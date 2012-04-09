@@ -1,0 +1,501 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9E9A13C0140124910047853A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13BF140124910047853A /* UIKit.framework */; };
+		9E9A13C2140124910047853A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C1140124910047853A /* Foundation.framework */; };
+		9E9A13C4140124910047853A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C3140124910047853A /* CoreGraphics.framework */; };
+		9E9A13CA140124910047853A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A13C8140124910047853A /* InfoPlist.strings */; };
+		9E9A13CD140124910047853A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A13CC140124910047853A /* main.m */; };
+		9E9A13D0140124910047853A /* GuideAssistAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A13CF140124910047853A /* GuideAssistAppDelegate.m */; };
+		9E9A13D3140124910047853A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A13D1140124910047853A /* MainWindow.xib */; };
+		9E9A13DA140124910047853A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13BF140124910047853A /* UIKit.framework */; };
+		9E9A13DB140124910047853A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C1140124910047853A /* Foundation.framework */; };
+		9E9A13DC140124910047853A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C3140124910047853A /* CoreGraphics.framework */; };
+		9E9A13E4140124910047853A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A13E2140124910047853A /* InfoPlist.strings */; };
+		9E9A13E7140124910047853A /* GuideAssistTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A13E6140124910047853A /* GuideAssistTests.h */; };
+		9E9A13E9140124910047853A /* GuideAssistTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A13E8140124910047853A /* GuideAssistTests.m */; };
+		9E9A13F6140125090047853A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A13F4140125090047853A /* LoginViewController.m */; };
+		9E9A13F7140125090047853A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A13F5140125090047853A /* LoginViewController.xib */; };
+		9E9A13FC140125FA0047853A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A13FA140125FA0047853A /* MainViewController.m */; };
+		9E9A13FD140125FA0047853A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A13FB140125FA0047853A /* MainViewController.xib */; };
+		9EACC4D314095F7600C580C1 /* bt_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D214095F7600C580C1 /* bt_login.png */; };
+		9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D514095FFC00C580C1 /* bt_quit.png */; };
+		9EACC4D81409607800C580C1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D71409607800C580C1 /* Settings.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9E9A13DD140124910047853A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E9A13B2140124900047853A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E9A13BA140124900047853A;
+			remoteInfo = GuideAssist;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9E9A13BB140124900047853A /* GuideAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E9A13BF140124910047853A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9E9A13C1140124910047853A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9E9A13C3140124910047853A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9E9A13C7140124910047853A /* GuideAssist-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GuideAssist-Info.plist"; sourceTree = "<group>"; };
+		9E9A13C9140124910047853A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9E9A13CB140124910047853A /* GuideAssist-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GuideAssist-Prefix.pch"; sourceTree = "<group>"; };
+		9E9A13CC140124910047853A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9E9A13CE140124910047853A /* GuideAssistAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideAssistAppDelegate.h; sourceTree = "<group>"; };
+		9E9A13CF140124910047853A /* GuideAssistAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideAssistAppDelegate.m; sourceTree = "<group>"; };
+		9E9A13D2140124910047853A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		9E9A13D9140124910047853A /* GuideAssistTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuideAssistTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E9A13E1140124910047853A /* GuideAssistTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GuideAssistTests-Info.plist"; sourceTree = "<group>"; };
+		9E9A13E3140124910047853A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9E9A13E5140124910047853A /* GuideAssistTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GuideAssistTests-Prefix.pch"; sourceTree = "<group>"; };
+		9E9A13E6140124910047853A /* GuideAssistTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideAssistTests.h; sourceTree = "<group>"; };
+		9E9A13E8140124910047853A /* GuideAssistTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideAssistTests.m; sourceTree = "<group>"; };
+		9E9A13F3140125090047853A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		9E9A13F4140125090047853A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		9E9A13F5140125090047853A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		9E9A13F9140125FA0047853A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		9E9A13FA140125FA0047853A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		9E9A13FB140125FA0047853A /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		9EACC4D214095F7600C580C1 /* bt_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_login.png; sourceTree = "<group>"; };
+		9EACC4D514095FFC00C580C1 /* bt_quit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_quit.png; sourceTree = "<group>"; };
+		9EACC4D71409607800C580C1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		9EACC4DA140A804900C580C1 /* DebugMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugMacroDefine.h; path = GuideAssist/DebugMacroDefine.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9E9A13B8140124900047853A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E9A13C0140124910047853A /* UIKit.framework in Frameworks */,
+				9E9A13C2140124910047853A /* Foundation.framework in Frameworks */,
+				9E9A13C4140124910047853A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E9A13D5140124910047853A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E9A13DA140124910047853A /* UIKit.framework in Frameworks */,
+				9E9A13DB140124910047853A /* Foundation.framework in Frameworks */,
+				9E9A13DC140124910047853A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9E9A13B0140124900047853A = {
+			isa = PBXGroup;
+			children = (
+				9EACC4D71409607800C580C1 /* Settings.bundle */,
+				9EACC4D514095FFC00C580C1 /* bt_quit.png */,
+				9EACC4D214095F7600C580C1 /* bt_login.png */,
+				9E9A13C5140124910047853A /* GuideAssist */,
+				9E9A13DF140124910047853A /* GuideAssistTests */,
+				9E9A13BE140124910047853A /* Frameworks */,
+				9E9A13BC140124900047853A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9E9A13BC140124900047853A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9E9A13BB140124900047853A /* GuideAssist.app */,
+				9E9A13D9140124910047853A /* GuideAssistTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9E9A13BE140124910047853A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E9A13BF140124910047853A /* UIKit.framework */,
+				9E9A13C1140124910047853A /* Foundation.framework */,
+				9E9A13C3140124910047853A /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9E9A13C5140124910047853A /* GuideAssist */ = {
+			isa = PBXGroup;
+			children = (
+				9EACC4D9140A7FEA00C580C1 /* BaseFunction */,
+				9E9A13F8140125180047853A /* MainView */,
+				9E9A13F2140124D30047853A /* Login */,
+				9E9A13CE140124910047853A /* GuideAssistAppDelegate.h */,
+				9E9A13CF140124910047853A /* GuideAssistAppDelegate.m */,
+				9E9A13D1140124910047853A /* MainWindow.xib */,
+				9E9A13C6140124910047853A /* Supporting Files */,
+			);
+			path = GuideAssist;
+			sourceTree = "<group>";
+		};
+		9E9A13C6140124910047853A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9E9A13C7140124910047853A /* GuideAssist-Info.plist */,
+				9E9A13C8140124910047853A /* InfoPlist.strings */,
+				9E9A13CB140124910047853A /* GuideAssist-Prefix.pch */,
+				9E9A13CC140124910047853A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E9A13DF140124910047853A /* GuideAssistTests */ = {
+			isa = PBXGroup;
+			children = (
+				9E9A13E6140124910047853A /* GuideAssistTests.h */,
+				9E9A13E8140124910047853A /* GuideAssistTests.m */,
+				9E9A13E0140124910047853A /* Supporting Files */,
+			);
+			path = GuideAssistTests;
+			sourceTree = "<group>";
+		};
+		9E9A13E0140124910047853A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9E9A13E1140124910047853A /* GuideAssistTests-Info.plist */,
+				9E9A13E2140124910047853A /* InfoPlist.strings */,
+				9E9A13E5140124910047853A /* GuideAssistTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E9A13F2140124D30047853A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9E9A13F3140125090047853A /* LoginViewController.h */,
+				9E9A13F4140125090047853A /* LoginViewController.m */,
+				9E9A13F5140125090047853A /* LoginViewController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		9E9A13F8140125180047853A /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				9E9A13F9140125FA0047853A /* MainViewController.h */,
+				9E9A13FA140125FA0047853A /* MainViewController.m */,
+				9E9A13FB140125FA0047853A /* MainViewController.xib */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		9EACC4D9140A7FEA00C580C1 /* BaseFunction */ = {
+			isa = PBXGroup;
+			children = (
+				9EACC4DA140A804900C580C1 /* DebugMacroDefine.h */,
+			);
+			name = BaseFunction;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9E9A13BA140124900047853A /* GuideAssist */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E9A13EC140124910047853A /* Build configuration list for PBXNativeTarget "GuideAssist" */;
+			buildPhases = (
+				9E9A13B7140124900047853A /* Sources */,
+				9E9A13B8140124900047853A /* Frameworks */,
+				9E9A13B9140124900047853A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GuideAssist;
+			productName = GuideAssist;
+			productReference = 9E9A13BB140124900047853A /* GuideAssist.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9E9A13D8140124910047853A /* GuideAssistTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E9A13EF140124910047853A /* Build configuration list for PBXNativeTarget "GuideAssistTests" */;
+			buildPhases = (
+				9E9A13D4140124910047853A /* Sources */,
+				9E9A13D5140124910047853A /* Frameworks */,
+				9E9A13D6140124910047853A /* Resources */,
+				9E9A13D7140124910047853A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E9A13DE140124910047853A /* PBXTargetDependency */,
+			);
+			name = GuideAssistTests;
+			productName = GuideAssistTests;
+			productReference = 9E9A13D9140124910047853A /* GuideAssistTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9E9A13B2140124900047853A /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 9E9A13B5140124900047853A /* Build configuration list for PBXProject "GuideAssist" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9E9A13B0140124900047853A;
+			productRefGroup = 9E9A13BC140124900047853A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9E9A13BA140124900047853A /* GuideAssist */,
+				9E9A13D8140124910047853A /* GuideAssistTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9E9A13B9140124900047853A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E9A13CA140124910047853A /* InfoPlist.strings in Resources */,
+				9E9A13D3140124910047853A /* MainWindow.xib in Resources */,
+				9E9A13F7140125090047853A /* LoginViewController.xib in Resources */,
+				9E9A13FD140125FA0047853A /* MainViewController.xib in Resources */,
+				9EACC4D314095F7600C580C1 /* bt_login.png in Resources */,
+				9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */,
+				9EACC4D81409607800C580C1 /* Settings.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E9A13D6140124910047853A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E9A13E4140124910047853A /* InfoPlist.strings in Resources */,
+				9E9A13E7140124910047853A /* GuideAssistTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9E9A13D7140124910047853A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9E9A13B7140124900047853A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E9A13CD140124910047853A /* main.m in Sources */,
+				9E9A13D0140124910047853A /* GuideAssistAppDelegate.m in Sources */,
+				9E9A13F6140125090047853A /* LoginViewController.m in Sources */,
+				9E9A13FC140125FA0047853A /* MainViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E9A13D4140124910047853A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E9A13E9140124910047853A /* GuideAssistTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9E9A13DE140124910047853A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E9A13BA140124900047853A /* GuideAssist */;
+			targetProxy = 9E9A13DD140124910047853A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9E9A13C8140124910047853A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E9A13C9140124910047853A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9E9A13D1140124910047853A /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E9A13D2140124910047853A /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		9E9A13E2140124910047853A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E9A13E3140124910047853A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9E9A13EA140124910047853A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9E9A13EB140124910047853A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		9E9A13ED140124910047853A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GuideAssist/GuideAssist-Prefix.pch";
+				INFOPLIST_FILE = "GuideAssist/GuideAssist-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9E9A13EE140124910047853A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GuideAssist/GuideAssist-Prefix.pch";
+				INFOPLIST_FILE = "GuideAssist/GuideAssist-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9E9A13F0140124910047853A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GuideAssist.app/GuideAssist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GuideAssistTests/GuideAssistTests-Prefix.pch";
+				INFOPLIST_FILE = "GuideAssistTests/GuideAssistTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9E9A13F1140124910047853A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GuideAssist.app/GuideAssist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GuideAssistTests/GuideAssistTests-Prefix.pch";
+				INFOPLIST_FILE = "GuideAssistTests/GuideAssistTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9E9A13B5140124900047853A /* Build configuration list for PBXProject "GuideAssist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E9A13EA140124910047853A /* Debug */,
+				9E9A13EB140124910047853A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9E9A13EC140124910047853A /* Build configuration list for PBXNativeTarget "GuideAssist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E9A13ED140124910047853A /* Debug */,
+				9E9A13EE140124910047853A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9E9A13EF140124910047853A /* Build configuration list for PBXNativeTarget "GuideAssistTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E9A13F0140124910047853A /* Debug */,
+				9E9A13F1140124910047853A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9E9A13B2140124900047853A /* Project object */;
+}
