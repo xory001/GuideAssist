@@ -27,6 +27,10 @@
 		9EACC4D314095F7600C580C1 /* bt_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D214095F7600C580C1 /* bt_login.png */; };
 		9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D514095FFC00C580C1 /* bt_quit.png */; };
 		9EACC4D81409607800C580C1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D71409607800C580C1 /* Settings.bundle */; };
+		9EB797741533C95B00928F31 /* CDBAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB797731533C95B00928F31 /* CDBAccess.m */; };
+		9EB797761533CBAB00928F31 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB797751533CBAB00928F31 /* libsqlite3.0.dylib */; };
+		9EB7977A1533CE4900928F31 /* CDataTypeDef.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB797781533CE4800928F31 /* CDataTypeDef.m */; };
+		9EB7977D153448E400928F31 /* CDetailItinerary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7977C153448E400928F31 /* CDetailItinerary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,13 @@
 		9EACC4D514095FFC00C580C1 /* bt_quit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_quit.png; sourceTree = "<group>"; };
 		9EACC4D71409607800C580C1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		9EACC4DA140A804900C580C1 /* DebugMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugMacroDefine.h; path = GuideAssist/DebugMacroDefine.h; sourceTree = "<group>"; };
+		9EB797721533C95B00928F31 /* CDBAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDBAccess.h; sourceTree = "<group>"; };
+		9EB797731533C95B00928F31 /* CDBAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDBAccess.m; sourceTree = "<group>"; };
+		9EB797751533CBAB00928F31 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		9EB797771533CBDE00928F31 /* CDataTypeDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataTypeDef.h; sourceTree = "<group>"; };
+		9EB797781533CE4800928F31 /* CDataTypeDef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataTypeDef.m; sourceTree = "<group>"; };
+		9EB7977B153448E300928F31 /* CDetailItinerary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDetailItinerary.h; sourceTree = "<group>"; };
+		9EB7977C153448E400928F31 /* CDetailItinerary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDetailItinerary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EB797761533CBAB00928F31 /* libsqlite3.0.dylib in Frameworks */,
 				9E9A13C0140124910047853A /* UIKit.framework in Frameworks */,
 				9E9A13C2140124910047853A /* Foundation.framework in Frameworks */,
 				9E9A13C4140124910047853A /* CoreGraphics.framework in Frameworks */,
@@ -118,6 +130,7 @@
 		9E9A13BE140124910047853A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9EB797751533CBAB00928F31 /* libsqlite3.0.dylib */,
 				9E9A13BF140124910047853A /* UIKit.framework */,
 				9E9A13C1140124910047853A /* Foundation.framework */,
 				9E9A13C3140124910047853A /* CoreGraphics.framework */,
@@ -128,6 +141,7 @@
 		9E9A13C5140124910047853A /* GuideAssist */ = {
 			isa = PBXGroup;
 			children = (
+				9EB797701533C8CD00928F31 /* DataAccess */,
 				9EACC4D9140A7FEA00C580C1 /* BaseFunction */,
 				9E9A13F8140125180047853A /* MainView */,
 				9E9A13F2140124D30047853A /* Login */,
@@ -197,6 +211,19 @@
 			);
 			name = BaseFunction;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		9EB797701533C8CD00928F31 /* DataAccess */ = {
+			isa = PBXGroup;
+			children = (
+				9EB797721533C95B00928F31 /* CDBAccess.h */,
+				9EB797731533C95B00928F31 /* CDBAccess.m */,
+				9EB797771533CBDE00928F31 /* CDataTypeDef.h */,
+				9EB797781533CE4800928F31 /* CDataTypeDef.m */,
+				9EB7977B153448E300928F31 /* CDetailItinerary.h */,
+				9EB7977C153448E400928F31 /* CDetailItinerary.m */,
+			);
+			name = DataAccess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +339,9 @@
 				9E9A13D0140124910047853A /* GuideAssistAppDelegate.m in Sources */,
 				9E9A13F6140125090047853A /* LoginViewController.m in Sources */,
 				9E9A13FC140125FA0047853A /* MainViewController.m in Sources */,
+				9EB797741533C95B00928F31 /* CDBAccess.m in Sources */,
+				9EB7977A1533CE4900928F31 /* CDataTypeDef.m in Sources */,
+				9EB7977D153448E400928F31 /* CDetailItinerary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
