@@ -27,6 +27,7 @@
                 pSQLite3_ = NULL;
                 return nil;
             }
+        [ self initDatabase ];
         }
     }
     
@@ -49,7 +50,7 @@
 - (BOOL)initDatabase
 {
     char *pstrCreateMainItineraryTable = 
-    "create table tb MainItinerary \
+    "create table tb_MainItinerary \
     ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
     TimeStamp TEXT, \
     TourGroupName TEXT, \

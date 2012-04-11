@@ -17,6 +17,7 @@
 }
 
 - (BOOL)executeSQL:(char*)pszSQL;
+- (BOOL)initDatabase;
 
 //main itinerary
 - (BOOL)insertMainItinerary:(CMainItinerary*)pMainIniterary retID:(UInt32*)puNid;

@@ -13,7 +13,7 @@
 
 @implementation GuideAssistAppDelegate
 
-
+@synthesize dataAccess=pDataAccess_;
 @synthesize window=_window;
 @synthesize loginViewContrller_, mainViewContrller_;
 
@@ -29,6 +29,7 @@
   NSURL *strURL = [[ NSBundle mainBundle] resourceURL];
   NSLog(@"%@", strURL);
  // [self.window set sett];
+    pDataAccess_ = [[ CDBAccess alloc ] init ];
   
    return YES;
 }
@@ -103,9 +104,10 @@
 
 - (void)dealloc
 {
-  [loginViewContrller_ release];
-  [mainViewContrller_ release];
-  [_window release];
+    [loginViewContrller_ release];
+    [mainViewContrller_ release];
+    [_window release];
+    [ pDataAccess_ release ];
     [super dealloc];
 }
 

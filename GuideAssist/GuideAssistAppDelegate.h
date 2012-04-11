@@ -7,21 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CDBAccess.h"
 
 @class LoginViewController;
 @class MainViewController;
+
 
 @interface GuideAssistAppDelegate : NSObject <UIApplicationDelegate> {
   
   LoginViewController *loginViewContrller_;
   MainViewController *mainViewContrller_;
+    CDBAccess *pDataAccess_;
 
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, getter = loginViewController, readonly) LoginViewController *loginViewContrller_;
-@property (nonatomic, getter = mainViewContrller, readonly) MainViewController *mainViewContrller_;
+@property ( nonatomic, retain) IBOutlet UIWindow *window;
+@property ( nonatomic, getter = loginViewController, readonly) LoginViewController *loginViewContrller_;
+@property ( nonatomic, getter = mainViewContrller, readonly) MainViewController *mainViewContrller_;
+@property ( nonatomic, readonly ) CDBAccess *dataAccess;
 
 
 - (void)ShowMainView;
