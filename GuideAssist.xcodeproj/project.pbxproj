@@ -31,6 +31,8 @@
 		9EB797761533CBAB00928F31 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB797751533CBAB00928F31 /* libsqlite3.0.dylib */; };
 		9EB7977A1533CE4900928F31 /* CDataTypeDef.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB797781533CE4800928F31 /* CDataTypeDef.m */; };
 		9EB7977D153448E400928F31 /* CDetailItinerary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7977C153448E400928F31 /* CDetailItinerary.m */; };
+		9EB7978015352FD300928F31 /* CGroupMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB7977F15352FD200928F31 /* CGroupMember.m */; };
+		9EB79783153564D900928F31 /* CMainItinerary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB79782153564D700928F31 /* CMainItinerary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,10 @@
 		9EB797781533CE4800928F31 /* CDataTypeDef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataTypeDef.m; sourceTree = "<group>"; };
 		9EB7977B153448E300928F31 /* CDetailItinerary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDetailItinerary.h; sourceTree = "<group>"; };
 		9EB7977C153448E400928F31 /* CDetailItinerary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDetailItinerary.m; sourceTree = "<group>"; };
+		9EB7977E15352FD200928F31 /* CGroupMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMember.h; sourceTree = "<group>"; };
+		9EB7977F15352FD200928F31 /* CGroupMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMember.m; sourceTree = "<group>"; };
+		9EB79781153564D600928F31 /* CMainItinerary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMainItinerary.h; sourceTree = "<group>"; };
+		9EB79782153564D700928F31 /* CMainItinerary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMainItinerary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +228,10 @@
 				9EB797781533CE4800928F31 /* CDataTypeDef.m */,
 				9EB7977B153448E300928F31 /* CDetailItinerary.h */,
 				9EB7977C153448E400928F31 /* CDetailItinerary.m */,
+				9EB7977E15352FD200928F31 /* CGroupMember.h */,
+				9EB7977F15352FD200928F31 /* CGroupMember.m */,
+				9EB79781153564D600928F31 /* CMainItinerary.h */,
+				9EB79782153564D700928F31 /* CMainItinerary.m */,
 			);
 			name = DataAccess;
 			sourceTree = "<group>";
@@ -342,6 +352,8 @@
 				9EB797741533C95B00928F31 /* CDBAccess.m in Sources */,
 				9EB7977A1533CE4900928F31 /* CDataTypeDef.m in Sources */,
 				9EB7977D153448E400928F31 /* CDetailItinerary.m in Sources */,
+				9EB7978015352FD300928F31 /* CGroupMember.m in Sources */,
+				9EB79783153564D900928F31 /* CMainItinerary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

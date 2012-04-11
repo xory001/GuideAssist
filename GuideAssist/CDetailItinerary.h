@@ -12,9 +12,9 @@
 @interface CDetailItinerary : NSObject
 {
 @private
-    int64_t nid_;
-    int64_t nMainid_;
-    int32_t nIndex_;
+    UInt32 nid_;
+    UInt32 nMainid_;
+    UInt32 nIndex_;
     NSString *pstrDay_;
     NSString *pstrTraffic_;
     NSString *pstrTrafficNo_;
@@ -30,9 +30,9 @@
     
 }
 
-@property( nonatomic, assign ) int64_t nid;
-@property( nonatomic, assign ) int64_t nMainid;
-@property( nonatomic, assign ) int32_t nIndex;
+@property( nonatomic, assign ) UInt32 nid;
+@property( nonatomic, assign ) UInt32 nMainid;
+@property( nonatomic, assign ) UInt32 nIndex;
 @property( nonatomic, retain ) NSString *Day;
 @property( nonatomic, retain ) NSString *Traffic;
 @property( nonatomic, retain ) NSString *TrafficNo;

@@ -7,10 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "/usr/include/sqlite3.h"
+#import "CDataTypeDef.h"
 
-
-@interface CDBAccess : NSObject {
-    
+@interface CDBAccess : NSObject 
+{
+    sqlite3 *pSQLite3_;
+    NSString *pstrDatabaseFile_;
 }
+
+- (BOOL)executeSQL:(char*)pszSQL;
+
+//main itinerary
+- (BOOL)insertMainItinerary:(CMainItinerary*)pMainIniterary retID:(UInt32*)puNid;
+
+//detail itinerary
+- (BOOL)insertDetailItinerary:(CDetailItinerary*)pDetailItinerary;
+
+//group member
+- (BOOL)insertGroupMember:(CGroupMember*)pGroupMember;
+
+
 
 @end
