@@ -11,10 +11,10 @@
 
 @interface CDetailItinerary : NSObject
 {
-@private
-    UInt32 nid_;
-    UInt32 nMainid_;
-    UInt32 nIndex_;
+@private //15 member variable
+    UInt32 uid_;
+    UInt32 uMainid_;
+    UInt32 uIndex_;
     NSString *pstrDay_;
     NSString *pstrTraffic_;
     NSString *pstrTrafficNo_;
@@ -30,20 +30,20 @@
     
 }
 
-@property( nonatomic, assign ) UInt32 nid;
-@property( nonatomic, assign ) UInt32 nMainid;
-@property( nonatomic, assign ) UInt32 nIndex;
-@property( nonatomic, retain ) NSString *Day;
-@property( nonatomic, retain ) NSString *Traffic;
-@property( nonatomic, retain ) NSString *TrafficNo;
-@property( nonatomic, retain ) NSString *DriverName;
-@property( nonatomic, retain ) NSString *DriverPhone;
-@property( nonatomic, retain ) NSString *City;
-@property( nonatomic, retain ) NSString *Meal;
-@property( nonatomic, retain ) NSString *Room;
-@property( nonatomic, retain ) NSString *DetailDesc;
-@property( nonatomic, retain ) NSString *LocalTravelAgencyName;
-@property( nonatomic, retain ) NSString *LocalGuide;
-@property( nonatomic, retain ) NSString *LocalGuidePhone;
+@property( nonatomic, assign ) UInt32 uid;
+@property( nonatomic, assign ) UInt32 mainid;
+@property( nonatomic, assign ) UInt32 index;
+@property( nonatomic, retain ) NSString *day;
+@property( nonatomic, retain ) NSString *traffic;
+@property( nonatomic, retain ) NSString *trafficNo;
+@property( nonatomic, retain ) NSString *driverName;
+@property( nonatomic, retain ) NSString *driverPhone;
+@property( nonatomic, retain ) NSString *city;
+@property( nonatomic, retain ) NSString *meal;
+@property( nonatomic, retain ) NSString *room;
+@property( nonatomic, retain ) NSString *detailDesc;
+@property( nonatomic, retain ) NSString *localTravelAgencyName;
+@property( nonatomic, retain ) NSString *localGuide;
+@property( nonatomic, retain ) NSString *localGuidePhone;
 
 @end

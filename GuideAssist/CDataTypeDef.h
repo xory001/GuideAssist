@@ -12,7 +12,18 @@
 #import "CGroupMember.h"
 
 
+@interface CMainItineraryDateID : NSObject
+{
+@private
+    uint32_t uid_;
+    NSString *pstrDate_;
+}
 
+@property ( nonatomic, assign ) uint32_t uid;
+@property ( nonatomic, retain ) NSString *date;
+
+
+@end
 
 
 

@@ -11,22 +11,22 @@
 
 @implementation CGroupMember
 
-@synthesize nid = nid_;
+@synthesize uid = uid_;
 @synthesize nPaid = nPaid_;
-@synthesize Name = pstrName_;
-@synthesize Sex = pstrSex_;
-@synthesize Age = pstrAge_;
-@synthesize Remark = pstrRemark_;
-@synthesize Phone = pstrPhone_;
-@synthesize IDCardType = pstrIDCardType_;
-@synthesize IDCardNumber = pstrIDCardNumber_;
+@synthesize name = pstrName_;
+@synthesize sex = pstrSex_;
+@synthesize age = pstrAge_;
+@synthesize remark = pstrRemark_;
+@synthesize phone = pstrPhone_;
+@synthesize idCardType = pstrIDCardType_;
+@synthesize idCardNumber = pstrIDCardNumber_;
 
 - (id)init
 {
     self = [ super init ];
     if ( self )
     {
-      nid_ = 0;
+      uid_ = 0;
       nPaid_ = 0;
       pstrName_ = [[ NSString alloc ] init ];
       pstrSex_ = [[ NSString alloc ] init ];
@@ -42,13 +42,13 @@
 
 - (void)dealloc
 {
-    self.Name = nil;
-    self.Sex = nil;
-    self.Age = nil;
-    self.Remark = nil;
-    self.Phone = nil;
-    self.IDCardNumber = nil;
-    self.IDCardType = nil;
+    self.name = nil;
+    self.sex = nil;
+    self.age = nil;
+    self.remark = nil;
+    self.phone = nil;
+    self.idCardNumber = nil;
+    self.idCardType = nil;
     [ super dealloc ];
 }
 

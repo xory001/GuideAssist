@@ -10,27 +10,27 @@
 
 @implementation CMainItinerary
 
-@synthesize nid = nid_;
-@synthesize TourGroupName = pstrTourGroupName_;
-@synthesize TravelAgencyName = pstrTravelAgencyName_;
-@synthesize MemberCount = nMemberCount_;
-@synthesize TimeStamp = pstrTimeStamp_;
-@synthesize StatDay = pstrStatDay_;
-@synthesize EndDay = pstrEndDay_;
-@synthesize StandardCost = pstrStandardCost_;
-@synthesize RoomCost = pstrRoomCost_;
-@synthesize TicketCost = pstrTicketCost_;
-@synthesize MealCost = pstrMealCost_;
-@synthesize TrafficCost = pstrTrafficCost_;
-@synthesize PersonalTotalCost = pstrPersonalTotalCost_;
-@synthesize GroupTotalCost = pstrGroupTotalCost_;
+@synthesize uid = uid_;
+@synthesize tourGroupName = pstrTourGroupName_;
+@synthesize travelAgencyName = pstrTravelAgencyName_;
+@synthesize memberCount = nMemberCount_;
+@synthesize timeStamp = pstrTimeStamp_;
+@synthesize statDay = pstrStatDay_;
+@synthesize endDay = pstrEndDay_;
+@synthesize standardCost = pstrStandardCost_;
+@synthesize roomCost = pstrRoomCost_;
+@synthesize ticketCost = pstrTicketCost_;
+@synthesize mealCost = pstrMealCost_;
+@synthesize trafficCost = pstrTrafficCost_;
+@synthesize personalTotalCost = pstrPersonalTotalCost_;
+@synthesize groupTotalCost = pstrGroupTotalCost_;
 
 -(id)init
 {
     self = [super init];
     if ( self )
       {
-        nid_ = 0;
+        uid_ = 0;
         nMemberCount_ = 0;
         pstrTourGroupName_ = [[ NSString alloc ] init ];
         pstrTravelAgencyName_ = [[ NSString alloc ] init ];
@@ -51,18 +51,18 @@
 
 -(void)dealloc
 {
-    self.TourGroupName = nil;
-    self.TravelAgencyName = nil;
-    self.TimeStamp = nil;
-    self.StatDay = nil;
-    self.EndDay = nil;
-    self.RoomCost = nil;
-    self.MealCost = nil;
-    self.TrafficCost = nil;
-    self.PersonalTotalCost = nil;
-    self.GroupTotalCost = nil;
-    self.StandardCost = nil;
-    self.TicketCost = nil;
+    self.tourGroupName = nil;
+    self.travelAgencyName = nil;
+    self.timeStamp = nil;
+    self.statDay = nil;
+    self.endDay = nil;
+    self.roomCost = nil;
+    self.mealCost = nil;
+    self.trafficCost = nil;
+    self.personalTotalCost = nil;
+    self.groupTotalCost = nil;
+    self.standardCost = nil;
+    self.ticketCost = nil;
     [ super dealloc ];
 }
 

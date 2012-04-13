@@ -10,6 +10,7 @@
 
 #import "LoginViewController.h"
 #import "MainViewController.h"
+#import "CDataTypeDef.h"
 
 @implementation GuideAssistAppDelegate
 
@@ -30,7 +31,20 @@
   NSLog(@"%@", strURL);
  // [self.window set sett];
     pDataAccess_ = [[ CDBAccess alloc ] init ];
-  
+//    NSString *pTmp = [[ NSString alloc ] initWithString: @"1abc" ];
+//    NSLog( @"%@, %x", pTmp, pTmp );
+//    pTmp = @"2cdf";
+//    NSLog( @"%@, %x", pTmp, pTmp );
+    
+//    CMainItineraryDateID *pDateID = [[ CMainItineraryDateID alloc ] init ];
+//    pDateID.date = pTmp;
+//    NSLog( @"%@, %x", pDateID.date, pDateID.date );
+//    pDateID.date = @"3abc";
+//    NSLog( @"%@, %x", pDateID.date, pDateID.date );
+//    pDateID.date = @"4abc";
+//    NSLog( @"%@, %x", pDateID.date, pDateID.date );
+
+    
    return YES;
 }
 

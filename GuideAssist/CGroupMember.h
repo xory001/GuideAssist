@@ -11,7 +11,7 @@
 
 @interface CGroupMember : NSObject
 {
-    UInt32 nid_;
+    UInt32 uid_;
     NSString *pstrName_;
     NSString *pstrSex_;
     NSString *pstrAge_;
@@ -22,14 +22,14 @@
     NSString *pstrIDCardNumber_;
 }
 
-@property( nonatomic, assign ) UInt32 nid;
+@property( nonatomic, assign ) UInt32 uid;
 @property( nonatomic, assign ) int32_t nPaid;
-@property( nonatomic, retain ) NSString *Name;
-@property( nonatomic, retain ) NSString *Sex;
-@property( nonatomic, retain ) NSString *Age;
-@property( nonatomic, retain ) NSString *Remark;
-@property( nonatomic, retain ) NSString *Phone;
-@property( nonatomic, retain ) NSString *IDCardType;
-@property( nonatomic, retain ) NSString *IDCardNumber;
+@property( nonatomic, retain ) NSString *name;
+@property( nonatomic, retain ) NSString *sex;
+@property( nonatomic, retain ) NSString *age;
+@property( nonatomic, retain ) NSString *remark;
+@property( nonatomic, retain ) NSString *phone;
+@property( nonatomic, retain ) NSString *idCardType;
+@property( nonatomic, retain ) NSString *idCardNumber;
 
 @end

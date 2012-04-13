@@ -11,7 +11,7 @@
 @interface  CMainItinerary  : NSObject 
 {
 @private
-    UInt32 nid_;
+    UInt32 uid_;
     NSString *pstrTimeStamp_;
     NSString *pstrTourGroupName_;
     NSString *pstrTravelAgencyName_;
@@ -28,20 +28,20 @@
     
 }
 
-@property( nonatomic, assign ) UInt32 nid;
-@property( nonatomic, retain ) NSString *TimeStamp;
-@property( nonatomic, retain ) NSString *TourGroupName;
-@property( nonatomic, retain ) NSString *TravelAgencyName;
-@property( nonatomic, assign ) UInt32 MemberCount;
-@property( nonatomic, retain ) NSString *StatDay;
-@property( nonatomic, retain ) NSString *EndDay;
-@property( nonatomic, retain ) NSString *StandardCost;
-@property( nonatomic, retain ) NSString *RoomCost;
-@property( nonatomic, retain ) NSString *MealCost;
-@property( nonatomic, retain ) NSString *TrafficCost;
-@property( nonatomic, retain ) NSString *PersonalTotalCost;
-@property( nonatomic, retain ) NSString *GroupTotalCost;
-@property( nonatomic, retain ) NSString *TicketCost;
+@property( nonatomic, assign ) UInt32 uid;
+@property( nonatomic, retain ) NSString *timeStamp;
+@property( nonatomic, retain ) NSString *tourGroupName;
+@property( nonatomic, retain ) NSString *travelAgencyName;
+@property( nonatomic, assign ) UInt32 memberCount;
+@property( nonatomic, retain ) NSString *statDay;
+@property( nonatomic, retain ) NSString *endDay;
+@property( nonatomic, retain ) NSString *standardCost;
+@property( nonatomic, retain ) NSString *roomCost;
+@property( nonatomic, retain ) NSString *mealCost;
+@property( nonatomic, retain ) NSString *trafficCost;
+@property( nonatomic, retain ) NSString *personalTotalCost;
+@property( nonatomic, retain ) NSString *groupTotalCost;
+@property( nonatomic, retain ) NSString *ticketCost;
 
 
 @end

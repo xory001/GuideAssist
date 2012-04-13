@@ -11,28 +11,28 @@
 
 @implementation CDetailItinerary
 
-@synthesize nid = nid_;
-@synthesize nMainid = nMainid_;
-@synthesize nIndex = nIndex_;
-@synthesize Day = pstrDay_;
-@synthesize Traffic = pstrTraffic_;
-@synthesize TrafficNo = pstrTrafficNo_;
-@synthesize DriverName = pstrDriverName_;
-@synthesize DriverPhone = pstrDriverPhone_;
-@synthesize City = pstrCity_;
-@synthesize Meal = pstrMeal_;
-@synthesize Room = pstrRoom_;
-@synthesize DetailDesc = pstrDetailDesc_;
-@synthesize LocalTravelAgencyName = pstrLocalTravelAgencyName_;
-@synthesize LocalGuide = pstrLocalGuide_;
-@synthesize LocalGuidePhone = pstrLocalGuidePhone_;
+@synthesize uid = uid_;
+@synthesize mainid = nMainid_;
+@synthesize index = nIndex_;
+@synthesize day = pstrDay_;
+@synthesize traffic = pstrTraffic_;
+@synthesize trafficNo = pstrTrafficNo_;
+@synthesize driverName = pstrDriverName_;
+@synthesize driverPhone = pstrDriverPhone_;
+@synthesize city = pstrCity_;
+@synthesize meal = pstrMeal_;
+@synthesize room = pstrRoom_;
+@synthesize detailDesc = pstrDetailDesc_;
+@synthesize localTravelAgencyName = pstrLocalTravelAgencyName_;
+@synthesize localGuide = pstrLocalGuide_;
+@synthesize localGuidePhone = pstrLocalGuidePhone_;
 
 - (id)init
 {
     self = [ super init ];
     if ( self ) 
     {
-      nid_ = 0;
+      uid_ = 0;
       nMainid_ = 0;
       nIndex_ = 0;
       pstrDay_ = [[ NSString alloc ] init ];
@@ -53,18 +53,18 @@
 
 - (void) dealloc
 {
-    self.Day = nil;
-    self.Traffic = nil;
-    self.TrafficNo = nil;
-    self.DriverName = nil;
-    self.DriverPhone = nil;
-    self.City = nil;
-    self.Meal = nil;
-    self.Room = nil;
-    self.DetailDesc = nil;
-    self.LocalTravelAgencyName = nil;
-    self.LocalGuide = nil;
-    self.LocalGuidePhone = nil;
+    self.day = nil;
+    self.traffic = nil;
+    self.trafficNo = nil;
+    self.driverName = nil;
+    self.driverPhone = nil;
+    self.city = nil;
+    self.meal = nil;
+    self.room = nil;
+    self.detailDesc = nil;
+    self.localTravelAgencyName = nil;
+    self.localGuide = nil;
+    self.localGuidePhone = nil;
     [ super dealloc ];
 }
 

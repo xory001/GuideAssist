@@ -16,17 +16,23 @@
     NSString *pstrDatabaseFile_;
 }
 
-- (BOOL)executeSQL:(char*)pszSQL;
+- (BOOL)executeSQLA:(char*)pszSQL;
+- (BOOL)executeSQLW:(wchar_t *)pwszSQL;
 - (BOOL)initDatabase;
 
 //main itinerary
 - (BOOL)insertMainItinerary:(CMainItinerary*)pMainIniterary retID:(UInt32*)puNid;
+- (BOOL)getAllMainItineraryDateAndID:(NSMutableArray*)parrDateID;
+
 
 //detail itinerary
 - (BOOL)insertDetailItinerary:(CDetailItinerary*)pDetailItinerary;
+- (BOOL)getAllDetailItinerary:(NSMutableArray*)parrDetail ByMainID:(uint32_t)uMainID;
+
 
 //group member
 - (BOOL)insertGroupMember:(CGroupMember*)pGroupMember;
+- (BOOL)getAllGroupMember:(NSMutableArray*)parrGroupMember byMainID:(uint32_t)uMainID;
 
 
 
