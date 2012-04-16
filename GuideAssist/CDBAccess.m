@@ -49,13 +49,46 @@
 //*******main itinerary
 - (BOOL)insertMainItinerary:(CMainItinerary *)pMainIniterary retID:(UInt32 *)puNid
 {
+    NSString *pstrSQL = [[ NSString alloc ] initWithFormat: 
+    @"insert into tb_MainItinerary( timeStamp, tourGroupName, travelAgencyName, \
+     memberCount, statDay, endDay, standardCost, roomCost, mealCost, trafficCost, \
+     personalTotalCost, groupTotalCost, ticketCost ) \
+     values('%@', '%@', '%@', %d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
+     pMainIniterary.timeStamp, pMainIniterary.tourGroupName, pMainIniterary.travelAgencyName,
+     pMainIniterary.memberCount, pMainIniterary.statDay, pMainIniterary.endDay,
+     pMainIniterary.standardCost, pMainIniterary.roomCost, pMainIniterary.mealCost,
+     pMainIniterary.trafficCost, pMainIniterary.personalTotalCost, 
+     pMainIniterary.groupTotalCost, pMainIniterary.ticketCost ];
     
-    return NO;
+    BOOL bRet = [ self executeSQLA: [ pstrSQL UTF8String ] ];
+    [ pstrSQL release ];
+    *puNid = (uint32_t)sqlite3_last_insert_rowid( pSQLite3_ );
+    return bRet;
+    
 }
 
 - (BOOL)getAllMainItineraryDateAndID:(NSMutableArray *)parrDateID
 {
-    return NO;
+    BOOL bRet = NO;
+    NSString *pstrSQL = [[ NSString alloc ] initWithString:
+                         @"select id, statDay from tb_MainItinerary"];
+    sqlite3_stmt *pstmt = NULL;
+    
+    if ( SQLITE_OK == sqlite3_prepare_v2( pSQLite3_, [ pstrSQL UTF8String ], -1, &pstmt, NULL) )
+    {
+        int nRet = sqlite3_step( pstmt );
+        while ( SQLITE_ROW == nRet )
+        {
+    
+        }
+        sqlite3_finalize( pstmt );
+        bRet = YES;
+    }
+    
+    
+    [ pstrSQL release ];
+    
+    return YES;
 }
 
 
@@ -104,7 +137,7 @@
     personalTotalCost TEXT, \
     groupTotalCost TEXT, \
     ticketCost TEXT )";
-    [ self executeSQL:pstrCreateMainItineraryTable ];
+    [ self executeSQLA:pstrCreateMainItineraryTable ];
     
     char *pstrCreateDetailItineraryTable =
     "create table tb_DetailItinerary \
@@ -123,7 +156,7 @@
     localTravelAgencyName TEXT, \
     localGuide TEXT, \
     localGuidePhone TEXT )";
-    [ self executeSQL:pstrCreateDetailItineraryTable ];
+    [ self executeSQLA:pstrCreateDetailItineraryTable ];
 
     
     char *pstrCreateGroupMemberTable =
@@ -137,13 +170,13 @@
     phone TEXT, \
     idCardType TEXT, \
     idCardNumber TEXT )";
-    [ self executeSQL:pstrCreateGroupMemberTable ];
+    [ self executeSQLA:pstrCreateGroupMemberTable ];
 
     return YES;
                         
 }
 
-- (BOOL)executeSQL:(char*)pszSQL
+- (BOOL)executeSQLA:(const char*)pszSQL
 {
     char *pszErrString = NULL;
     sqlite3_exec( pSQLite3_, pszSQL, NULL, NULL, &pszErrString );
@@ -154,6 +187,11 @@
         return NO;
     }
     return YES;
+}
+
+- (BOOL)executeSQLW:(wchar_t *)pwszSQL
+{
+    return NO;
 }
 
 @end

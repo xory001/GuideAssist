@@ -16,7 +16,7 @@
     NSString *pstrDatabaseFile_;
 }
 
-- (BOOL)executeSQLA:(char*)pszSQL;
+- (BOOL)executeSQLA:(const char*)pszSQL;
 - (BOOL)executeSQLW:(wchar_t *)pwszSQL;
 - (BOOL)initDatabase;
 
