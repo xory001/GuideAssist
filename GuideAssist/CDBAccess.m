@@ -47,14 +47,15 @@
 }
 
 //*******main itinerary
-- (BOOL)insertMainItinerary:(CMainItinerary *)pMainIniterary retID:(UInt32 *)puNid
+- (BOOL)insertMainItinerary:(CMainItinerary *)pMainIniterary
 {
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat: 
-    @"insert into tb_MainItinerary( timeStamp, tourGroupName, travelAgencyName, \
+    @"insert into tb_MainItinerary( SerialNumber, timeStamp, tourGroupName, travelAgencyName, \
      memberCount, statDay, endDay, standardCost, roomCost, mealCost, trafficCost, \
      personalTotalCost, groupTotalCost, ticketCost ) \
-     values('%@', '%@', '%@', %d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
-     pMainIniterary.timeStamp, pMainIniterary.tourGroupName, pMainIniterary.travelAgencyName,
+     values('%@', '%@', '%@', '%@', %d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
+     pMainIniterary.serialNumber, pMainIniterary.timeStamp, pMainIniterary.tourGroupName, 
+                         pMainIniterary.travelAgencyName,
      pMainIniterary.memberCount, pMainIniterary.statDay, pMainIniterary.endDay,
      pMainIniterary.standardCost, pMainIniterary.roomCost, pMainIniterary.mealCost,
      pMainIniterary.trafficCost, pMainIniterary.personalTotalCost, 
@@ -62,12 +63,11 @@
     
     BOOL bRet = [ self executeSQLA: [ pstrSQL UTF8String ] ];
     [ pstrSQL release ];
-    *puNid = (uint32_t)sqlite3_last_insert_rowid( pSQLite3_ );
     return bRet;
     
 }
 
-- (BOOL)getAllMainItineraryDateAndID:(NSMutableArray *)parrDateID
+- (BOOL)getAllMainItinerarySerialNumber:(NSMutableArray*)parrMainSerialNumber
 {
     BOOL bRet = NO;
     NSString *pstrSQL = [[ NSString alloc ] initWithString:
@@ -76,10 +76,25 @@
     
     if ( SQLITE_OK == sqlite3_prepare_v2( pSQLite3_, [ pstrSQL UTF8String ], -1, &pstmt, NULL) )
     {
-        int nRet = sqlite3_step( pstmt );
-        while ( SQLITE_ROW == nRet )
+        CMainItinerarySerialNumner *pMainItinerarySerialNumner = NULL;
+        NSString *pstrTemp = NULL;
+        while ( SQLITE_ROW == sqlite3_step( pstmt ) )
         {
-    
+            pMainItinerarySerialNumner = [[ CMainItinerarySerialNumner alloc ] init ];
+           
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 0 ) ];
+            pMainItinerarySerialNumner.serialNumner = pstrTemp;
+            [ pstrTemp release ];
+
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+               ( const char *)sqlite3_column_text( pstmt, 1 ) ];
+            pMainItinerarySerialNumner.date = pstrTemp;
+            [ pstrTemp release ];
+            
+            [ parrMainSerialNumber addObject: pMainItinerarySerialNumner ];
+            [ pMainItinerarySerialNumner release ];
+            
         }
         sqlite3_finalize( pstmt );
         bRet = YES;
@@ -96,25 +111,204 @@
 //*********detail itinerary
 - (BOOL)insertDetailItinerary:(CDetailItinerary *)pDetailItinerary
 {
-    return NO;
+    
+    NSString *pstrSQL = [[ NSString alloc ] initWithFormat: 
+                         @"insert into tb_DetailItinerary( index, serialNumber, day, \
+                         traffic, trafficNo, driverName, driverPhone, city, meal, room, \
+                         detailDesc, localTravelAgencyName, localGuide, localGuidePhone ) \
+                         values(%u, %d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
+                         pDetailItinerary.index, pDetailItinerary.serialNumber, pDetailItinerary.day,
+                         pDetailItinerary.traffic, pDetailItinerary.trafficNo, pDetailItinerary.driverName,
+                         pDetailItinerary.driverPhone, pDetailItinerary.city, pDetailItinerary.meal,
+                         pDetailItinerary.room, pDetailItinerary.detailDesc, 
+                         pDetailItinerary.localTravelAgencyName, pDetailItinerary.localGuide,
+                         pDetailItinerary.localGuidePhone ];
+        
+    BOOL bRet = [ self executeSQLA: [ pstrSQL UTF8String ] ];
+    [ pstrSQL release ];
+    return bRet;
+
 }
 
-- (BOOL)getAllDetailItinerary:(NSMutableArray *)parrDetail ByMainID:(uint32_t)uMainID
+- (BOOL)getAllDetailItinerary:(NSMutableArray*)parrDetail ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
 {
-    return NO;
+    BOOL bRet = NO;
+    NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
+                         @"select * from tb_DetailItinerary where serialNumber = '%@'", pstrMainSerialNumber ];
+    sqlite3_stmt *pstmt = NULL;
+    
+    if ( SQLITE_OK == sqlite3_prepare_v2( pSQLite3_, [ pstrSQL UTF8String ], -1, &pstmt, NULL) )
+    {
+        CDetailItinerary *pDetailItinerary = NULL;
+        NSString *pstrTemp = NULL;
+        while ( SQLITE_ROW == sqlite3_step( pstmt ) )
+        {
+            pDetailItinerary = [[ CDetailItinerary alloc ] init ];
+            pDetailItinerary.uid = sqlite3_column_int( pstmt, 0 );
+            pDetailItinerary.index = sqlite3_column_int( pstmt, 1 );
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 2 ) ];
+            pDetailItinerary.serialNumber = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 3 ) ];
+            pDetailItinerary.day = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 4 ) ];
+            pDetailItinerary.traffic = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 5 ) ];
+            pDetailItinerary.trafficNo = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 6 ) ];
+            pDetailItinerary.driverName = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 7 ) ];
+            pDetailItinerary.driverPhone = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 8 ) ];
+            pDetailItinerary.city = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 9 ) ];
+            pDetailItinerary.meal = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 10 ) ];
+            pDetailItinerary.room = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 11 ) ];
+            pDetailItinerary.detailDesc = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 12 ) ];
+            pDetailItinerary.localTravelAgencyName = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 13 ) ];
+            pDetailItinerary.localGuide = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 14 ) ];
+            pDetailItinerary.localGuidePhone = pstrTemp;
+            [ pstrTemp release ];
+            
+            [ parrDetail addObject: pDetailItinerary ];
+            [ pDetailItinerary release ];
+            
+        }
+        sqlite3_finalize( pstmt );
+        bRet = YES;
+    }
+
+    
+    return bRet;
 }
 
 
 //**************group member
 - (BOOL)insertGroupMember:(CGroupMember *)pGroupMember
 {
-    return NO;    
+    NSString *pstrSQL = [[ NSString alloc ] initWithFormat: 
+                         @"insert into tb_GroupMember( paid, serialNumber, \
+                         name, sex, age, remark, phone, idCardType, \
+                         idCardType ) values( %d, '%@', '%@', '%@', '%@', '%@', \
+                         '%@', '%@', '%@' )", 
+                         pGroupMember.paid, pGroupMember.serialNumber, pGroupMember.name,
+                         pGroupMember.sex, pGroupMember.age, pGroupMember.remark,
+                         pGroupMember.phone, pGroupMember.idCardType, pGroupMember.idCardNumber ];
+    
+    BOOL bRet = [ self executeSQLA: [ pstrSQL UTF8String ] ];
+    [ pstrSQL release ];
+    return bRet;
+
 }
 
 
-- (BOOL)getAllGroupMember:(NSMutableArray *)parrGroupMember byMainID:(uint32_t)uMainID
+- (BOOL)getAllGroupMember:(NSMutableArray*)parrGroupMember ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
 {
-    return NO;
+    BOOL bRet = NO;
+    NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
+                         @"select * from tb_DetailItinerary where serialNumber = '%@'", pstrMainSerialNumber ];
+    sqlite3_stmt *pstmt = NULL;
+    
+    if ( SQLITE_OK == sqlite3_prepare_v2( pSQLite3_, [ pstrSQL UTF8String ], -1, &pstmt, NULL) )
+    {
+        CGroupMember *pGroupMember = NULL;
+        NSString *pstrTemp = NULL;
+        while ( SQLITE_ROW == sqlite3_step( pstmt ) )
+        {
+            pGroupMember = [[ CGroupMember alloc ] init ];
+            pGroupMember.uid = sqlite3_column_int( pstmt, 0 );
+            pGroupMember.paid = sqlite3_column_int( pstmt, 1 );
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 2 ) ];
+            pGroupMember.serialNumber = pstrTemp;
+                   
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 3 ) ];
+            pGroupMember.name = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 4 ) ];
+            pGroupMember.sex = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 5 ) ];
+            pGroupMember.age = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 6 ) ];
+            pGroupMember.remark = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 7 ) ];
+            pGroupMember.phone = pstrTemp;
+            [ pstrTemp release ];
+            
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 8 ) ];
+            pGroupMember.idCardType = pstrTemp;
+            [ pstrTemp release ];
+
+            pstrTemp = [ [ NSString alloc ] initWithUTF8String:
+                        ( const char *)sqlite3_column_text( pstmt, 9 ) ];
+            pGroupMember.idCardNumber = pstrTemp;
+            [ pstrTemp release ];
+            
+            [ parrGroupMember addObject: pGroupMember ];
+            [ pGroupMember release ];
+
+        }
+        sqlite3_finalize( pstmt );
+        bRet = YES;
+    }
+    
+    return bRet;
 }
 
 
@@ -124,6 +318,7 @@
     char *pstrCreateMainItineraryTable = 
     "create table tb_MainItinerary \
     ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
+    SerialNumber TEXT, \
     timeStamp TEXT, \
     tourGroupName TEXT, \
     travelAgencyName TEXT, \
@@ -142,8 +337,8 @@
     char *pstrCreateDetailItineraryTable =
     "create table tb_DetailItinerary \
     ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
-    mianid INTEGER, \
     index INTEGER, \
+    serialNumber TEXT, \
     day TEXT, \
     traffic TEXT, \
     trafficNo TEXT, \
@@ -151,7 +346,7 @@
     driverPhone TEXT, \
     city TEXT, \
     meal TEXT, \
-    toom TEXT, \
+    room TEXT, \
     detailDesc TEXT, \
     localTravelAgencyName TEXT, \
     localGuide TEXT, \
@@ -160,9 +355,10 @@
 
     
     char *pstrCreateGroupMemberTable =
-    "create table tb_DetailItinerary \
+    "create table tb_GroupMember \
     ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
     paid INTEGER, \
+    serialNumber TEXT, \
     name TEXT, \
     sex TEXT, \
     age TEXT, \

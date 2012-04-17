@@ -12,7 +12,8 @@
 @implementation CGroupMember
 
 @synthesize uid = uid_;
-@synthesize nPaid = nPaid_;
+@synthesize paid = nPaid_;
+@synthesize serialNumber = pstrSerialNumber_;
 @synthesize name = pstrName_;
 @synthesize sex = pstrSex_;
 @synthesize age = pstrAge_;
@@ -28,6 +29,7 @@
     {
       uid_ = 0;
       nPaid_ = 0;
+      pstrSerialNumber_ = [[ NSString alloc ] init ];
       pstrName_ = [[ NSString alloc ] init ];
       pstrSex_ = [[ NSString alloc ] init ];
       pstrAge_ = [[ NSString alloc ] init ];
@@ -42,6 +44,7 @@
 
 - (void)dealloc
 {
+    self.serialNumber = nil;
     self.name = nil;
     self.sex = nil;
     self.age = nil;

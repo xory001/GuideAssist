@@ -21,18 +21,18 @@
 - (BOOL)initDatabase;
 
 //main itinerary
-- (BOOL)insertMainItinerary:(CMainItinerary*)pMainIniterary retID:(UInt32*)puNid;
-- (BOOL)getAllMainItineraryDateAndID:(NSMutableArray*)parrDateID;
+- (BOOL)insertMainItinerary:(CMainItinerary*)pMainIniterary;
+- (BOOL)getAllMainItinerarySerialNumber:(NSMutableArray*)parrMainSerialNumber;
 
 
 //detail itinerary
 - (BOOL)insertDetailItinerary:(CDetailItinerary*)pDetailItinerary;
-- (BOOL)getAllDetailItinerary:(NSMutableArray*)parrDetail ByMainID:(uint32_t)uMainID;
+- (BOOL)getAllDetailItinerary:(NSMutableArray*)parrDetail ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
 
 
 //group member
 - (BOOL)insertGroupMember:(CGroupMember*)pGroupMember;
-- (BOOL)getAllGroupMember:(NSMutableArray*)parrGroupMember byMainID:(uint32_t)uMainID;
+- (BOOL)getAllGroupMember:(NSMutableArray*)parrGroupMember ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
 
 
 

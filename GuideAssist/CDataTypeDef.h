@@ -12,15 +12,15 @@
 #import "CGroupMember.h"
 
 
-@interface CMainItineraryDateID : NSObject
+@interface CMainItinerarySerialNumner : NSObject
 {
 @private
-    uint32_t uid_;
+    NSString *pstrSerialNumner_;
     NSString *pstrDate_;
 }
 
-@property ( nonatomic, assign ) uint32_t uid;
-@property ( nonatomic, retain ) NSString *date;
+@property ( nonatomic, copy ) NSString *serialNumner;
+@property ( nonatomic, copy ) NSString *date;
 
 
 @end

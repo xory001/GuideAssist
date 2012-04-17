@@ -7,9 +7,9 @@
 //
 #import "CDataTypeDef.h"
 
-@implementation CMainItineraryDateID
+@implementation CMainItinerarySerialNumner
 
-@synthesize uid = uid_;
+@synthesize serialNumner = pstrSerialNumner_;
 @synthesize date = pstrDate_;
 
 - (id)init
@@ -17,7 +17,7 @@
     self = [ super init ];
     if ( self )
     {
-        uid_ = 0;
+        pstrSerialNumner_ = [[ NSString alloc ] init ];
         pstrDate_ = [[ NSString alloc ] init ];
     }
     return self;
@@ -25,6 +25,7 @@
 
 - (void)dealloc
 {
+    self.serialNumner = nil;
     self.date = nil;
     [ super dealloc ];
 }

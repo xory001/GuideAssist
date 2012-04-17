@@ -11,6 +11,7 @@
 @implementation CMainItinerary
 
 @synthesize uid = uid_;
+@synthesize serialNumber = pstrSerialNumber_;
 @synthesize tourGroupName = pstrTourGroupName_;
 @synthesize travelAgencyName = pstrTravelAgencyName_;
 @synthesize memberCount = nMemberCount_;
@@ -32,6 +33,7 @@
       {
         uid_ = 0;
         nMemberCount_ = 0;
+        pstrSerialNumber_ = [[ NSString alloc ] init ];
         pstrTourGroupName_ = [[ NSString alloc ] init ];
         pstrTravelAgencyName_ = [[ NSString alloc ] init ];
         pstrTimeStamp_ = [[ NSString alloc ] init ];
@@ -51,6 +53,7 @@
 
 -(void)dealloc
 {
+    self.serialNumber = nil;
     self.tourGroupName = nil;
     self.travelAgencyName = nil;
     self.timeStamp = nil;

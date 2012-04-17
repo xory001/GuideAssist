@@ -12,6 +12,7 @@
 {
 @private
     UInt32 uid_;
+    NSString *pstrSerialNumber_;
     NSString *pstrTimeStamp_;
     NSString *pstrTourGroupName_;
     NSString *pstrTravelAgencyName_;
@@ -29,19 +30,20 @@
 }
 
 @property( nonatomic, assign ) UInt32 uid;
-@property( nonatomic, retain ) NSString *timeStamp;
-@property( nonatomic, retain ) NSString *tourGroupName;
-@property( nonatomic, retain ) NSString *travelAgencyName;
+@property( nonatomic, copy ) NSString *serialNumber;
+@property( nonatomic, copy ) NSString *timeStamp;
+@property( nonatomic, copy ) NSString *tourGroupName;
+@property( nonatomic, copy ) NSString *travelAgencyName;
 @property( nonatomic, assign ) UInt32 memberCount;
-@property( nonatomic, retain ) NSString *statDay;
-@property( nonatomic, retain ) NSString *endDay;
-@property( nonatomic, retain ) NSString *standardCost;
-@property( nonatomic, retain ) NSString *roomCost;
-@property( nonatomic, retain ) NSString *mealCost;
-@property( nonatomic, retain ) NSString *trafficCost;
-@property( nonatomic, retain ) NSString *personalTotalCost;
-@property( nonatomic, retain ) NSString *groupTotalCost;
-@property( nonatomic, retain ) NSString *ticketCost;
+@property( nonatomic, copy ) NSString *statDay;
+@property( nonatomic, copy ) NSString *endDay;
+@property( nonatomic, copy ) NSString *standardCost;
+@property( nonatomic, copy ) NSString *roomCost;
+@property( nonatomic, copy ) NSString *mealCost;
+@property( nonatomic, copy ) NSString *trafficCost;
+@property( nonatomic, copy ) NSString *personalTotalCost;
+@property( nonatomic, copy ) NSString *groupTotalCost;
+@property( nonatomic, copy ) NSString *ticketCost;
 
 
 @end

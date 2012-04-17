@@ -12,7 +12,7 @@
 @implementation CDetailItinerary
 
 @synthesize uid = uid_;
-@synthesize mainid = nMainid_;
+@synthesize serialNumber = pstrSerialNumber_;
 @synthesize index = nIndex_;
 @synthesize day = pstrDay_;
 @synthesize traffic = pstrTraffic_;
@@ -33,8 +33,8 @@
     if ( self ) 
     {
       uid_ = 0;
-      nMainid_ = 0;
       nIndex_ = 0;
+      pstrSerialNumber_ = [[ NSString alloc ] init ];
       pstrDay_ = [[ NSString alloc ] init ];
       pstrTraffic_ = [[ NSString alloc ] init ];
       pstrTrafficNo_ = [[ NSString alloc ] init ];
@@ -53,6 +53,7 @@
 
 - (void) dealloc
 {
+    self.serialNumber = nil;
     self.day = nil;
     self.traffic = nil;
     self.trafficNo = nil;

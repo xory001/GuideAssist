@@ -13,8 +13,8 @@
 {
 @private //15 member variable
     UInt32 uid_;
-    UInt32 uMainid_;
     UInt32 uIndex_;
+    NSString *pstrSerialNumber_;
     NSString *pstrDay_;
     NSString *pstrTraffic_;
     NSString *pstrTrafficNo_;
@@ -31,19 +31,19 @@
 }
 
 @property( nonatomic, assign ) UInt32 uid;
-@property( nonatomic, assign ) UInt32 mainid;
+@property( nonatomic, copy ) NSString *serialNumber;
 @property( nonatomic, assign ) UInt32 index;
-@property( nonatomic, retain ) NSString *day;
-@property( nonatomic, retain ) NSString *traffic;
-@property( nonatomic, retain ) NSString *trafficNo;
-@property( nonatomic, retain ) NSString *driverName;
-@property( nonatomic, retain ) NSString *driverPhone;
-@property( nonatomic, retain ) NSString *city;
-@property( nonatomic, retain ) NSString *meal;
-@property( nonatomic, retain ) NSString *room;
-@property( nonatomic, retain ) NSString *detailDesc;
-@property( nonatomic, retain ) NSString *localTravelAgencyName;
-@property( nonatomic, retain ) NSString *localGuide;
-@property( nonatomic, retain ) NSString *localGuidePhone;
+@property( nonatomic, copy ) NSString *day;
+@property( nonatomic, copy ) NSString *traffic;
+@property( nonatomic, copy ) NSString *trafficNo;
+@property( nonatomic, copy ) NSString *driverName;
+@property( nonatomic, copy ) NSString *driverPhone;
+@property( nonatomic, copy ) NSString *city;
+@property( nonatomic, copy ) NSString *meal;
+@property( nonatomic, copy ) NSString *room;
+@property( nonatomic, copy ) NSString *detailDesc;
+@property( nonatomic, copy ) NSString *localTravelAgencyName;
+@property( nonatomic, copy ) NSString *localGuide;
+@property( nonatomic, copy ) NSString *localGuidePhone;
 
 @end
