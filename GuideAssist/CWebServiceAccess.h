@@ -27,8 +27,11 @@
 @property( nonatomic, copy ) NSString *icCardNumber;
 @property( nonatomic, copy ) NSString *guidePhone;
 
-- (BOOL)userLogin:(NSString*)pstrRetXML soapBody:(NSString*)pstrSoapBody;
-- (BOOL)isDataSync;
+- (NSString*)getMD5:(NSString*)pstrSource;
 
+- (BOOL)userLogin:(NSMutableString*)pstrRetXML;
+- (BOOL)isDataSync:(NSMutableString*)pstrRetXML syncItineraryInfo:(NSMutableDictionary*)parrSyncItineraryInfo;
+- (BOOL)getItineraryInfo:(NSMutableString*)pstrRetXML byItineraryNumber:(NSString*)pstrItineraryNumber;
+- (BOOL)getGroupMember:(NSMutableString*)pstrRetXML byItineraryNumber:(NSString*)pstrItineraryNumber;
 
 @end

@@ -49,7 +49,7 @@ typedef NSString* (*FnGetResponsValue)(NSString*);
 
 #pragma mark -
 #pragma mark HttpDownloadHelper member variables define
-@interface HttpDownloadHelper : NSObject <NSURLConnectionDataDelegate>
+@interface HttpDownloadHelper : NSObject
 {
 @protected
     NSURLConnection* mpUrlConnection;
