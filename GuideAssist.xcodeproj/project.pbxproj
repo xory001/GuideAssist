@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E928184153E60B500785495 /* baseModule in Resources */ = {isa = PBXBuildFile; fileRef = 9E928183153E60B500785495 /* baseModule */; };
+		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
 		9E9A13C0140124910047853A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13BF140124910047853A /* UIKit.framework */; };
 		9E9A13C2140124910047853A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C1140124910047853A /* Foundation.framework */; };
 		9E9A13C4140124910047853A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C3140124910047853A /* CoreGraphics.framework */; };
@@ -46,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E928183153E60B500785495 /* baseModule */ = {isa = PBXFileReference; lastKnownFileType = folder; path = baseModule; sourceTree = "<group>"; };
+		9E928185153E639A00785495 /* CWebServiceAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWebServiceAccess.h; sourceTree = "<group>"; };
+		9E928186153E639B00785495 /* CWebServiceAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWebServiceAccess.m; sourceTree = "<group>"; };
 		9E9A13BB140124900047853A /* GuideAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E9A13BF140124910047853A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E9A13C1140124910047853A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -147,6 +152,7 @@
 		9E9A13C5140124910047853A /* GuideAssist */ = {
 			isa = PBXGroup;
 			children = (
+				9E928183153E60B500785495 /* baseModule */,
 				9EB797701533C8CD00928F31 /* DataAccess */,
 				9EACC4D9140A7FEA00C580C1 /* BaseFunction */,
 				9E9A13F8140125180047853A /* MainView */,
@@ -232,6 +238,8 @@
 				9EB7977F15352FD200928F31 /* CGroupMember.m */,
 				9EB79781153564D600928F31 /* CMainItinerary.h */,
 				9EB79782153564D700928F31 /* CMainItinerary.m */,
+				9E928185153E639A00785495 /* CWebServiceAccess.h */,
+				9E928186153E639B00785495 /* CWebServiceAccess.m */,
 			);
 			name = DataAccess;
 			sourceTree = "<group>";
@@ -310,6 +318,7 @@
 				9EACC4D314095F7600C580C1 /* bt_login.png in Resources */,
 				9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */,
 				9EACC4D81409607800C580C1 /* Settings.bundle in Resources */,
+				9E928184153E60B500785495 /* baseModule in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +363,7 @@
 				9EB7977D153448E400928F31 /* CDetailItinerary.m in Sources */,
 				9EB7978015352FD300928F31 /* CGroupMember.m in Sources */,
 				9EB79783153564D900928F31 /* CMainItinerary.m in Sources */,
+				9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
