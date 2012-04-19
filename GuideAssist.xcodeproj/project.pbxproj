@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E928184153E60B500785495 /* baseModule in Resources */ = {isa = PBXBuildFile; fileRef = 9E928183153E60B500785495 /* baseModule */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
 		9E9A13C0140124910047853A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13BF140124910047853A /* UIKit.framework */; };
 		9E9A13C2140124910047853A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C1140124910047853A /* Foundation.framework */; };
@@ -26,6 +25,19 @@
 		9E9A13F7140125090047853A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A13F5140125090047853A /* LoginViewController.xib */; };
 		9E9A13FC140125FA0047853A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A13FA140125FA0047853A /* MainViewController.m */; };
 		9E9A13FD140125FA0047853A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A13FB140125FA0047853A /* MainViewController.xib */; };
+		9E9E664B153FA8BF009B05F7 /* DialogUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6640153FA8BF009B05F7 /* DialogUIAlertView.m */; };
+		9E9E664C153FA8BF009B05F7 /* DialogUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6640153FA8BF009B05F7 /* DialogUIAlertView.m */; };
+		9E9E664D153FA8BF009B05F7 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6642153FA8BF009B05F7 /* HttpRequest.m */; };
+		9E9E664E153FA8BF009B05F7 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6642153FA8BF009B05F7 /* HttpRequest.m */; };
+		9E9E664F153FA8BF009B05F7 /* IniFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6644153FA8BF009B05F7 /* IniFileManager.m */; };
+		9E9E6650153FA8BF009B05F7 /* IniFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6644153FA8BF009B05F7 /* IniFileManager.m */; };
+		9E9E6651153FA8BF009B05F7 /* LoopList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6646153FA8BF009B05F7 /* LoopList.m */; };
+		9E9E6652153FA8BF009B05F7 /* LoopList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6646153FA8BF009B05F7 /* LoopList.m */; };
+		9E9E6653153FA8BF009B05F7 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6648153FA8BF009B05F7 /* TreeNode.m */; };
+		9E9E6654153FA8BF009B05F7 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6648153FA8BF009B05F7 /* TreeNode.m */; };
+		9E9E6655153FA8BF009B05F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E664A153FA8BF009B05F7 /* XMLParser.m */; };
+		9E9E6656153FA8BF009B05F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E664A153FA8BF009B05F7 /* XMLParser.m */; };
+		9E9E6659153FB5C3009B05F7 /* InterfaceDefined.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6658153FB5C3009B05F7 /* InterfaceDefined.m */; };
 		9EACC4D314095F7600C580C1 /* bt_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D214095F7600C580C1 /* bt_login.png */; };
 		9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D514095FFC00C580C1 /* bt_quit.png */; };
 		9EACC4D81409607800C580C1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D71409607800C580C1 /* Settings.bundle */; };
@@ -48,7 +60,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9E928183153E60B500785495 /* baseModule */ = {isa = PBXFileReference; lastKnownFileType = folder; path = baseModule; sourceTree = "<group>"; };
 		9E928185153E639A00785495 /* CWebServiceAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWebServiceAccess.h; sourceTree = "<group>"; };
 		9E928186153E639B00785495 /* CWebServiceAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWebServiceAccess.m; sourceTree = "<group>"; };
 		9E9A13BB140124900047853A /* GuideAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +85,20 @@
 		9E9A13F9140125FA0047853A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9E9A13FA140125FA0047853A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		9E9A13FB140125FA0047853A /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		9E9E663F153FA8BF009B05F7 /* DialogUIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogUIAlertView.h; sourceTree = "<group>"; };
+		9E9E6640153FA8BF009B05F7 /* DialogUIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogUIAlertView.m; sourceTree = "<group>"; };
+		9E9E6641153FA8BF009B05F7 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
+		9E9E6642153FA8BF009B05F7 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
+		9E9E6643153FA8BF009B05F7 /* IniFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IniFileManager.h; sourceTree = "<group>"; };
+		9E9E6644153FA8BF009B05F7 /* IniFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IniFileManager.m; sourceTree = "<group>"; };
+		9E9E6645153FA8BF009B05F7 /* LoopList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopList.h; sourceTree = "<group>"; };
+		9E9E6646153FA8BF009B05F7 /* LoopList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopList.m; sourceTree = "<group>"; };
+		9E9E6647153FA8BF009B05F7 /* TreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeNode.h; sourceTree = "<group>"; };
+		9E9E6648153FA8BF009B05F7 /* TreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeNode.m; sourceTree = "<group>"; };
+		9E9E6649153FA8BF009B05F7 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
+		9E9E664A153FA8BF009B05F7 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
+		9E9E6657153FB5C3009B05F7 /* InterfaceDefined.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceDefined.h; sourceTree = "<group>"; };
+		9E9E6658153FB5C3009B05F7 /* InterfaceDefined.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceDefined.m; sourceTree = "<group>"; };
 		9EACC4D214095F7600C580C1 /* bt_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_login.png; sourceTree = "<group>"; };
 		9EACC4D514095FFC00C580C1 /* bt_quit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_quit.png; sourceTree = "<group>"; };
 		9EACC4D71409607800C580C1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -152,7 +177,7 @@
 		9E9A13C5140124910047853A /* GuideAssist */ = {
 			isa = PBXGroup;
 			children = (
-				9E928183153E60B500785495 /* baseModule */,
+				9E9E663E153FA8BF009B05F7 /* baseModule */,
 				9EB797701533C8CD00928F31 /* DataAccess */,
 				9EACC4D9140A7FEA00C580C1 /* BaseFunction */,
 				9E9A13F8140125180047853A /* MainView */,
@@ -214,6 +239,27 @@
 				9E9A13FB140125FA0047853A /* MainViewController.xib */,
 			);
 			name = MainView;
+			sourceTree = "<group>";
+		};
+		9E9E663E153FA8BF009B05F7 /* baseModule */ = {
+			isa = PBXGroup;
+			children = (
+				9E9E6657153FB5C3009B05F7 /* InterfaceDefined.h */,
+				9E9E6658153FB5C3009B05F7 /* InterfaceDefined.m */,
+				9E9E663F153FA8BF009B05F7 /* DialogUIAlertView.h */,
+				9E9E6640153FA8BF009B05F7 /* DialogUIAlertView.m */,
+				9E9E6641153FA8BF009B05F7 /* HttpRequest.h */,
+				9E9E6642153FA8BF009B05F7 /* HttpRequest.m */,
+				9E9E6643153FA8BF009B05F7 /* IniFileManager.h */,
+				9E9E6644153FA8BF009B05F7 /* IniFileManager.m */,
+				9E9E6645153FA8BF009B05F7 /* LoopList.h */,
+				9E9E6646153FA8BF009B05F7 /* LoopList.m */,
+				9E9E6647153FA8BF009B05F7 /* TreeNode.h */,
+				9E9E6648153FA8BF009B05F7 /* TreeNode.m */,
+				9E9E6649153FA8BF009B05F7 /* XMLParser.h */,
+				9E9E664A153FA8BF009B05F7 /* XMLParser.m */,
+			);
+			path = baseModule;
 			sourceTree = "<group>";
 		};
 		9EACC4D9140A7FEA00C580C1 /* BaseFunction */ = {
@@ -318,7 +364,6 @@
 				9EACC4D314095F7600C580C1 /* bt_login.png in Resources */,
 				9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */,
 				9EACC4D81409607800C580C1 /* Settings.bundle in Resources */,
-				9E928184153E60B500785495 /* baseModule in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +409,13 @@
 				9EB7978015352FD300928F31 /* CGroupMember.m in Sources */,
 				9EB79783153564D900928F31 /* CMainItinerary.m in Sources */,
 				9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */,
+				9E9E664B153FA8BF009B05F7 /* DialogUIAlertView.m in Sources */,
+				9E9E664D153FA8BF009B05F7 /* HttpRequest.m in Sources */,
+				9E9E664F153FA8BF009B05F7 /* IniFileManager.m in Sources */,
+				9E9E6651153FA8BF009B05F7 /* LoopList.m in Sources */,
+				9E9E6653153FA8BF009B05F7 /* TreeNode.m in Sources */,
+				9E9E6655153FA8BF009B05F7 /* XMLParser.m in Sources */,
+				9E9E6659153FB5C3009B05F7 /* InterfaceDefined.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +424,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E9A13E9140124910047853A /* GuideAssistTests.m in Sources */,
+				9E9E664C153FA8BF009B05F7 /* DialogUIAlertView.m in Sources */,
+				9E9E664E153FA8BF009B05F7 /* HttpRequest.m in Sources */,
+				9E9E6650153FA8BF009B05F7 /* IniFileManager.m in Sources */,
+				9E9E6652153FA8BF009B05F7 /* LoopList.m in Sources */,
+				9E9E6654153FA8BF009B05F7 /* TreeNode.m in Sources */,
+				9E9E6656153FA8BF009B05F7 /* XMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

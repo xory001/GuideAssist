@@ -7,7 +7,7 @@
 //
 
 #import "CWebServiceAccess.h"
-#import "baseModule/HttpRequest.h"
+#import <CommonCrypto/CommonDigest.h>
 
 
 @implementation CWebServiceAccess
@@ -54,26 +54,45 @@
     [ super dealloc ];
 }
 
+- (NSString*)getMD5:(NSString *)pstrSource
+{
+    NSMutableString *pstrMD5 = [[ NSMutableString alloc ] init ];
+    unsigned char szMD5[16] = {0};
+    CC_MD5( [ pstrSource UTF8String ], [ pstrSource length ], szMD5 );
+    for (int i = 0; i < 16; i++ )
+    {
+        [ pstrMD5 appendFormat:@"%02x", szMD5[i] ];
+    }
+    NSString *pstrRet = [[[ NSString alloc ] initWithString: 
+                         [ pstrMD5 substringWithRange: NSMakeRange( 2, 10 ) ] ] autorelease ];
+    [ pstrMD5 release ];
+    return pstrRet;
+}
+
 - (BOOL)userLogin:(NSMutableString *)pstrRetXML
 {
-    NSString *pstrMD5 = [[ NSString alloc ] init ];
+    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@0", self.icCardNumber,
+                                self.guidePhone ] autorelease ];
+    NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrLoginBody = [[ NSString alloc ] initWithFormat:
                                @"<userLogin xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
-                               <arg0 xmlns=\"\">712936</arg0> \
-                               <arg1 xmlns=\"\">15305712936</arg1> \
+                               <arg0 xmlns=\"\">%@</arg0> \
+                               <arg1 xmlns=\"\">%@</arg1> \
                                <arg2 xmlns=\"\">0</arg2> \
-                               <arg3 xmlns=\"\">158f81736f</arg3> \
+                               <arg3 xmlns=\"\">%@</arg3> \
                                </userLogin>", self.icCardNumber,
-                               self.guidePhone, 0, pstrMD5 ];
+                               self.guidePhone, pstrMD5 ];
+    [ phttpRequest_ setUrl: self.url ];
     [ phttpRequest_ setHTTPHeaderValue: self.soapAction forKey:@"SOAPAction" ];
     [ phttpRequest_ setHTTPMethod: @"POST" ];
     [ phttpRequest_ setHttpBody: pstrLoginBody withEncoding: NSUnicodeStringEncoding ];
-    if ( [ phttpRequest_ startDownloadWithBlockTime: 10 ] )
+    if ( [ phttpRequest_ startDownloadWithBlockTime: 10000 ] )
     {
         NSString *pstrRet = [ phttpRequest_ getResultString ];
         NSLog( @"%@", pstrRet );
     }
     
+    [ pstrLoginBody release ];
     
     return NO;
 }

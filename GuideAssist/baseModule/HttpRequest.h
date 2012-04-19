@@ -104,7 +104,7 @@ typedef NSString* (*FnGetResponsValue)(NSString*);
 #pragma mark HttpDownloadHelper download controls
 
 - (BOOL) startDownload;
-- (BOOL) startDownloadWithBlockTime:(NSUInteger) uBlockTime;
+- (BOOL) startDownloadWithBlockTime:(NSUInteger) uBlockTime; //millisecond
 - (BOOL) doCancel;
 - (void) doRetryDownload;
 #pragma mark -

@@ -8,13 +8,27 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "GuideAssist/GuideAssistAppDelegate.m"
-         timestampString = "355997902.065858"
+         filePath = "GuideAssist/CWebServiceAccess.m"
+         timestampString = "356503508.531501"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "48"
-         endingLineNumber = "48"
-         landmarkName = "-application:didFinishLaunchingWithOptions:"
+         startingLineNumber = "97"
+         endingLineNumber = "97"
+         landmarkName = "-userLogin:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "GuideAssist/CWebServiceAccess.m"
+         timestampString = "356503508.531501"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
+         landmarkName = "-userLogin:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
