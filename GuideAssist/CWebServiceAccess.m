@@ -74,26 +74,26 @@
     NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@0", self.icCardNumber,
                                 self.guidePhone ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
-    NSString *pstrLoginBody = [[ NSString alloc ] initWithFormat:
+    NSString *pstrLoginInfo = [[[ NSString alloc ] initWithFormat:
                                @"<userLogin xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
                                <arg0 xmlns=\"\">%@</arg0> \
                                <arg1 xmlns=\"\">%@</arg1> \
                                <arg2 xmlns=\"\">0</arg2> \
                                <arg3 xmlns=\"\">%@</arg3> \
                                </userLogin>", self.icCardNumber,
-                               self.guidePhone, pstrMD5 ];
+                               self.guidePhone, pstrMD5 ] autorelease ];
+    NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrLoginInfo ] autorelease ];
     [ phttpRequest_ setUrl: self.url ];
     [ phttpRequest_ setHTTPHeaderValue: self.soapAction forKey:@"SOAPAction" ];
     [ phttpRequest_ setHTTPMethod: @"POST" ];
-    [ phttpRequest_ setHttpBody: pstrLoginBody withEncoding: NSUnicodeStringEncoding ];
+    [ phttpRequest_ setHttpBody: pstrBody withEncoding: NSUTF8StringEncoding ];
     if ( [ phttpRequest_ startDownloadWithBlockTime: 10000 ] )
     {
         NSString *pstrRet = [ phttpRequest_ getResultString ];
         NSLog( @"%@", pstrRet );
     }
     
-    [ pstrLoginBody release ];
-    
+   
     return NO;
 }
 
