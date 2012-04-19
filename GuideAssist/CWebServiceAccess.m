@@ -100,8 +100,12 @@
                               [ pstrRet dataUsingEncoding: NSUnicodeStringEncoding ]];
         if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"0" ] )
         {
-            *ppstrRetErrInfo = [[[ NSString alloc ] initWithString: 
-                                 [ pXMLRoot leafForKey:@"ErrInfo" ] ] autorelease ];
+            if ( NULL != ppstrRetErrInfo )
+            {
+                *ppstrRetErrInfo = [[[ NSString alloc ] initWithString: 
+                                     [ pXMLRoot leafForKey:@"ErrInfo" ] ] autorelease ];
+           //     NSLog(@"%@", *ppstrRetErrInfo );
+            }
             return NO;
         }
         else

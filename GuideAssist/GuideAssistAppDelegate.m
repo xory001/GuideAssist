@@ -38,7 +38,8 @@
     pWebService.url = @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper";
     pWebService.icCardNumber = @"712936";
     pWebService.guidePhone = @"15305712936";
-    [ pWebService userLogin: nil ];
+    NSString *pstrErr = NULL;
+    [ pWebService userLogin: &pstrErr ];
     
    return YES;
 }
