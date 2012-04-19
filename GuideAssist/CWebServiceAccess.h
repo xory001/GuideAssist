@@ -29,7 +29,7 @@
 
 - (NSString*)getMD5:(NSString*)pstrSource;
 
-- (BOOL)userLogin:(NSMutableString*)pstrRetXML;
+- (BOOL)userLogin:(NSString**)ppstrRetErrInfo;
 - (BOOL)isDataSync:(NSMutableString*)pstrRetXML syncItineraryInfo:(NSMutableDictionary*)parrSyncItineraryInfo;
 - (BOOL)getItineraryInfo:(NSMutableString*)pstrRetXML byItineraryNumber:(NSString*)pstrItineraryNumber;
 - (BOOL)getGroupMember:(NSMutableString*)pstrRetXML byItineraryNumber:(NSString*)pstrItineraryNumber;

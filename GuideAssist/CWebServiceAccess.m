@@ -8,6 +8,9 @@
 
 #import "CWebServiceAccess.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "baseModule/XMLParser.h"
+#import "baseModule/TreeNode.h"
+#import "baseModule/IniFileManager.h"
 
 
 @implementation CWebServiceAccess
@@ -64,12 +67,12 @@
         [ pstrMD5 appendFormat:@"%02x", szMD5[i] ];
     }
     NSString *pstrRet = [[[ NSString alloc ] initWithString: 
-                         [ pstrMD5 substringWithRange: NSMakeRange( 2, 10 ) ] ] autorelease ];
+                         [ pstrMD5 substringWithRange: NSMakeRange( 2, 9 ) ] ] autorelease ];
     [ pstrMD5 release ];
     return pstrRet;
 }
 
-- (BOOL)userLogin:(NSMutableString *)pstrRetXML
+- (BOOL)userLogin:(NSString**)ppstrRetErrInfo
 {
     NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@0", self.icCardNumber,
                                 self.guidePhone ] autorelease ];
@@ -89,11 +92,24 @@
     [ phttpRequest_ setHttpBody: pstrBody withEncoding: NSUTF8StringEncoding ];
     if ( [ phttpRequest_ startDownloadWithBlockTime: 10000 ] )
     {
-        NSString *pstrRet = [ phttpRequest_ getResultString ];
-        NSLog( @"%@", pstrRet );
+        NSString *pstrRet = [ [phttpRequest_ getResultString ] stringByReplacingOccurrencesOfString: @"&lt;" withString: @"<" ] ;
+        NSUInteger uIndex = [ pstrRet findString: @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
+                              withStartLocation: 1 ];
+        pstrRet = [ pstrRet midString: uIndex ];
+        TreeNode *pXMLRoot = [[ XMLParser sharedInstance ] parseXMLFromData:
+                              [ pstrRet dataUsingEncoding: NSUnicodeStringEncoding ]];
+        if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"0" ] )
+        {
+            *ppstrRetErrInfo = [[[ NSString alloc ] initWithString: 
+                                 [ pXMLRoot leafForKey:@"ErrInfo" ] ] autorelease ];
+            return NO;
+        }
+        else
+        {
+            return YES;
+        }
     }
     
-   
     return NO;
 }
 
