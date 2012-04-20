@@ -17,7 +17,7 @@
     NSString *pstrTourGroupName_;
     NSString *pstrTravelAgencyName_;
     UInt32 nMemberCount_;
-    NSString *pstrStatDay_;
+    NSString *pstrStartDay_;
     NSString *pstrEndDay_;
     NSString *pstrStandardCost_;
     NSString *pstrRoomCost_;
@@ -35,7 +35,7 @@
 @property( nonatomic, copy ) NSString *tourGroupName;
 @property( nonatomic, copy ) NSString *travelAgencyName;
 @property( nonatomic, assign ) UInt32 memberCount;
-@property( nonatomic, copy ) NSString *statDay;
+@property( nonatomic, copy ) NSString *startDay;
 @property( nonatomic, copy ) NSString *endDay;
 @property( nonatomic, copy ) NSString *standardCost;
 @property( nonatomic, copy ) NSString *roomCost;

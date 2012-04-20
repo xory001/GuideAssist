@@ -30,6 +30,7 @@
 @property( nonatomic, copy ) NSString *guidePhone;
 @property( nonatomic, retain ) CDBAccess *dbAccess;
 
+- (uint32_t)getTickCount;
 - (NSString*)getYYYYMMddhh;
 - (NSString*)getMD5:(NSString*)pstrSource;
 - (NSString*)callMethod:(NSString*)pstrRequestBody; //return xml info
@@ -37,8 +38,9 @@
 - (BOOL)userLogin:(NSString**)ppstrRetErrInfo;
 - (BOOL)syncItineraryInfo:(NSMutableDictionary*)pDictSyncItineraryInfo;
 
-//bAdd YES add; NO modify, it is need to delete by add
-- (BOOL)getItineraryInfo:(NSString*)pstrItineraryNumber timeStamp:(NSString*)pstrTimeStamp opetation:(BOOL)bUpdate; 
-- (BOOL)getGroupMember:(NSMutableString*)pstrRetXML byItineraryNumber:(NSString*)pstrItineraryNumber;
+//if get itinerary succeed, delete the local datebase itinerary info before add
+- (BOOL)getItineraryInfo:(NSString*)pstrItineraryNumber timeStamp:(NSString*)pstrTimeStamp;
+- (BOOL)getGroupMember:(NSString*)pstrItineraryNumber timeStamp:(NSString*)pstrTimeStamp;
+- (BOOL)closeItinerary:(NSString*)pstrItineraryNumber remark:(NSString*)pstrRemark;
 
 @end

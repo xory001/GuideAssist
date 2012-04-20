@@ -16,7 +16,7 @@
 @synthesize travelAgencyName = pstrTravelAgencyName_;
 @synthesize memberCount = nMemberCount_;
 @synthesize timeStamp = pstrTimeStamp_;
-@synthesize statDay = pstrStatDay_;
+@synthesize startDay = pstrStartDay_;
 @synthesize endDay = pstrEndDay_;
 @synthesize standardCost = pstrStandardCost_;
 @synthesize roomCost = pstrRoomCost_;
@@ -37,7 +37,7 @@
         pstrTourGroupName_ = [[ NSString alloc ] init ];
         pstrTravelAgencyName_ = [[ NSString alloc ] init ];
         pstrTimeStamp_ = [[ NSString alloc ] init ];
-        pstrStatDay_ = [[ NSString alloc ] init ];
+        pstrStartDay_ = [[ NSString alloc ] init ];
         pstrEndDay_ = [[ NSString alloc ] init ];
         pstrStandardCost_ = [[ NSString alloc ] init ];
         pstrTicketCost_ = [[ NSString alloc ] init ];
@@ -57,7 +57,7 @@
     self.tourGroupName = nil;
     self.travelAgencyName = nil;
     self.timeStamp = nil;
-    self.statDay = nil;
+    self.startDay = nil;
     self.endDay = nil;
     self.roomCost = nil;
     self.mealCost = nil;

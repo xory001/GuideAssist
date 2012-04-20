@@ -301,7 +301,7 @@ NSString* _getDownloaderResponsValue(NSString* pstrCode)
 
 + (BOOL) doTipHttpError
 {
-    
+    return NO;
 }
 
 

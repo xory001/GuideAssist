@@ -26,7 +26,8 @@
 //main itinerary
 - (BOOL)insertMainItinerary:(CMainItinerary*)pMainIniterary;
 - (BOOL)getAllMainItinerarySerialNumber:(NSMutableArray*)parrMainSerialNumber;
-- (BOOL)deleteAllItineraryBySerialNumber:(NSString*)pstrSerialNumber;
+- (BOOL)deleteItineraryBySerialNumber:(NSString*)pstrSerialNumber;
+- (BOOL)deleteGroupMemberInfoByBySerialNumber:(NSString*)pstrSerialNumber;
 
 
 //detail itinerary

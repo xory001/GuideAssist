@@ -24,7 +24,8 @@
 #pragma mark Create and Initialize TreeNodes
 - (TreeNode *) init
 {
-	if (self = [super init]) 
+    self = [ super init ];
+	if ( self ) 
 	{
         mpChildren = [[NSMutableArray alloc] initWithCapacity:0];
 	}

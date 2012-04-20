@@ -12,6 +12,9 @@
 #import "baseModule/TreeNode.h"
 #import "baseModule/IniFileManager.h"
 #import "CDBAccess.h"
+#import <sys/time.h>
+
+
 
 
 @implementation CWebServiceAccess
@@ -60,24 +63,188 @@
     [ super dealloc ];
 }
 
-- (NSString*)getMD5:(NSString *)pstrSource
+- (BOOL)closeItinerary:(NSString *)pstrItineraryNumber remark:(NSString *)pstrRemark
 {
-    NSMutableString *pstrMD5 = [[ NSMutableString alloc ] init ];
-    unsigned char szMD5[16] = {0};
-    CC_MD5( [ pstrSource UTF8String ], [ pstrSource length ], szMD5 );
-    for (int i = 0; i < 16; i++ )
+    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@%@", self.icCardNumber,
+                             self.guidePhone, pstrItineraryNumber ] autorelease ];
+    NSString *pstrMD5 = [ self getMD5: pstrSource ];
+    NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
+                                  @"<tyDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
+                                  <arg0 xmlns=\"\">%@</arg0> \
+                                  <arg1 xmlns=\"\">%@</arg1> \
+                                  <arg2 xmlns=\"\">%@</arg2> \
+                                  <arg3 xmlms=\"\">%@</agr3> \
+                                  </tyDataSync>", self.icCardNumber,
+                                  self.guidePhone, pstrItineraryNumber , pstrMD5 ] autorelease ];
+    
+    NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrRequestInfo ] autorelease ];
+    
+    NSString *pstrRet = [ self callMethod: pstrBody ];
+    if ( pstrRet )
     {
-        [ pstrMD5 appendFormat:@"%02x", szMD5[i] ];
+        TreeNode *pXMLRoot = [[ XMLParser sharedInstance ] parseXMLFromData:
+                              [ pstrRet dataUsingEncoding: NSUnicodeStringEncoding ]];
+        if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"0" ] )
+        {
+            NSLog(@"%@", [ pXMLRoot leafForKey:@"ErrInfo" ] ); 
+            return NO;
+        }
+        else if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"1" ] )
+        {
+            return YES;
+        }
     }
-    NSString *pstrRet = [[[ NSString alloc ] initWithString: 
-                         [ pstrMD5 substringWithRange: NSMakeRange( 2, 9 ) ] ] autorelease ];
-    [ pstrMD5 release ];
-    return pstrRet;
+    
+    return NO;
 }
 
-- (BOOL)getItineraryInfo:(NSString*)pstrItineraryNumber timeStamp:(NSString*)pstrTimeStamp opetation:(BOOL)bUpdate
+- (BOOL)getGroupMember:(NSString *)pstrItineraryNumber timeStamp:(NSString *)pstrTimeStamp
 {
+    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@", pstrItineraryNumber,
+                             pstrTimeStamp ] autorelease ];
+    NSString *pstrMD5 = [ self getMD5: pstrSource ];
+    NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
+                                @"<tyDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
+                                <arg0 xmlns=\"\">%@</arg0> \
+                                <arg1 xmlns=\"\">%@</arg1> \
+                                <arg2 xmlns=\"\">%@</arg2> \
+                                </tyDataSync>", pstrItineraryNumber,
+                                pstrTimeStamp , pstrMD5 ] autorelease ];
     
+    NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrRequestInfo ] autorelease ];
+    
+    NSString *pstrRet = [ self callMethod: pstrBody ];
+    if ( pstrRet )
+    {
+        TreeNode *pXMLRoot = [[ XMLParser sharedInstance ] parseXMLFromData:
+                              [ pstrRet dataUsingEncoding: NSUnicodeStringEncoding ]];
+        if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"0" ] )
+        {
+            NSLog(@"%@", [ pXMLRoot leafForKey:@"ErrInfo" ] ); 
+            return NO;
+        }
+        else if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"2" ] )
+        {
+            [ pDBAccess_ deleteGroupMemberInfoByBySerialNumber:pstrItineraryNumber ];
+            NSArray *parrGroupMembers = [ pXMLRoot objectsForKey:@"dd" ];
+            CGroupMember *pMember = [[ CGroupMember alloc ] init ];
+            for ( TreeNode *pTmpNode in parrGroupMembers )
+            {
+                pMember.name = [ pTmpNode leafForKey:@"a" ];
+                pMember.sex = [ pTmpNode leafForKey:@"b" ];
+                pMember.age = [ pTmpNode leafForKey:@"c" ];
+                pMember.phone = [ pTmpNode leafForKey:@"d" ];
+                pMember.remark = [ pTmpNode leafForKey:@"f" ];
+                pMember.paid = [[ pTmpNode leafForKey:@"g" ] intValue ];
+                pMember.idCardType = [ pTmpNode leafForKey:@"h" ];
+                pMember.idCardNumber = [ pTmpNode leafForKey:@"i" ];
+                
+                [ pDBAccess_ insertGroupMember: pMember ];
+            }
+            [ pMember release ];
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (BOOL)getItineraryInfo:(NSString*)pstrItineraryNumber timeStamp:(NSString*)pstrTimeStamp
+{
+    NSString *pstrCurTime = [ self getYYYYMMddhh ];
+    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@%@%@%@", self.icCardNumber,
+                             self.guidePhone, pstrItineraryNumber, pstrTimeStamp, pstrCurTime ] autorelease ];
+    NSString *pstrMD5 = [ self getMD5: pstrSource ];
+    NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
+                                @"<xcdDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
+                                <arg0 xmlns=\"\">%@</arg0> \
+                                <arg1 xmlns=\"\">%@</arg1> \
+                                <arg2 xmlns=\"\">%@</arg2> \
+                                <arg3 xmlns=\"\">%@</arg3> \
+                                <arg4 xmlns=\"\">%@</arg4> \
+                                <arg5 xmlns=\"\">%@</arg5> \
+                                </xcdDataSync>",self.icCardNumber,
+                                self.guidePhone, pstrItineraryNumber, 
+                                pstrTimeStamp, pstrCurTime , pstrMD5 ] autorelease ];
+    
+    NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrRequestInfo ] autorelease ];
+    
+    NSString *pstrRet = [ self callMethod: pstrBody ];
+    if ( pstrRet )
+    {
+        TreeNode *pXMLRoot = [[ XMLParser sharedInstance ] parseXMLFromData:
+                              [ pstrRet dataUsingEncoding: NSUnicodeStringEncoding ]];
+        if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"0" ] )
+        {
+            NSLog(@"%@", [ pXMLRoot leafForKey:@"ErrInfo" ] ); 
+            return NO;
+        }
+        else if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"1" ] )
+        {
+            TreeNode *pXcdNode = [[ pXMLRoot objectForKey:@"Xcd" ] objectForKey:@"ds" ];
+            TreeNode *pMainItineraryNode = [ pXcdNode objectForKey:@"mn" ];
+            CMainItinerary *pMainItinerary = [[ CMainItinerary alloc ] init ];
+            if ( pMainItineraryNode )
+            {
+                pMainItinerary.tourGroupName = [ pMainItineraryNode leafForKey:@"a" ];
+                pMainItinerary.travelAgencyName = [ pMainItineraryNode leafForKey:@"b" ];
+                pMainItinerary.memberCount = [[ pMainItineraryNode leafForKey:@"c" ] intValue ];
+                pMainItinerary.timeStamp = [ pMainItineraryNode leafForKey:@"d" ];
+                pMainItinerary.startDay = [ pMainItineraryNode leafForKey:@"e" ];
+                pMainItinerary.endDay = [ pMainItineraryNode leafForKey:@"f" ];
+                pMainItinerary.serialNumber = pstrItineraryNumber;
+            }
+            pMainItineraryNode = [ pXcdNode objectForKey:@"fe" ];
+            if ( pMainItineraryNode )
+            {
+                pMainItinerary.standardCost = [ pMainItineraryNode leafForKey:@"a" ];
+                pMainItinerary.roomCost = [ pMainItineraryNode leafForKey:@"b" ];
+                pMainItinerary.ticketCost = [ pMainItineraryNode leafForKey:@"c" ];
+                pMainItinerary.mealCost = [ pMainItineraryNode leafForKey:@"d" ];
+                pMainItinerary.trafficCost = [ pMainItineraryNode leafForKey:@"e" ];
+                pMainItinerary.personalTotalCost = [ pMainItineraryNode leafForKey:@"f" ];
+                pMainItinerary.groupTotalCost = [ pMainItineraryNode leafForKey:@"g" ];
+            }
+            [ pDBAccess_ deleteItineraryBySerialNumber: pstrItineraryNumber ];
+            [ pDBAccess_ insertMainItinerary: pMainItinerary ];
+            [ pMainItinerary release ];
+            
+            CDetailItinerary *pDetailItinerary = nil;
+            pMainItineraryNode = [ pXcdNode objectForKey:@"dts" ];
+            NSArray *parrDetailNode = [ pXcdNode objectsForKey:@"dd" ];
+            int nIndex = 1;
+            pDetailItinerary = [[ CDetailItinerary alloc ] init ];
+            for ( TreeNode *pTmpNode in parrDetailNode ) 
+            {
+                pDetailItinerary.index = nIndex;
+                pDetailItinerary.day = [ pTmpNode leafForKey:@"a" ];
+                pDetailItinerary.traffic = [ pTmpNode leafForKey:@"c" ];
+                pDetailItinerary.trafficNo = [ pTmpNode leafForKey:@"d" ];
+                pDetailItinerary.driverName = [ pTmpNode leafForKey:@"e" ];
+                pDetailItinerary.driverPhone = [ pTmpNode leafForKey:@"f" ];
+                pDetailItinerary.city = [ pTmpNode leafForKey:@"i" ];
+                pDetailItinerary.meal = [ pTmpNode leafForKey:@"j" ];
+                pDetailItinerary.room = [ pTmpNode leafForKey:@"k" ];
+                pDetailItinerary.detailDesc = [ pTmpNode leafForKey:@"h" ];
+                pDetailItinerary.localTravelAgencyName = [ pTmpNode leafForKey:@"r" ];
+                pDetailItinerary.localGuide = [ pTmpNode leafForKey:@"s" ];
+                pDetailItinerary.localGuidePhone = [ pTmpNode leafForKey:@"t" ];
+                pDetailItinerary.serialNumber = pstrItineraryNumber;
+                
+                [ pDBAccess_ insertDetailItinerary: pDetailItinerary ];
+                nIndex++;
+               
+            }
+            [ pDetailItinerary release ];
+                                 
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+        
+    }
     return NO;
 }
 
@@ -138,17 +305,13 @@
                 switch ( [ pItineraryState intValue ] )
                 {
                     case ITINERARY_STATE_ADD:
-                        [ self getItineraryInfo2DateBaseByItineraryNumber:pItineraryNumber ];
-                        break;
-                        
                     case ITINERARY_STATE_MODIFY:
-                        [ self.dbAccess deleteAllItineraryBySerialNumber:pItineraryNumber ];
-                        [ self getItineraryInfo2DateBaseByItineraryNumber:pItineraryNumber ];
+                        [ self getItineraryInfo:pItineraryNumber timeStamp:nil ];
                         break;
                         
 
                     case ITINERARY_STATE_DEL:
-                        [ self.dbAccess deleteAllItineraryBySerialNumber:pItineraryNumber ];
+                        [ self.dbAccess deleteItineraryBySerialNumber:pItineraryNumber ];
                         break;
                         
                     default:
@@ -236,6 +399,28 @@
     NSString *pDay = [ pFormat stringFromDate: [ NSDate date ] ];
     [ pFormat release ];
     return pDay;
+}
+
+- (uint32_t)getTickCount
+{
+    struct timeval tv;
+    gettimeofday( &tv, NULL );
+    return (uint32_t)( tv.tv_sec * 1000 + tv.tv_usec / 1000 );
+}
+
+- (NSString*)getMD5:(NSString *)pstrSource
+{
+    NSMutableString *pstrMD5 = [[ NSMutableString alloc ] init ];
+    unsigned char szMD5[16] = {0};
+    CC_MD5( [ pstrSource UTF8String ], [ pstrSource length ], szMD5 );
+    for (int i = 0; i < 16; i++ )
+    {
+        [ pstrMD5 appendFormat:@"%02x", szMD5[i] ];
+    }
+    NSString *pstrRet = [[[ NSString alloc ] initWithString: 
+                          [ pstrMD5 substringWithRange: NSMakeRange( 2, 10 ) ] ] autorelease ];
+    [ pstrMD5 release ];
+    return pstrRet;
 }
 
 @end

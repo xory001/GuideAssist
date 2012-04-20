@@ -71,7 +71,7 @@ static CDBAccess *g_sharedInstance = nil;
      values('%@', '%@', '%@', '%@', %d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
      pMainIniterary.serialNumber, pMainIniterary.timeStamp, pMainIniterary.tourGroupName, 
                          pMainIniterary.travelAgencyName,
-     pMainIniterary.memberCount, pMainIniterary.statDay, pMainIniterary.endDay,
+     pMainIniterary.memberCount, pMainIniterary.startDay, pMainIniterary.endDay,
      pMainIniterary.standardCost, pMainIniterary.roomCost, pMainIniterary.mealCost,
      pMainIniterary.trafficCost, pMainIniterary.personalTotalCost, 
      pMainIniterary.groupTotalCost, pMainIniterary.ticketCost ];
@@ -121,7 +121,7 @@ static CDBAccess *g_sharedInstance = nil;
     return YES;
 }
 
-- (BOOL)deleteAllItineraryBySerialNumber:(NSString *)pstrSerialNumber
+- (BOOL)deleteItineraryBySerialNumber:(NSString *)pstrSerialNumber
 {
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
                          @"delet from tb_MainItinerary where SerialNumber = '%@'",
@@ -135,12 +135,7 @@ static CDBAccess *g_sharedInstance = nil;
     [ self executeSQLA: [ pstrSQL UTF8String ]];
     [ pstrSQL release ];
     
-    pstrSQL = [[ NSString alloc ] initWithFormat:
-                         @"delet from tb_GroupMember where SerialNumber = '%@'",
-                         pstrSerialNumber ];
-    [ self executeSQLA: [ pstrSQL UTF8String ]];
-    [ pstrSQL release ];
-    
+
     return YES;    
      
 }
@@ -280,6 +275,15 @@ static CDBAccess *g_sharedInstance = nil;
 
 }
 
+- (BOOL)deleteGroupMemberInfoByBySerialNumber:(NSString *)pstrSerialNumber
+{
+    NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
+               @"delet from tb_GroupMember where SerialNumber = '%@'",
+               pstrSerialNumber ];
+    [ self executeSQLA: [ pstrSQL UTF8String ]];
+    [ pstrSQL release ];
+    return YES;
+}
 
 - (BOOL)getAllGroupMember:(NSMutableArray*)parrGroupMember ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
 {
