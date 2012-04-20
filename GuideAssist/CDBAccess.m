@@ -9,8 +9,23 @@
 #import "CDBAccess.h"
 #import "/usr/include/sqlite3.h"
 
+static CDBAccess *g_sharedInstance = nil;
 
 @implementation CDBAccess
+
+
++ (CDBAccess*)sharedInstance
+{
+    if ( [NSThread currentThread].isMainThread )
+    {
+        return nil; //[[[self alloc] init] autorelease];
+    }
+    else if(!g_sharedInstance) 
+    {
+        g_sharedInstance = [[self alloc] init];
+    }
+    return g_sharedInstance;
+}
 
 - (id)init
 {
@@ -106,7 +121,29 @@
     return YES;
 }
 
-
+- (BOOL)deleteAllItineraryBySerialNumber:(NSString *)pstrSerialNumber
+{
+    NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
+                         @"delet from tb_MainItinerary where SerialNumber = '%@'",
+                         pstrSerialNumber ];
+    [ self executeSQLA: [ pstrSQL UTF8String ]];
+    [ pstrSQL release ];
+    
+    pstrSQL = [[ NSString alloc ] initWithFormat:
+                         @"delet from tb_DetailItinerary where SerialNumber = '%@'",
+                         pstrSerialNumber ];
+    [ self executeSQLA: [ pstrSQL UTF8String ]];
+    [ pstrSQL release ];
+    
+    pstrSQL = [[ NSString alloc ] initWithFormat:
+                         @"delet from tb_GroupMember where SerialNumber = '%@'",
+                         pstrSerialNumber ];
+    [ self executeSQLA: [ pstrSQL UTF8String ]];
+    [ pstrSQL release ];
+    
+    return YES;    
+     
+}
 
 //*********detail itinerary
 - (BOOL)insertDetailItinerary:(CDetailItinerary *)pDetailItinerary

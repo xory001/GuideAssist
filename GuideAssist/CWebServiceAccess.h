@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "baseModule/HttpRequest.h"
+#import "CDBAccess.h"
 
 
 @interface CWebServiceAccess : NSObject 
@@ -19,6 +20,7 @@
     NSString *pstrICCardNumber_;
     NSString *pstrGuidePhone_;
     
+    CDBAccess *pDBAccess_;
     HttpRequest *phttpRequest_;
 }
 
@@ -26,12 +28,17 @@
 @property( nonatomic, copy ) NSString *soapAction;
 @property( nonatomic, copy ) NSString *icCardNumber;
 @property( nonatomic, copy ) NSString *guidePhone;
+@property( nonatomic, retain ) CDBAccess *dbAccess;
 
+- (NSString*)getYYYYMMddhh;
 - (NSString*)getMD5:(NSString*)pstrSource;
+- (NSString*)callMethod:(NSString*)pstrRequestBody; //return xml info
 
 - (BOOL)userLogin:(NSString**)ppstrRetErrInfo;
-- (BOOL)isDataSync:(NSMutableString*)pstrRetXML syncItineraryInfo:(NSMutableDictionary*)parrSyncItineraryInfo;
-- (BOOL)getItineraryInfo:(NSMutableString*)pstrRetXML byItineraryNumber:(NSString*)pstrItineraryNumber;
+- (BOOL)syncItineraryInfo:(NSMutableDictionary*)pDictSyncItineraryInfo;
+
+//bAdd YES add; NO modify, it is need to delete by add
+- (BOOL)getItineraryInfo:(NSString*)pstrItineraryNumber timeStamp:(NSString*)pstrTimeStamp opetation:(BOOL)bUpdate; 
 - (BOOL)getGroupMember:(NSMutableString*)pstrRetXML byItineraryNumber:(NSString*)pstrItineraryNumber;
 
 @end

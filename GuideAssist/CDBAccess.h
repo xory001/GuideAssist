@@ -14,7 +14,10 @@
 {
     sqlite3 *pSQLite3_;
     NSString *pstrDatabaseFile_;
+  //  CDBAccess *sharedInstance_;
 }
+
++ (CDBAccess*)sharedInstance;
 
 - (BOOL)executeSQLA:(const char*)pszSQL;
 - (BOOL)executeSQLW:(wchar_t *)pwszSQL;
@@ -23,6 +26,7 @@
 //main itinerary
 - (BOOL)insertMainItinerary:(CMainItinerary*)pMainIniterary;
 - (BOOL)getAllMainItinerarySerialNumber:(NSMutableArray*)parrMainSerialNumber;
+- (BOOL)deleteAllItineraryBySerialNumber:(NSString*)pstrSerialNumber;
 
 
 //detail itinerary
