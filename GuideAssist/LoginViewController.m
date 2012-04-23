@@ -13,10 +13,10 @@
 
 @implementation LoginViewController
 
-@synthesize loginPassword_;
-@synthesize loginType_;
-@synthesize loginName_;
-
+@synthesize loginPassword = loginPassword_;
+@synthesize loginType = loginType_;
+@synthesize loginName = loginName_;
+//@synthesize lableTest = pLableTest_;
 
 
 ////user defined method
@@ -24,14 +24,21 @@
 - (IBAction)LoginButtonPressed:(id)sender
 {
   Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]);
-  opetationQueue_ = [[NSOperationQueue alloc] init];
-  [opetationQueue_ setMaxConcurrentOperationCount:1];
-  invoctionOperation_ = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(ThreadLogin:) object:strWebServiceURL_];
-  [opetationQueue_ addOperation:invoctionOperation_];
+//  opetationQueue_ = [[NSOperationQueue alloc] init];
+//  [opetationQueue_ setMaxConcurrentOperationCount:1];
+//  invoctionOperation_ = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(ThreadLogin:) object:strWebServiceURL_];
+//  [opetationQueue_ addOperation:invoctionOperation_];
  // [self release];
   Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
 
   
+}
+
+- (IBAction)quitBtnPressed:(id)sender
+{
+   // [ self performSelector:@selector(notExistCall) ];
+   //abort();
+    exit( 0 );
 }
 
 -(void)ThreadLogin:(NSString *)strWebServiceURL
@@ -63,12 +70,8 @@
 
 -(void)ThreadQuitCalledMethod:(id)loginResult
 {
- // Log( @"LoginViewController ThreadQuiCallMethod: 1, loginResult retainCount: %u", [loginResult retainCount]);
   NSNumber *numRet = (NSNumber*)loginResult;
-  Log( @"LoginViewController ThreadQuiCallMethod: loginResult: %@,refCount:%u", numRet,[numRet retainCount]);
-  Log( @"LoginViewController ThreadQuiCallMethod: self refCount:%u",[self retainCount]);
 
-  //return;
   if ( [numRet boolValue] )
   {
     GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -89,9 +92,9 @@
 
 - (void)dealloc
 {
-  [loginPassword_ release];
-  [loginType_ release];
-  [loginName_ release];
+    self.loginName = nil;
+    self.loginPassword = nil;
+    self.loginType = nil;
   [strWebServiceURL_ release];
   [opetationQueue_ release];
   [invoctionOperation_ release];
@@ -117,9 +120,7 @@
 
 - (void)viewDidUnload
 {
-  [self setLoginPassword:nil];
-  [self setLoginName:nil];
-  [self setLoginType:nil];
+
    [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

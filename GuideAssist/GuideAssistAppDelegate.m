@@ -26,22 +26,22 @@
  // [self.window insertSubview:loginViewContrller_.view atIndex:0];
   [self.window addSubview:loginViewContrller_.view];
   [self.window makeKeyAndVisible];
-  NSString *strPath = [[NSBundle mainBundle] resourcePath]; 
-  NSLog( @"%@", strPath );
-  NSURL *strURL = [[ NSBundle mainBundle] resourceURL];
-  NSLog(@"%@", strURL);
+//  NSString *strPath = [[NSBundle mainBundle] resourcePath]; 
+//  NSLog( @"%@", strPath );
+//  NSURL *strURL = [[ NSBundle mainBundle] resourceURL];
+//  NSLog(@"%@", strURL);
  // [self.window set sett];
     pDataAccess_ = [[ CDBAccess alloc ] init ];
     
     // webservice test
-    CWebServiceAccess *pWebService = [[[ CWebServiceAccess alloc ] init ] autorelease ];
-    pWebService.dbAccess = pDataAccess_;
-    pWebService.url = @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper";
-    pWebService.icCardNumber = @"712936";
-    pWebService.guidePhone = @"15305712936";
-    NSString *pstrErr = nil;
-   // [ pWebService userLogin: &pstrErr ];
-    [ pWebService syncItineraryInfo:nil ];
+//    CWebServiceAccess *pWebService = [[[ CWebServiceAccess alloc ] init ] autorelease ];
+//    pWebService.dbAccess = pDataAccess_;
+//    pWebService.url = @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper";
+//    pWebService.icCardNumber = @"712936";
+//    pWebService.guidePhone = @"15305712936";
+//    NSString *pstrErr = nil;
+//   // [ pWebService userLogin: &pstrErr ];
+//    [ pWebService syncItineraryInfo:nil ];
     
    return YES;
 }
@@ -116,7 +116,7 @@
 
 - (void)dealloc
 {
-    [loginViewContrller_ release];
+   // [loginViewContrller_ release];
     [mainViewContrller_ release];
     [_window release];
     [ pDataAccess_ release ];

@@ -20,18 +20,19 @@
   NSString *strWebServiceURL_; //end not has "/"
   BOOL bQuitThread_;
     
+  //  UILabel *pLableTest_;
+    
 
  
 }
-//, getter = loiginName,setter = setLoginName:
-//@property (nonatomic, retain) IBOutlet UITextField *textName_;
-@property (nonatomic,retain,getter = loginType,setter = setLoginType:) IBOutlet UISegmentedControl *loginType_;
 
-@property (nonatomic,retain,getter = loiginName,setter = setLoginName:) IBOutlet UITextField *loginName_;
-
-@property (nonatomic,retain,getter = loginPassword, setter = setLoginPassword:) IBOutlet UITextField *loginPassword_;
+@property (nonatomic,retain) IBOutlet UISegmentedControl *loginType;
+@property (nonatomic,retain ) IBOutlet UITextField *loginName;
+@property ( nonatomic,retain ) IBOutlet UITextField *loginPassword;
+//@property( nonatomic, retain ) IBOutlet UILabel *lableTest;
 
 - (IBAction)LoginButtonPressed:(id)sender;
+- (IBAction)quitBtnPressed:(id)sender;
 
 - (void)ThreadLogin:(NSString*)strWebServiceURL;
 - (void)ThreadQuitCalledMethod:(id)loginResult;
