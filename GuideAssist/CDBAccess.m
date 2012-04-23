@@ -8,6 +8,7 @@
 
 #import "CDBAccess.h"
 #import "/usr/include/sqlite3.h"
+#import "DebugMacroDefine.h"
 
 static CDBAccess *g_sharedInstance = nil;
 
@@ -35,6 +36,7 @@ static CDBAccess *g_sharedInstance = nil;
         NSString *pstrDocPath = [ NSSearchPathForDirectoriesInDomains
                              ( NSDocumentDirectory, NSUserDomainMask, YES ) lastObject ];
         pstrDatabaseFile_ = [[ NSString alloc ] initWithFormat: @"%@/GuideAssist.db", pstrDocPath ];
+        Log( @"%@", pstrDatabaseFile_ );
         if ( ![[ NSFileManager defaultManager ] fileExistsAtPath: pstrDatabaseFile_ ] )
         {
             if( SQLITE_OK != sqlite3_open( [ pstrDatabaseFile_ UTF8String ], &pSQLite3_ ) )
@@ -42,7 +44,15 @@ static CDBAccess *g_sharedInstance = nil;
                 pSQLite3_ = NULL;
                 return nil;
             }
-        [ self initDatabase ];
+            [ self initDatabase ];
+        }
+        else
+        {
+            if( SQLITE_OK != sqlite3_open( [ pstrDatabaseFile_ UTF8String ], &pSQLite3_ ) )
+            {
+                pSQLite3_ = NULL;
+                return nil;
+            }
         }
     }
     
@@ -124,13 +134,13 @@ static CDBAccess *g_sharedInstance = nil;
 - (BOOL)deleteItineraryBySerialNumber:(NSString *)pstrSerialNumber
 {
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
-                         @"delet from tb_MainItinerary where SerialNumber = '%@'",
+                         @"delete from tb_MainItinerary where SerialNumber = '%@'",
                          pstrSerialNumber ];
     [ self executeSQLA: [ pstrSQL UTF8String ]];
     [ pstrSQL release ];
     
     pstrSQL = [[ NSString alloc ] initWithFormat:
-                         @"delet from tb_DetailItinerary where SerialNumber = '%@'",
+                         @"delete from tb_DetailItinerary where SerialNumber = '%@'",
                          pstrSerialNumber ];
     [ self executeSQLA: [ pstrSQL UTF8String ]];
     [ pstrSQL release ];
@@ -145,10 +155,10 @@ static CDBAccess *g_sharedInstance = nil;
 {
     
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat: 
-                         @"insert into tb_DetailItinerary( index, serialNumber, day, \
+                         @"insert into tb_DetailItinerary( nindex, serialNumber, day, \
                          traffic, trafficNo, driverName, driverPhone, city, meal, room, \
                          detailDesc, localTravelAgencyName, localGuide, localGuidePhone ) \
-                         values(%u, %d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
+                         values(%u, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
                          pDetailItinerary.index, pDetailItinerary.serialNumber, pDetailItinerary.day,
                          pDetailItinerary.traffic, pDetailItinerary.trafficNo, pDetailItinerary.driverName,
                          pDetailItinerary.driverPhone, pDetailItinerary.city, pDetailItinerary.meal,
@@ -263,7 +273,7 @@ static CDBAccess *g_sharedInstance = nil;
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat: 
                          @"insert into tb_GroupMember( paid, serialNumber, \
                          name, sex, age, remark, phone, idCardType, \
-                         idCardType ) values( %d, '%@', '%@', '%@', '%@', '%@', \
+                         idCardNumber ) values( %d, '%@', '%@', '%@', '%@', '%@', \
                          '%@', '%@', '%@' )", 
                          pGroupMember.paid, pGroupMember.serialNumber, pGroupMember.name,
                          pGroupMember.sex, pGroupMember.age, pGroupMember.remark,
@@ -278,7 +288,7 @@ static CDBAccess *g_sharedInstance = nil;
 - (BOOL)deleteGroupMemberInfoByBySerialNumber:(NSString *)pstrSerialNumber
 {
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
-               @"delet from tb_GroupMember where SerialNumber = '%@'",
+               @"delete from tb_GroupMember where SerialNumber = '%@'",
                pstrSerialNumber ];
     [ self executeSQLA: [ pstrSQL UTF8String ]];
     [ pstrSQL release ];
@@ -378,7 +388,7 @@ static CDBAccess *g_sharedInstance = nil;
     char *pstrCreateDetailItineraryTable =
     "create table tb_DetailItinerary \
     ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
-    index INTEGER, \
+    nindex INTEGER, \
     serialNumber TEXT, \
     day TEXT, \
     traffic TEXT, \
@@ -416,7 +426,10 @@ static CDBAccess *g_sharedInstance = nil;
 - (BOOL)executeSQLA:(const char*)pszSQL
 {
     char *pszErrString = NULL;
-    sqlite3_exec( pSQLite3_, pszSQL, NULL, NULL, &pszErrString );
+    if ( SQLITE_OK != sqlite3_exec( pSQLite3_, pszSQL, NULL, NULL, &pszErrString ) )
+    {
+        NSLog( @"sqlite execute err: %s", pszSQL );
+    }
     if ( pszErrString )
     {
         NSLog( @"%s", pszErrString );

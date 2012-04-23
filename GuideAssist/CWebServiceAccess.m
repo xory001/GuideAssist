@@ -100,16 +100,16 @@
 
 - (BOOL)getGroupMember:(NSString *)pstrItineraryNumber timeStamp:(NSString *)pstrTimeStamp
 {
-    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@", pstrItineraryNumber,
+    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@0", pstrItineraryNumber,
                              pstrTimeStamp ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
                                 @"<tyDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
                                 <arg0 xmlns=\"\">%@</arg0> \
-                                <arg1 xmlns=\"\">%@</arg1> \
+                                <arg1 xmlns=\"\">0</arg1> \
                                 <arg2 xmlns=\"\">%@</arg2> \
                                 </tyDataSync>", pstrItineraryNumber,
-                                pstrTimeStamp , pstrMD5 ] autorelease ];
+                                /*pstrTimeStamp ,*/ pstrMD5 ] autorelease ];
     
     NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrRequestInfo ] autorelease ];
     
@@ -123,25 +123,31 @@
             NSLog(@"%@", [ pXMLRoot leafForKey:@"ErrInfo" ] ); 
             return NO;
         }
-        else if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"2" ] )
+        else if ( NSOrderedSame == [[ pXMLRoot leafForKey:@"Result" ] compare: @"1" ] )
         {
-            [ pDBAccess_ deleteGroupMemberInfoByBySerialNumber:pstrItineraryNumber ];
-            NSArray *parrGroupMembers = [ pXMLRoot objectsForKey:@"dd" ];
-            CGroupMember *pMember = [[ CGroupMember alloc ] init ];
-            for ( TreeNode *pTmpNode in parrGroupMembers )
+            TreeNode *pXMLGroupRoot = [ pXMLRoot objectForKey:@"TY" ];
+            if ( NSOrderedSame == [[ pXMLGroupRoot leafForKey:@"s"] compare:@"1"] )
             {
-                pMember.name = [ pTmpNode leafForKey:@"a" ];
-                pMember.sex = [ pTmpNode leafForKey:@"b" ];
-                pMember.age = [ pTmpNode leafForKey:@"c" ];
-                pMember.phone = [ pTmpNode leafForKey:@"d" ];
-                pMember.remark = [ pTmpNode leafForKey:@"f" ];
-                pMember.paid = [[ pTmpNode leafForKey:@"g" ] intValue ];
-                pMember.idCardType = [ pTmpNode leafForKey:@"h" ];
-                pMember.idCardNumber = [ pTmpNode leafForKey:@"i" ];
-                
-                [ pDBAccess_ insertGroupMember: pMember ];
+                [ pDBAccess_ deleteGroupMemberInfoByBySerialNumber:pstrItineraryNumber ];
+                NSArray *parrGroupMembers = [ pXMLGroupRoot objectsForKey:@"dd" ];
+                CGroupMember *pMember = [[ CGroupMember alloc ] init ];
+                for ( TreeNode *pTmpNode in parrGroupMembers )
+                {
+                    pMember.name = [ pTmpNode leafForKey:@"a" ];
+                    pMember.sex = [ pTmpNode leafForKey:@"b" ];
+                    pMember.age = [ pTmpNode leafForKey:@"c" ];
+                    pMember.phone = [ pTmpNode leafForKey:@"d" ];
+                    pMember.remark = [ pTmpNode leafForKey:@"f" ];
+                    pMember.paid = [[ pTmpNode leafForKey:@"g" ] intValue ];
+                    pMember.idCardType = [ pTmpNode leafForKey:@"h" ];
+                    pMember.idCardNumber = [ pTmpNode leafForKey:@"i" ];
+                    pMember.serialNumber = pstrItineraryNumber;
+                    
+                    [ pDBAccess_ insertGroupMember: pMember ];
+                }
+                [ pMember release ];
+
             }
-            [ pMember release ];
             return YES;
         }
     }
@@ -152,8 +158,8 @@
 - (BOOL)getItineraryInfo:(NSString*)pstrItineraryNumber timeStamp:(NSString*)pstrTimeStamp
 {
     NSString *pstrCurTime = [ self getYYYYMMddhh ];
-    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@%@%@%@", self.icCardNumber,
-                             self.guidePhone, pstrItineraryNumber, pstrTimeStamp, pstrCurTime ] autorelease ];
+    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@%@", self.icCardNumber,
+                             self.guidePhone, pstrTimeStamp ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
                                 @"<xcdDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
@@ -252,7 +258,7 @@
 {
     NSMutableString *pstrItineraryInfo = [[ NSMutableString alloc ] init ];
     NSEnumerator *pEnumerator = [ pDictSyncItineraryInfo keyEnumerator ];
-    NSString *pstrKey = NULL, *pstrValue = NULL;
+    NSString *pstrKey = nil, *pstrValue = nil;
     pstrKey = [ pEnumerator nextObject ];
     while ( pstrKey )
     {
@@ -307,6 +313,7 @@
                     case ITINERARY_STATE_ADD:
                     case ITINERARY_STATE_MODIFY:
                         [ self getItineraryInfo:pItineraryNumber timeStamp:nil ];
+                        [ self getGroupMember:pItineraryNumber timeStamp:nil ];
                         break;
                         
 
