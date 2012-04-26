@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 
 
-@interface MainViewController : UIViewController {
+@interface MainViewController : UIViewController 
+{
+@private
+    NSDictionary *pDictMainIcon_;
+    NSArray *pMainView_;
     
 }
+
+@property( nonatomic, retain ) NSDictionary *dicMainIcon;
+@property( nonatomic, retain ) NSArray *mainView;
 
 @end

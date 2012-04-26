@@ -15,15 +15,15 @@
 
 @interface GuideAssistAppDelegate : NSObject <UIApplicationDelegate> {
   
-  LoginViewController *loginViewContrller_;
-  MainViewController *mainViewContrller_;
+    LoginViewController *ploginViewContrller_;
+    MainViewController *pmainViewContrller_;
     CDBAccess *pDataAccess_;
 
 }
 
 @property ( nonatomic, retain) IBOutlet UIWindow *window;
-@property ( nonatomic, getter = loginViewController, readonly) LoginViewController *loginViewContrller_;
-@property ( nonatomic, getter = mainViewContrller, readonly) MainViewController *mainViewContrller_;
+@property ( nonatomic, retain ) LoginViewController *loginViewContrller;
+@property ( nonatomic, retain ) MainViewController *mainViewContrller;
 @property ( nonatomic, readonly ) CDBAccess *dataAccess;
 
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>main</key>
+	<dict/>
+	<key>1</key>
+	<string>icon001.png,今日行程</string>
+	<key>2</key>
+	<string>icon002.png,团员管理</string>
+	<key>4</key>
+	<string>icon004.png,行程管理</string>
+	<key>6</key>
+	<string>icon006.png,小工具</string>
+	<key>8</key>
+	<string>icon008.png,报销</string>
+	<key>7</key>
+	<string>icon007.png,公司事项</string>
+	<key>3</key>
+	<string>icon003.png,短信箱</string>
+	<key>5</key>
+	<string>icon005.png,通讯录</string>
+	<key>9</key>
+	<string>icon009.png,帮助</string>
+</dict>
+</plist>

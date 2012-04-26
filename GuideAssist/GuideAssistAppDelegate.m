@@ -17,23 +17,19 @@
 
 @synthesize dataAccess=pDataAccess_;
 @synthesize window=_window;
-@synthesize loginViewContrller_, mainViewContrller_;
+@synthesize loginViewContrller = ploginViewContrller_;
+@synthesize mainViewContrller = pmainViewContrller_;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-  loginViewContrller_  = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
- // [self.window insertSubview:loginViewContrller_.view atIndex:0];
-  [self.window addSubview:loginViewContrller_.view];
-  [self.window makeKeyAndVisible];
-//  NSString *strPath = [[NSBundle mainBundle] resourcePath]; 
-//  NSLog( @"%@", strPath );
-//  NSURL *strURL = [[ NSBundle mainBundle] resourceURL];
-//  NSLog(@"%@", strURL);
- // [self.window set sett];
     pDataAccess_ = [[ CDBAccess alloc ] init ];
     
-    // webservice test
+    // Override point for customization after application launch.
+  ploginViewContrller_  = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+  [self.window addSubview:ploginViewContrller_.view];
+  [self.window makeKeyAndVisible];
+
+     // webservice test
 //    CWebServiceAccess *pWebService = [[[ CWebServiceAccess alloc ] init ] autorelease ];
 //    pWebService.dbAccess = pDataAccess_;
 //    pWebService.url = @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper";
@@ -48,16 +44,16 @@
 
 - (void)ShowMainView
 {
-  if ( nil == mainViewContrller_ ) 
+  if ( nil == pmainViewContrller_ ) 
   {
-    mainViewContrller_ = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+      pmainViewContrller_ = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
   }
 //  [self.window insertSubview:mainViewContrller_.view
 //                belowSubview:loginViewContrller_.view];
 //  [self.window insertSubview:mainViewContrller_.view atIndex:0];
   [UIView beginAnimations:nil context:nil];
   [UIView setAnimationDuration:1];
-  [self.window addSubview:mainViewContrller_.view];
+  [self.window addSubview:self.mainViewContrller.view];
 
   [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft 
                          forView:self.window cache:NO];
@@ -67,9 +63,8 @@
     
   [UIView commitAnimations];
   
-  [loginViewContrller_.view removeFromSuperview];
-  [loginViewContrller_ release];
-  loginViewContrller_ = nil;
+    [self.loginViewContrller.view removeFromSuperview];
+    self.loginViewContrller = nil;
    
     
 
@@ -116,8 +111,8 @@
 
 - (void)dealloc
 {
-   // [loginViewContrller_ release];
-    [mainViewContrller_ release];
+    self.loginViewContrller = nil;
+    self.mainViewContrller = nil;
     [_window release];
     [ pDataAccess_ release ];
     [super dealloc];

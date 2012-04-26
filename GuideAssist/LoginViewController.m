@@ -23,14 +23,15 @@
 
 - (IBAction)LoginButtonPressed:(id)sender
 {
-  Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]);
+//  Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]);
 //  opetationQueue_ = [[NSOperationQueue alloc] init];
 //  [opetationQueue_ setMaxConcurrentOperationCount:1];
 //  invoctionOperation_ = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(ThreadLogin:) object:strWebServiceURL_];
 //  [opetationQueue_ addOperation:invoctionOperation_];
  // [self release];
-  Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
-
+  //Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
+    GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate ShowMainView];
   
 }
 

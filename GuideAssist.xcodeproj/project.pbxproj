@@ -38,6 +38,8 @@
 		9E9E6655153FA8BF009B05F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E664A153FA8BF009B05F7 /* XMLParser.m */; };
 		9E9E6656153FA8BF009B05F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E664A153FA8BF009B05F7 /* XMLParser.m */; };
 		9E9E6659153FB5C3009B05F7 /* InterfaceDefined.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6658153FB5C3009B05F7 /* InterfaceDefined.m */; };
+		9E9E665B1548E64F009B05F7 /* resource in Resources */ = {isa = PBXBuildFile; fileRef = 9E9E665A1548E64B009B05F7 /* resource */; };
+		9E9E666015494D7F009B05F7 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 9E9E665F15494D7C009B05F7 /* config */; };
 		9EACC4D314095F7600C580C1 /* bt_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D214095F7600C580C1 /* bt_login.png */; };
 		9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D514095FFC00C580C1 /* bt_quit.png */; };
 		9EACC4D81409607800C580C1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D71409607800C580C1 /* Settings.bundle */; };
@@ -99,6 +101,8 @@
 		9E9E664A153FA8BF009B05F7 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
 		9E9E6657153FB5C3009B05F7 /* InterfaceDefined.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceDefined.h; sourceTree = "<group>"; };
 		9E9E6658153FB5C3009B05F7 /* InterfaceDefined.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceDefined.m; sourceTree = "<group>"; };
+		9E9E665A1548E64B009B05F7 /* resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resource; sourceTree = "<group>"; };
+		9E9E665F15494D7C009B05F7 /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config; sourceTree = "<group>"; };
 		9EACC4D214095F7600C580C1 /* bt_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_login.png; sourceTree = "<group>"; };
 		9EACC4D514095FFC00C580C1 /* bt_quit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_quit.png; sourceTree = "<group>"; };
 		9EACC4D71409607800C580C1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 		9E9A13C5140124910047853A /* GuideAssist */ = {
 			isa = PBXGroup;
 			children = (
+				9E9E665F15494D7C009B05F7 /* config */,
+				9E9E665A1548E64B009B05F7 /* resource */,
 				9E9E663E153FA8BF009B05F7 /* baseModule */,
 				9EB797701533C8CD00928F31 /* DataAccess */,
 				9EACC4D9140A7FEA00C580C1 /* BaseFunction */,
@@ -364,6 +370,8 @@
 				9EACC4D314095F7600C580C1 /* bt_login.png in Resources */,
 				9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */,
 				9EACC4D81409607800C580C1 /* Settings.bundle in Resources */,
+				9E9E665B1548E64F009B05F7 /* resource in Resources */,
+				9E9E666015494D7F009B05F7 /* config in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

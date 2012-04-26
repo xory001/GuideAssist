@@ -10,6 +10,7 @@
 #import "baseModule/HttpRequest.h"
 #import "CDBAccess.h"
 
+#define WEBSERVICE_URL @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper"
 
 @interface CWebServiceAccess : NSObject 
 {
