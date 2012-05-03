@@ -20,40 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) 
     {
-        //load icon.plist file
-        NSString *pstrIconFile = [[ NSBundle mainBundle ] pathForResource:@"icon" 
-                                ofType:@"plist" inDirectory:@"config" ];
-        pDictMainIcon_ = [[ NSDictionary alloc ] initWithContentsOfFile: pstrIconFile ];
-        
-        NSString *pstrResoucePath =  [[ NSString alloc ] initWithFormat:@"%@/resource",
-                                [[ NSBundle mainBundle ] bundlePath ] ];
-        
-        NSString *pstrKey = nil, *pstrValue = nil;
-        UIButton *pBtn = nil;
-        NSArray *pArrKey = [ pDictMainIcon_ allKeys ];
-        int nIndex  = 0;
-        
-        int nColumn = 0;
-        CGRect rectView = self.view.frame;
-        CGRect rectBtn;
-        while ( TRUE )
-        {
-            for ( int i = 0 ; i < 4; i++ )
-            {
-        
-            }
-//            {
-//                pstrValue = [ pDictMainIcon_ objectForKey:pstrKey ];
-//                pArrayString = [ pstrValue componentsSeparatedByString:@"," ];
-//                for ( NSString *pstrTmp in pArrayString )
-//                {
-//                    pBtn = [ UIButton alloc ] initWithCoder:<#(NSCoder *)#>
-//                }
-//                
-//            }
- 
-        }
-                
+        [ self initBtns ];               
     }
     return self;
 }
@@ -61,6 +28,88 @@
 - (void)dealloc
 {
     [super dealloc];
+}
+
+         
+- (void)BtnEvent:(id)sender forEvent:(UIControlEvents)event
+{
+    UIButton *pBtn = (UIButton*)sender;
+    int nTag = pBtn.tag;
+    switch ( nTag )
+    {
+        case  1:
+            
+            break;
+            
+        default:
+            break;
+    }
+
+}
+ 
+- (BOOL)initBtns
+{
+    //load icon.plist file
+    NSString *pstrIconFile = [[ NSBundle mainBundle ] pathForResource:@"icon" 
+                                                               ofType:@"plist" inDirectory:@"config" ];
+    NSDictionary *pdicIconContent = [[[ NSDictionary alloc ] initWithContentsOfFile: pstrIconFile ] autorelease ];
+    
+    NSString *pstrResoucePath =  [[[ NSString alloc ] initWithFormat:@"%@/resource",
+                                   [[ NSBundle mainBundle ] bundlePath ] ] autorelease ];
+    
+#define MAIN_ICON_WIDTH 64
+#define MAIN_ICON_HEIGHT 64
+#define WIDTH_ICONS   4
+    
+    CGRect rectCurView = self.view.frame;
+    int nYMargin = 10;
+    int nXmargin = ( rectCurView.size.width - MAIN_ICON_WIDTH * WIDTH_ICONS ) / 5;
+    int nRow = 0;
+    int nColumn = 0;
+   
+    NSString *pstrValue = nil;
+    NSString  *pstrImgPath = nil;
+    UIButton *pBtn = nil;
+    NSArray *pArrKey = [ pdicIconContent allKeys ];
+
+    CGRect rectBtn = CGRectMake( nXmargin, nYMargin, MAIN_ICON_WIDTH, MAIN_ICON_HEIGHT );
+    NSArray *pArrayString = nil;
+    UIImage *pImg = nil;
+    for ( NSString *pstrKey in pArrKey )
+    {
+        pstrValue = [ pdicIconContent objectForKey:pstrKey ];
+        pArrayString = [ pstrValue componentsSeparatedByString:@"," ];
+        if ( 2 != [ pArrayString count ] ) 
+        {
+            continue;
+        }
+        pstrImgPath = [[ NSString alloc ] initWithFormat:@"%@/%@", pstrResoucePath, 
+                       [ pArrayString objectAtIndex:0 ]];
+        pImg = [ UIImage imageWithContentsOfFile: pstrImgPath ];
+        pBtn = [[ UIButton alloc] init ];
+        if ( pImg )
+        {
+            [ pBtn setBackgroundImage:pImg forState:UIControlStateNormal ];
+        }
+        [ pBtn setTag: [ pstrKey intValue ]]; 
+        [ pBtn setFrame:rectBtn ];
+        [ pBtn setTitle:[ pArrayString lastObject ] forState:UIControlStateNormal ];
+        [ pBtn addTarget:self action:@selector(BtnEvent:forEvent:) forControlEvents:UIControlEventTouchUpInside ];
+        [ self.view addSubview: pBtn ];
+        [ pBtn release ];
+        
+        nColumn++;
+        if ( WIDTH_ICONS == nColumn ) 
+        {
+            nColumn = 0;
+            nRow++;
+            rectBtn.origin.y = ( nRow + 1 ) * nYMargin + nRow * MAIN_ICON_HEIGHT;
+        }
+        rectBtn.origin.x = ( nColumn + 1 ) * nXmargin + nColumn * MAIN_ICON_WIDTH;
+        
+
+    }
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning

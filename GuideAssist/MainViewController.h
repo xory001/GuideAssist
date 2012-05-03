@@ -20,4 +20,8 @@
 @property( nonatomic, retain ) NSDictionary *dicMainIcon;
 @property( nonatomic, retain ) NSArray *mainView;
 
+- (BOOL)initBtns;
+
+- (void)BtnEvent:(id)sender forEvent:(UIControlEvents)event;
+
 @end
