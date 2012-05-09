@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73C445155AC69800116576 /* CGroupMemberListController.m */; };
+		9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E73C446155AC69800116576 /* CGroupMemberListController.xib */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
 		9E9A13C0140124910047853A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13BF140124910047853A /* UIKit.framework */; };
 		9E9A13C2140124910047853A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C1140124910047853A /* Foundation.framework */; };
@@ -62,6 +64,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E73C444155AC69800116576 /* CGroupMemberListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberListController.h; sourceTree = "<group>"; };
+		9E73C445155AC69800116576 /* CGroupMemberListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberListController.m; sourceTree = "<group>"; };
+		9E73C446155AC69800116576 /* CGroupMemberListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberListController.xib; sourceTree = "<group>"; };
 		9E928185153E639A00785495 /* CWebServiceAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWebServiceAccess.h; sourceTree = "<group>"; };
 		9E928186153E639B00785495 /* CWebServiceAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWebServiceAccess.m; sourceTree = "<group>"; };
 		9E9A13BB140124900047853A /* GuideAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,7 +191,7 @@
 				9E9E663E153FA8BF009B05F7 /* baseModule */,
 				9EB797701533C8CD00928F31 /* DataAccess */,
 				9EACC4D9140A7FEA00C580C1 /* BaseFunction */,
-				9E9A13F8140125180047853A /* MainView */,
+				9E9A13F8140125180047853A /* Views */,
 				9E9A13F2140124D30047853A /* Login */,
 				9E9A13CE140124910047853A /* GuideAssistAppDelegate.h */,
 				9E9A13CF140124910047853A /* GuideAssistAppDelegate.m */,
@@ -230,21 +235,24 @@
 		9E9A13F2140124D30047853A /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				9E9A13F3140125090047853A /* LoginViewController.h */,
-				9E9A13F4140125090047853A /* LoginViewController.m */,
-				9E9A13F5140125090047853A /* LoginViewController.xib */,
 			);
 			name = Login;
 			sourceTree = "<group>";
 		};
-		9E9A13F8140125180047853A /* MainView */ = {
+		9E9A13F8140125180047853A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9E9A13F3140125090047853A /* LoginViewController.h */,
+				9E9A13F4140125090047853A /* LoginViewController.m */,
+				9E9A13F5140125090047853A /* LoginViewController.xib */,
 				9E9A13F9140125FA0047853A /* MainViewController.h */,
 				9E9A13FA140125FA0047853A /* MainViewController.m */,
 				9E9A13FB140125FA0047853A /* MainViewController.xib */,
+				9E73C444155AC69800116576 /* CGroupMemberListController.h */,
+				9E73C445155AC69800116576 /* CGroupMemberListController.m */,
+				9E73C446155AC69800116576 /* CGroupMemberListController.xib */,
 			);
-			name = MainView;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		9E9E663E153FA8BF009B05F7 /* baseModule */ = {
@@ -372,6 +380,7 @@
 				9EACC4D81409607800C580C1 /* Settings.bundle in Resources */,
 				9E9E665B1548E64F009B05F7 /* resource in Resources */,
 				9E9E666015494D7F009B05F7 /* config in Resources */,
+				9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +433,7 @@
 				9E9E6653153FA8BF009B05F7 /* TreeNode.m in Sources */,
 				9E9E6655153FA8BF009B05F7 /* XMLParser.m in Sources */,
 				9E9E6659153FB5C3009B05F7 /* InterfaceDefined.m in Sources */,
+				9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

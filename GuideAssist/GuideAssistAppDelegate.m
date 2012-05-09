@@ -10,6 +10,8 @@
 
 #import "LoginViewController.h"
 #import "MainViewController.h"
+#import "CGroupMemberListController.h"
+
 #import "CDataTypeDef.h"
 #import "CWebServiceAccess.h"
 
@@ -19,13 +21,16 @@
 @synthesize window=_window;
 @synthesize loginViewContrller = ploginViewContrller_;
 @synthesize mainViewContrller = pmainViewContrller_;
+@synthesize groupMemberListController = pGroupMemberListController_;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    frameApp_ = [[ UIScreen mainScreen ] applicationFrame ];
     pDataAccess_ = [[ CDBAccess alloc ] init ];
     
     // Override point for customization after application launch.
   ploginViewContrller_  = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    ploginViewContrller_.view.frame = frameApp_;
   [self.window addSubview:ploginViewContrller_.view];
   [self.window makeKeyAndVisible];
 
@@ -47,13 +52,19 @@
   if ( nil == pmainViewContrller_ ) 
   {
       pmainViewContrller_ = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+      pmainViewContrller_.view.frame = frameApp_;
   }
-//  [self.window insertSubview:mainViewContrller_.view
-//                belowSubview:loginViewContrller_.view];
-//  [self.window insertSubview:mainViewContrller_.view atIndex:0];
+
+    if ( nil == pGroupMemberListController_ )
+    {
+        pGroupMemberListController_ = [[ CGroupMemberListController alloc ] initWithNibName:nil bundle:nil ];
+    }
+    
   [UIView beginAnimations:nil context:nil];
   [UIView setAnimationDuration:1];
-  [self.window addSubview:self.mainViewContrller.view];
+//  [self.window addSubview:self.mainViewContrller.view];
+    
+    [ self.window addSubview:self.groupMemberListController.view ];
 
   [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft 
                          forView:self.window cache:NO];
@@ -113,6 +124,7 @@
 {
     self.loginViewContrller = nil;
     self.mainViewContrller = nil;
+    self.groupMemberListController = nil;
     [_window release];
     [ pDataAccess_ release ];
     [super dealloc];
