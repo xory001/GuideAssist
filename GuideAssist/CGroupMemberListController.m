@@ -7,23 +7,38 @@
 //
 
 #import "CGroupMemberListController.h"
+#import "GuideAssistAppDelegate.h"
 
 
 @implementation CGroupMemberListController
+
+#define TABLE_ROW_HEIGHT 64
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) 
     {
+     //   NSLog( @"Group member list controller initWithNibName:");
+
         CGRect appFrame = [[ UIScreen mainScreen ] applicationFrame ];
         UITableView *pGroupMemberTabView = [[ UITableView alloc ] initWithFrame:appFrame 
                                                             style:UITableViewStyleGrouped ];
         [ pGroupMemberTabView setDelegate:self ];
         [ pGroupMemberTabView setDataSource:self ];
+        [ pGroupMemberTabView setTag:11 ];
         self.view.frame = appFrame;
         [self.view addSubview:pGroupMemberTabView ];
+         nMaxTableItemShowing_ = pGroupMemberTabView.frame.size.height / TABLE_ROW_HEIGHT;
         [ pGroupMemberTabView release ];
+        
+       
+        pstrResoucePath_ =  [[ NSString alloc ] initWithFormat:@"%@/resource",
+                                       [[ NSBundle mainBundle ] bundlePath ]];
+
+        pArrGroupMember_ = [[ NSMutableArray alloc ] init ];
+        
     }
     return self;
 }
@@ -31,19 +46,80 @@
 - (void)dealloc
 {
     [super dealloc];
+    [ pArrGroupMember_ release ];
+    [ pstrResoucePath_ release ];
 }
+
+- (BOOL)loadData:(NSString *)pstrMainItineraryNumber
+{
+    //get data base access;
+    GuideAssistAppDelegate *pAppdelegate = [ UIApplication sharedApplication ].delegate;
+    pDBAccess_ = pAppdelegate.dataAccess;
+    return [ pDBAccess_ getAllGroupMember:pArrGroupMember_ ByMainSerialNumber:pstrMainItineraryNumber ];
+}
+
+
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *pCell = [[ UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault 
-                                                      reuseIdentifier:@"1" ];
-    pCell.textLabel.text = @"1";
+   // return nil;
+    NSLog(@"table row: %d", indexPath.row );
+    if ( indexPath.row > [ pArrGroupMember_ count ] )
+    {
+        return nil;
+    }
+    NSString *pstrIdentify = [[ NSString alloc ] initWithFormat:@"%d", 
+                              indexPath.row % nMaxTableItemShowing_ + 1 ];
+     
+    UITableViewCell *pCell = [ tableView dequeueReusableCellWithIdentifier:pstrIdentify ];
+    if ( nil == pCell )
+    {
+        pCell = [[ UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault 
+                                                          reuseIdentifier:pstrIdentify ];
+        if ( [ pArrGroupMember_ count ] )
+        {
+            UIImage *pImgSex = nil;
+            NSMutableString *pstrPic = [[ NSMutableString alloc ] initWithString: pstrResoucePath_ ];
+            CGroupMember *pMember = [ pArrGroupMember_ objectAtIndex:indexPath.row ];
+            if ( [ pMember.sex isEqualToString:@"1" ] ) //male
+            {
+                [ pstrPic appendString:@"/boy.png" ];
+                pImgSex = [ UIImage imageWithContentsOfFile: pstrPic ];
+            }
+            else if ( [ pMember.sex isEqualToString:@"2" ] ) //female
+            {
+                [ pstrPic appendString:@"/girl.png" ];
+                pImgSex = [ UIImage imageWithContentsOfFile: pstrPic ];
+            }
+            [ pCell.imageView setImage:pImgSex ];
+            [ pImgSex release ];
+            
+            pCell.detailTextLabel.text = pMember.phone;
+            pCell.textLabel.text = pMember.name;
+            pCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else
+        {
+           pCell.textLabel.text = pstrIdentify; 
+        }
+    }
+    [ pstrIdentify release ];
     return pCell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    if ( ( nil != pArrGroupMember_) && [ pArrGroupMember_ count ] )
+    {
+        NSLog( @"row count: %d", [ pArrGroupMember_ count ] );
+        return [ pArrGroupMember_ count ];
+    }
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 64.0f;  
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,6 +135,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    //NSLog( @"Group member list controller viewDidLoad");
     // Do any additional setup after loading the view from its nib.
 }
 

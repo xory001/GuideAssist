@@ -298,8 +298,11 @@ static CDBAccess *g_sharedInstance = nil;
 - (BOOL)getAllGroupMember:(NSMutableArray*)parrGroupMember ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
 {
     BOOL bRet = NO;
-    NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
-                         @"select * from tb_DetailItinerary where serialNumber = '%@'", pstrMainSerialNumber ];
+  //  NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
+  //                       @"select * from tb_DetailItinerary where serialNumber = '%@'", pstrMainSerialNumber ];
+    NSString *pstrSQL = [[ NSString alloc ] initWithString:
+                         @"select * from tb_DetailItinerary" ];
+
     sqlite3_stmt *pstmt = NULL;
     
     if ( SQLITE_OK == sqlite3_prepare_v2( pSQLite3_, [ pstrSQL UTF8String ], -1, &pstmt, NULL) )

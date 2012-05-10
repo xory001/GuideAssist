@@ -58,6 +58,7 @@
     if ( nil == pGroupMemberListController_ )
     {
         pGroupMemberListController_ = [[ CGroupMemberListController alloc ] initWithNibName:nil bundle:nil ];
+        [ pGroupMemberListController_ loadData:nil ];
     }
     
   [UIView beginAnimations:nil context:nil];
