@@ -24,13 +24,17 @@
 
         CGRect appFrame = [[ UIScreen mainScreen ] applicationFrame ];
         UITableView *pGroupMemberTabView = [[ UITableView alloc ] initWithFrame:appFrame 
-                                                            style:UITableViewStyleGrouped ];
+                                                            style:UITableViewStylePlain ];
         [ pGroupMemberTabView setDelegate:self ];
         [ pGroupMemberTabView setDataSource:self ];
         [ pGroupMemberTabView setTag:11 ];
         self.view.frame = appFrame;
         [self.view addSubview:pGroupMemberTabView ];
          nMaxTableItemShowing_ = pGroupMemberTabView.frame.size.height / TABLE_ROW_HEIGHT;
+        if ( nMaxTableItemShowing_ == 0 )
+        {
+            nMaxTableItemShowing_ = 1;
+        }
         [ pGroupMemberTabView release ];
         
        
@@ -62,48 +66,51 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   // return nil;
-    NSLog(@"table row: %d", indexPath.row );
-    if ( indexPath.row > [ pArrGroupMember_ count ] )
-    {
-        return nil;
-    }
-    NSString *pstrIdentify = [[ NSString alloc ] initWithFormat:@"%d", 
-                              indexPath.row % nMaxTableItemShowing_ + 1 ];
+//    NSLog(@"table row: %d", indexPath.row );
+
+    NSString *pstrIdentify = [[[ NSString alloc ] initWithFormat:@"%d", 
+                              indexPath.row % nMaxTableItemShowing_ + 1 ] autorelease ];
      
     UITableViewCell *pCell = [ tableView dequeueReusableCellWithIdentifier:pstrIdentify ];
+       
     if ( nil == pCell )
     {
-        pCell = [[ UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault 
+        pCell = [[ UITableViewCell alloc ] initWithStyle:UITableViewCellStyleSubtitle
                                                           reuseIdentifier:pstrIdentify ];
-        if ( [ pArrGroupMember_ count ] )
-        {
-            UIImage *pImgSex = nil;
-            NSMutableString *pstrPic = [[ NSMutableString alloc ] initWithString: pstrResoucePath_ ];
-            CGroupMember *pMember = [ pArrGroupMember_ objectAtIndex:indexPath.row ];
-            if ( [ pMember.sex isEqualToString:@"1" ] ) //male
-            {
-                [ pstrPic appendString:@"/boy.png" ];
-                pImgSex = [ UIImage imageWithContentsOfFile: pstrPic ];
-            }
-            else if ( [ pMember.sex isEqualToString:@"2" ] ) //female
-            {
-                [ pstrPic appendString:@"/girl.png" ];
-                pImgSex = [ UIImage imageWithContentsOfFile: pstrPic ];
-            }
-            [ pCell.imageView setImage:pImgSex ];
-            [ pImgSex release ];
-            
-            pCell.detailTextLabel.text = pMember.phone;
-            pCell.textLabel.text = pMember.name;
-            pCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        else
-        {
-           pCell.textLabel.text = pstrIdentify; 
-        }
     }
-    [ pstrIdentify release ];
+
+
+    if ( [ pArrGroupMember_ count ] )
+    {
+        UIImage *pImgSex = nil;
+        NSMutableString *pstrPic = [[[ NSMutableString alloc ] 
+                                    initWithString: pstrResoucePath_ ] autorelease ];
+        CGroupMember *pMember = [ pArrGroupMember_ objectAtIndex:indexPath.row ];
+        if ( [ pMember.sex isEqualToString:@"1" ] ) //male
+        {
+            [ pstrPic appendString:@"/boy.png" ];
+            pImgSex = [ UIImage imageWithContentsOfFile: pstrPic ];
+        }
+        else if ( [ pMember.sex isEqualToString:@"2" ] ) //female
+        {
+            [ pstrPic appendString:@"/girl.png" ];
+            pImgSex = [ UIImage imageWithContentsOfFile: pstrPic ];
+        }
+        if ( nil != pImgSex )
+        {
+            [ pCell.imageView setImage:pImgSex ];
+        }
+       
+     
+        pCell.detailTextLabel.text = pMember.phone;
+        pCell.textLabel.text = pMember.name;
+        pCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else
+    {
+        pCell.textLabel.text = [ NSString stringWithFormat:@"empty item" ];
+    }
+
     return pCell;
 }
 
