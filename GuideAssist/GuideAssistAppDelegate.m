@@ -61,19 +61,27 @@
         [ pGroupMemberListController_ loadData:nil ];
     }
     
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-//  [self.window addSubview:self.mainViewContrller.view];
+//  [UIView beginAnimations:nil context:nil];
+//  [UIView setAnimationDuration:1];
+//    [ UIView setAnimationCurve:UIViewAnimationCurveEaseIn ];
+////  [self.window addSubview:self.mainViewContrller.view];
+//    
+//    [ self.window addSubview:self.groupMemberListController.view ];
+//
+//  [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft 
+//                         forView:self.window cache:NO];
+//  
+// // [self.window addSubview:mainViewContrller_.view];
+////  [mainViewContrller_.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0]; 
+//    
+//  [UIView commitAnimations];
     
+    CATransition *pAnimotion = [ CATransition animation ];
+    [ pAnimotion setType: kCATransitionPush ];
+    [ pAnimotion setSubtype:kCATransitionFromRight ];
+    [ self.window.layer addAnimation:pAnimotion forKey:nil ];
     [ self.window addSubview:self.groupMemberListController.view ];
-
-  [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft 
-                         forView:self.window cache:NO];
-  
- // [self.window addSubview:mainViewContrller_.view];
-//  [mainViewContrller_.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0]; 
     
-  [UIView commitAnimations];
   
     [self.loginViewContrller.view removeFromSuperview];
     self.loginViewContrller = nil;

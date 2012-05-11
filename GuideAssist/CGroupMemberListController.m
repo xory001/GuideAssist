@@ -22,13 +22,16 @@
     {
      //   NSLog( @"Group member list controller initWithNibName:");
 
-        CGRect appFrame = [[ UIScreen mainScreen ] applicationFrame ];
-        UITableView *pGroupMemberTabView = [[ UITableView alloc ] initWithFrame:appFrame 
-                                                            style:UITableViewStylePlain ];
+        CGRect scnFrame = [[ UIScreen mainScreen ] bounds ];
+        
+        UITableView *pGroupMemberTabView = [[ UITableView alloc ] 
+                                            initWithFrame:scnFrame 
+                                                    style:UITableViewStyleGrouped ];
         [ pGroupMemberTabView setDelegate:self ];
         [ pGroupMemberTabView setDataSource:self ];
         [ pGroupMemberTabView setTag:11 ];
-        self.view.frame = appFrame;
+        pGroupMemberTabView.allowsSelection = YES;
+        self.view.frame = [[ UIScreen mainScreen ] applicationFrame ];
         [self.view addSubview:pGroupMemberTabView ];
          nMaxTableItemShowing_ = pGroupMemberTabView.frame.size.height / TABLE_ROW_HEIGHT;
         if ( nMaxTableItemShowing_ == 0 )
@@ -36,7 +39,7 @@
             nMaxTableItemShowing_ = 1;
         }
         [ pGroupMemberTabView release ];
-        
+        self.title = @"123";
        
         pstrResoucePath_ =  [[ NSString alloc ] initWithFormat:@"%@/resource",
                                        [[ NSBundle mainBundle ] bundlePath ]];
@@ -62,7 +65,24 @@
     return [ pDBAccess_ getAllGroupMember:pArrGroupMember_ ByMainSerialNumber:pstrMainItineraryNumber ];
 }
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+   // NSLog( @"%d", indexPath.row );
+}
 
+- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView
+         accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
+
+{
+    //NSLog( @"%d", indexPath.row );
+    return UITableViewCellAccessoryDisclosureIndicator;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    //return @"团圆信息";
+    return nil;
+}
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -104,7 +124,7 @@
      
         pCell.detailTextLabel.text = pMember.phone;
         pCell.textLabel.text = pMember.name;
-        pCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        pCell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     }
     else
     {
@@ -112,6 +132,11 @@
     }
 
     return pCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [ tableView deselectRowAtIndexPath:indexPath animated:YES ];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

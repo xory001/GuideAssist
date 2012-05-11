@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E5445D1155D0A5200CC71BB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5445D0155D0A5200CC71BB /* QuartzCore.framework */; };
 		9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73C445155AC69800116576 /* CGroupMemberListController.m */; };
 		9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E73C446155AC69800116576 /* CGroupMemberListController.xib */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
@@ -64,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E5445D0155D0A5200CC71BB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9E73C444155AC69800116576 /* CGroupMemberListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberListController.h; sourceTree = "<group>"; };
 		9E73C445155AC69800116576 /* CGroupMemberListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberListController.m; sourceTree = "<group>"; };
 		9E73C446155AC69800116576 /* CGroupMemberListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberListController.xib; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E5445D1155D0A5200CC71BB /* QuartzCore.framework in Frameworks */,
 				9EB797761533CBAB00928F31 /* libsqlite3.0.dylib in Frameworks */,
 				9E9A13C0140124910047853A /* UIKit.framework in Frameworks */,
 				9E9A13C2140124910047853A /* Foundation.framework in Frameworks */,
@@ -153,6 +156,7 @@
 		9E9A13B0140124900047853A = {
 			isa = PBXGroup;
 			children = (
+				9E5445D0155D0A5200CC71BB /* QuartzCore.framework */,
 				9EACC4D71409607800C580C1 /* Settings.bundle */,
 				9EACC4D514095FFC00C580C1 /* bt_quit.png */,
 				9EACC4D214095F7600C580C1 /* bt_login.png */,
