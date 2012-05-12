@@ -45,8 +45,6 @@
 		9E9E6659153FB5C3009B05F7 /* InterfaceDefined.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E6658153FB5C3009B05F7 /* InterfaceDefined.m */; };
 		9E9E665B1548E64F009B05F7 /* resource in Resources */ = {isa = PBXBuildFile; fileRef = 9E9E665A1548E64B009B05F7 /* resource */; };
 		9E9E666015494D7F009B05F7 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 9E9E665F15494D7C009B05F7 /* config */; };
-		9EACC4D314095F7600C580C1 /* bt_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D214095F7600C580C1 /* bt_login.png */; };
-		9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D514095FFC00C580C1 /* bt_quit.png */; };
 		9EACC4D81409607800C580C1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9EACC4D71409607800C580C1 /* Settings.bundle */; };
 		9EB797741533C95B00928F31 /* CDBAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB797731533C95B00928F31 /* CDBAccess.m */; };
 		9EB797761533CBAB00928F31 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB797751533CBAB00928F31 /* libsqlite3.0.dylib */; };
@@ -115,8 +113,6 @@
 		9E9E6658153FB5C3009B05F7 /* InterfaceDefined.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceDefined.m; sourceTree = "<group>"; };
 		9E9E665A1548E64B009B05F7 /* resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resource; sourceTree = "<group>"; };
 		9E9E665F15494D7C009B05F7 /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config; sourceTree = "<group>"; };
-		9EACC4D214095F7600C580C1 /* bt_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_login.png; sourceTree = "<group>"; };
-		9EACC4D514095FFC00C580C1 /* bt_quit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_quit.png; sourceTree = "<group>"; };
 		9EACC4D71409607800C580C1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		9EACC4DA140A804900C580C1 /* DebugMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugMacroDefine.h; path = GuideAssist/DebugMacroDefine.h; sourceTree = "<group>"; };
 		9EB797721533C95B00928F31 /* CDBAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDBAccess.h; sourceTree = "<group>"; };
@@ -163,8 +159,6 @@
 			children = (
 				9E5445D0155D0A5200CC71BB /* QuartzCore.framework */,
 				9EACC4D71409607800C580C1 /* Settings.bundle */,
-				9EACC4D514095FFC00C580C1 /* bt_quit.png */,
-				9EACC4D214095F7600C580C1 /* bt_login.png */,
 				9E9A13C5140124910047853A /* GuideAssist */,
 				9E9A13DF140124910047853A /* GuideAssistTests */,
 				9E9A13BE140124910047853A /* Frameworks */,
@@ -387,8 +381,6 @@
 				9E9A13D3140124910047853A /* MainWindow.xib in Resources */,
 				9E9A13F7140125090047853A /* LoginViewController.xib in Resources */,
 				9E9A13FD140125FA0047853A /* MainViewController.xib in Resources */,
-				9EACC4D314095F7600C580C1 /* bt_login.png in Resources */,
-				9EACC4D614095FFC00C580C1 /* bt_quit.png in Resources */,
 				9EACC4D81409607800C580C1 /* Settings.bundle in Resources */,
 				9E9E665B1548E64F009B05F7 /* resource in Resources */,
 				9E9E666015494D7F009B05F7 /* config in Resources */,
