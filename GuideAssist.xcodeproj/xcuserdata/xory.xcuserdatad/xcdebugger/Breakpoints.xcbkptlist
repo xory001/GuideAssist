@@ -36,13 +36,27 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "GuideAssist/CGroupMemberListController.m"
-         timestampString = "358448475.375402"
+         filePath = "GuideAssist/CGroupMemberDetailController.m"
+         timestampString = "358498030.125494"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "96"
-         endingLineNumber = "96"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         startingLineNumber = "134"
+         endingLineNumber = "134"
+         landmarkName = "-btnPrePageClick:forEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "GuideAssist/CGroupMemberDetailController.m"
+         timestampString = "358498082.192943"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "148"
+         endingLineNumber = "148"
+         landmarkName = "-btnNextPageClick:forEvent:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

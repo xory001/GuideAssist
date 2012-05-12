@@ -15,17 +15,26 @@
 #import "CDataTypeDef.h"
 #import "CWebServiceAccess.h"
 
+GuideAssistAppDelegate *g_pAppDelegate = nil;
+
 @implementation GuideAssistAppDelegate
 
-@synthesize dataAccess=pDataAccess_;
-@synthesize window=_window;
+@synthesize bgImgColor = pbgImgColor_;
+@synthesize dataAccess = pDataAccess_;
+@synthesize window = _window;
 @synthesize loginViewContrller = ploginViewContrller_;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    g_pAppDelegate = self;
+    
     frameApp_ = [[ UIScreen mainScreen ] applicationFrame ];
     pDataAccess_ = [[ CDBAccess alloc ] init ];
+    NSString *pstrImg = [ [NSBundle mainBundle ] pathForResource:@"bg" 
+                                                          ofType:@"png" 
+                                                     inDirectory:@"resource" ];
+     pbgImgColor_ = [[ UIColor alloc ] initWithPatternImage:[ UIImage imageWithContentsOfFile:pstrImg ] ];
     
     // Override point for customization after application launch.
   ploginViewContrller_  = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
@@ -132,7 +141,10 @@
     self.loginViewContrller = nil;
     [_window release];
     [ pDataAccess_ release ];
+    [ pbgImgColor_ release ];
     [super dealloc];
+    
+    g_pAppDelegate = nil;
 }
 
 @end

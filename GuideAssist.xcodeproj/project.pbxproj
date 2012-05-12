@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9E5445D1155D0A5200CC71BB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5445D0155D0A5200CC71BB /* QuartzCore.framework */; };
+		9E5445D6155E03D500CC71BB /* CGroupMemberDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5445D4155E03D500CC71BB /* CGroupMemberDetailController.m */; };
+		9E5445D7155E03D500CC71BB /* CGroupMemberDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5445D5155E03D500CC71BB /* CGroupMemberDetailController.xib */; };
 		9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73C445155AC69800116576 /* CGroupMemberListController.m */; };
 		9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E73C446155AC69800116576 /* CGroupMemberListController.xib */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
@@ -66,6 +68,9 @@
 
 /* Begin PBXFileReference section */
 		9E5445D0155D0A5200CC71BB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9E5445D3155E03D500CC71BB /* CGroupMemberDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberDetailController.h; sourceTree = "<group>"; };
+		9E5445D4155E03D500CC71BB /* CGroupMemberDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberDetailController.m; sourceTree = "<group>"; };
+		9E5445D5155E03D500CC71BB /* CGroupMemberDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberDetailController.xib; sourceTree = "<group>"; };
 		9E73C444155AC69800116576 /* CGroupMemberListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberListController.h; sourceTree = "<group>"; };
 		9E73C445155AC69800116576 /* CGroupMemberListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberListController.m; sourceTree = "<group>"; };
 		9E73C446155AC69800116576 /* CGroupMemberListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberListController.xib; sourceTree = "<group>"; };
@@ -255,6 +260,9 @@
 				9E73C444155AC69800116576 /* CGroupMemberListController.h */,
 				9E73C445155AC69800116576 /* CGroupMemberListController.m */,
 				9E73C446155AC69800116576 /* CGroupMemberListController.xib */,
+				9E5445D3155E03D500CC71BB /* CGroupMemberDetailController.h */,
+				9E5445D4155E03D500CC71BB /* CGroupMemberDetailController.m */,
+				9E5445D5155E03D500CC71BB /* CGroupMemberDetailController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -385,6 +393,7 @@
 				9E9E665B1548E64F009B05F7 /* resource in Resources */,
 				9E9E666015494D7F009B05F7 /* config in Resources */,
 				9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */,
+				9E5445D7155E03D500CC71BB /* CGroupMemberDetailController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +447,7 @@
 				9E9E6655153FA8BF009B05F7 /* XMLParser.m in Sources */,
 				9E9E6659153FB5C3009B05F7 /* InterfaceDefined.m in Sources */,
 				9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */,
+				9E5445D6155E03D500CC71BB /* CGroupMemberDetailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

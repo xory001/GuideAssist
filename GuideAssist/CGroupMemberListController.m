@@ -8,6 +8,7 @@
 
 #import "CGroupMemberListController.h"
 #import "GuideAssistAppDelegate.h"
+#import "CGroupMemberDetailController.h"
 
 
 @implementation CGroupMemberListController
@@ -21,7 +22,7 @@
     if (self) 
     {
      //   NSLog( @"Group member list controller initWithNibName:");
-
+         self.view.backgroundColor = g_pAppDelegate.bgImgColor;
         CGRect scnFrame = [[ UIScreen mainScreen ] bounds ];
         
         UITableView *pGroupMemberTabView = [[ UITableView alloc ] 
@@ -38,8 +39,9 @@
         {
             nMaxTableItemShowing_ = 1;
         }
+        pGroupMemberTabView.backgroundColor = [ UIColor clearColor ];
         [ pGroupMemberTabView release ];
-        self.title = @"123";
+        self.title = @"团员管理"; //团员详细信息
        
         pstrResoucePath_ =  [[ NSString alloc ] initWithFormat:@"%@/resource",
                                        [[ NSBundle mainBundle ] bundlePath ]];
@@ -98,7 +100,7 @@
         pCell = [[ UITableViewCell alloc ] initWithStyle:UITableViewCellStyleSubtitle
                                                           reuseIdentifier:pstrIdentify ];
     }
-
+  //  pCell.backgroundColor = [ UIColor clearColor ];
 
     if ( [ pArrGroupMember_ count ] )
     {
@@ -137,6 +139,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [ tableView deselectRowAtIndexPath:indexPath animated:YES ];
+    CGroupMemberDetailController *pGroupDetailCtrller = 
+                [[ CGroupMemberDetailController alloc ] initWithNibName:nil bundle:nil ];
+    pGroupDetailCtrller.arrGroupMember = pArrGroupMember_;
+    pGroupDetailCtrller.nCurMemberIndex = indexPath.row;
+    [ pGroupDetailCtrller initViewState ];
+    [ self.navigationController pushViewController:pGroupDetailCtrller animated:YES ];
+    [ pGroupDetailCtrller release ];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

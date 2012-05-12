@@ -6,6 +6,7 @@
 //  Copyright 2011年 __MyCompanyName__. All rights reserved.
 //
 
+#import "GuideAssistAppDelegate.h"
 #import "MainViewController.h"
 #import "CGroupMemberListController.h"
 
@@ -23,6 +24,7 @@
     {
         [ self initBtns ];  
         self.title = @"导游助手";
+        self.view.backgroundColor = g_pAppDelegate.bgImgColor;
     }
     return self;
 }

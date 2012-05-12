@@ -75,8 +75,9 @@
 
   if ( [numRet boolValue] )
   {
-    GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate ShowMainView];
+//    GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+//    [appDelegate ShowMainView];
+      [ g_pAppDelegate ShowMainView ];
   }
 }
 
@@ -85,8 +86,12 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-      strWebServiceURL_ = [[NSString alloc] init];
+    if (self) 
+    {
+        strWebServiceURL_ = [[NSString alloc] init];
+
+        self.view.backgroundColor = g_pAppDelegate.bgImgColor;
+//                 ((GuideAssistAppDelegate*)( [[UIApplication sharedApplication] delegate] )).bgImgColor;
     }
     return self;
 }

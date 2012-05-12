@@ -20,14 +20,19 @@
     CDBAccess *pDataAccess_;
     CGRect frameApp_;
     UINavigationController *pnavc_;
+    
+    UIColor *pbgImgColor_;
 
 }
 
 @property ( nonatomic, retain) IBOutlet UIWindow *window;
 @property ( nonatomic, retain ) LoginViewController *loginViewContrller;
 @property ( nonatomic, readonly ) CDBAccess *dataAccess;
+@property ( nonatomic, readonly ) UIColor *bgImgColor;
 
 
 - (void)ShowMainView;
 
 @end
+
+extern GuideAssistAppDelegate *g_pAppDelegate;
