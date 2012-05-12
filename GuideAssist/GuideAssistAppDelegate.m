@@ -10,7 +10,7 @@
 
 #import "LoginViewController.h"
 #import "MainViewController.h"
-#import "CGroupMemberListController.h"
+
 
 #import "CDataTypeDef.h"
 #import "CWebServiceAccess.h"
@@ -20,8 +20,7 @@
 @synthesize dataAccess=pDataAccess_;
 @synthesize window=_window;
 @synthesize loginViewContrller = ploginViewContrller_;
-@synthesize mainViewContrller = pmainViewContrller_;
-@synthesize groupMemberListController = pGroupMemberListController_;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -49,17 +48,16 @@
 
 - (void)ShowMainView
 {
-  if ( nil == pmainViewContrller_ ) 
-  {
-      pmainViewContrller_ = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-      pmainViewContrller_.view.frame = frameApp_;
-  }
-
-    if ( nil == pGroupMemberListController_ )
+     MainViewController *pmainViewContrller = 
+                [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+     pmainViewContrller.view.frame = frameApp_;
+    
+    if ( nil == pnavc_ )
     {
-        pGroupMemberListController_ = [[ CGroupMemberListController alloc ] initWithNibName:nil bundle:nil ];
-        [ pGroupMemberListController_ loadData:nil ];
+        pnavc_ = [[ UINavigationController alloc ] init ];
     }
+    [ pnavc_ pushViewController: pmainViewContrller animated:NO ];
+    [ pmainViewContrller release ];
     
 //  [UIView beginAnimations:nil context:nil];
 //  [UIView setAnimationDuration:1];
@@ -77,17 +75,16 @@
 //  [UIView commitAnimations];
     
     CATransition *pAnimotion = [ CATransition animation ];
+//    [ pAnimotion setType:@"pageCurl" ]; //@"suckEffect"  @"cube" rippleEffect
     [ pAnimotion setType: kCATransitionPush ];
     [ pAnimotion setSubtype:kCATransitionFromRight ];
+    [ pAnimotion setDuration:0.39 ];
     [ self.window.layer addAnimation:pAnimotion forKey:nil ];
-    [ self.window addSubview:self.groupMemberListController.view ];
+    [ self.window addSubview:pnavc_.view ];
     
   
     [self.loginViewContrller.view removeFromSuperview];
     self.loginViewContrller = nil;
-   
-    
-
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -131,9 +128,8 @@
 
 - (void)dealloc
 {
+    [ pnavc_ release ];
     self.loginViewContrller = nil;
-    self.mainViewContrller = nil;
-    self.groupMemberListController = nil;
     [_window release];
     [ pDataAccess_ release ];
     [super dealloc];

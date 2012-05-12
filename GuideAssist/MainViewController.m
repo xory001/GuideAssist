@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "CGroupMemberListController.h"
 
 
 
@@ -20,7 +21,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) 
     {
-        [ self initBtns ];               
+        [ self initBtns ];  
+        self.title = @"导游助手";
     }
     return self;
 }
@@ -39,6 +41,16 @@
     {
         case  1:
             
+            break;
+            
+        case 2: //group menber manage
+        {
+            CGroupMemberListController *pGroupC = 
+                        [[ CGroupMemberListController alloc ] initWithNibName:nil bundle:nil ];
+            [ pGroupC loadData:nil ];
+            [ self.navigationController pushViewController:pGroupC animated:YES ];
+            [ pGroupC release ];
+        }
             break;
             
         default:

@@ -11,25 +11,20 @@
 #import "CDBAccess.h"
 
 @class LoginViewController;
-@class MainViewController;
-@class CGroupMemberListController;
 
 
 @interface GuideAssistAppDelegate : NSObject <UIApplicationDelegate> {
   
     LoginViewController *ploginViewContrller_;
-    MainViewController *pmainViewContrller_;
-    CGroupMemberListController *pGroupMemberListController_;
+   
     CDBAccess *pDataAccess_;
     CGRect frameApp_;
+    UINavigationController *pnavc_;
 
 }
 
 @property ( nonatomic, retain) IBOutlet UIWindow *window;
 @property ( nonatomic, retain ) LoginViewController *loginViewContrller;
-@property ( nonatomic, retain ) MainViewController *mainViewContrller;
-@property ( nonatomic, retain ) CGroupMemberListController *groupMemberListController;
-
 @property ( nonatomic, readonly ) CDBAccess *dataAccess;
 
 
