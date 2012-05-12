@@ -9,6 +9,7 @@
 #import "GuideAssistAppDelegate.h"
 #import "MainViewController.h"
 #import "CGroupMemberListController.h"
+#import "CTodayItineraryController.h"
 
 
 
@@ -42,7 +43,13 @@
     switch ( nTag )
     {
         case  1:
-            
+        {
+            CTodayItineraryController *pTodayC = 
+                [[ CTodayItineraryController alloc ] initWithNibName:nil bundle:nil ];
+            [ pTodayC userInit:nil ];
+            [ self.navigationController pushViewController:pTodayC animated:YES ];
+            [ pTodayC release ];
+        }
             break;
             
         case 2: //group menber manage

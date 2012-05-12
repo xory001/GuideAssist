@@ -10,6 +10,8 @@
 		9E5445D1155D0A5200CC71BB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5445D0155D0A5200CC71BB /* QuartzCore.framework */; };
 		9E5445D6155E03D500CC71BB /* CGroupMemberDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5445D4155E03D500CC71BB /* CGroupMemberDetailController.m */; };
 		9E5445D7155E03D500CC71BB /* CGroupMemberDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5445D5155E03D500CC71BB /* CGroupMemberDetailController.xib */; };
+		9E6F4108155EC64C0081136F /* CTodayItineraryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4106155EC64B0081136F /* CTodayItineraryController.m */; };
+		9E6F4109155EC64C0081136F /* CTodayItineraryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6F4107155EC64B0081136F /* CTodayItineraryController.xib */; };
 		9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73C445155AC69800116576 /* CGroupMemberListController.m */; };
 		9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E73C446155AC69800116576 /* CGroupMemberListController.xib */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
@@ -69,6 +71,9 @@
 		9E5445D3155E03D500CC71BB /* CGroupMemberDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberDetailController.h; sourceTree = "<group>"; };
 		9E5445D4155E03D500CC71BB /* CGroupMemberDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberDetailController.m; sourceTree = "<group>"; };
 		9E5445D5155E03D500CC71BB /* CGroupMemberDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberDetailController.xib; sourceTree = "<group>"; };
+		9E6F4105155EC64B0081136F /* CTodayItineraryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTodayItineraryController.h; sourceTree = "<group>"; };
+		9E6F4106155EC64B0081136F /* CTodayItineraryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTodayItineraryController.m; sourceTree = "<group>"; };
+		9E6F4107155EC64B0081136F /* CTodayItineraryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CTodayItineraryController.xib; sourceTree = "<group>"; };
 		9E73C444155AC69800116576 /* CGroupMemberListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberListController.h; sourceTree = "<group>"; };
 		9E73C445155AC69800116576 /* CGroupMemberListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberListController.m; sourceTree = "<group>"; };
 		9E73C446155AC69800116576 /* CGroupMemberListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberListController.xib; sourceTree = "<group>"; };
@@ -257,6 +262,9 @@
 				9E5445D3155E03D500CC71BB /* CGroupMemberDetailController.h */,
 				9E5445D4155E03D500CC71BB /* CGroupMemberDetailController.m */,
 				9E5445D5155E03D500CC71BB /* CGroupMemberDetailController.xib */,
+				9E6F4105155EC64B0081136F /* CTodayItineraryController.h */,
+				9E6F4106155EC64B0081136F /* CTodayItineraryController.m */,
+				9E6F4107155EC64B0081136F /* CTodayItineraryController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -386,6 +394,7 @@
 				9E9E666015494D7F009B05F7 /* config in Resources */,
 				9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */,
 				9E5445D7155E03D500CC71BB /* CGroupMemberDetailController.xib in Resources */,
+				9E6F4109155EC64C0081136F /* CTodayItineraryController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +449,7 @@
 				9E9E6659153FB5C3009B05F7 /* InterfaceDefined.m in Sources */,
 				9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */,
 				9E5445D6155E03D500CC71BB /* CGroupMemberDetailController.m in Sources */,
+				9E6F4108155EC64C0081136F /* CTodayItineraryController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

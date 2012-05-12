@@ -29,6 +29,7 @@
 @property ( nonatomic, retain ) LoginViewController *loginViewContrller;
 @property ( nonatomic, readonly ) CDBAccess *dataAccess;
 @property ( nonatomic, readonly ) UIColor *bgImgColor;
+@property ( nonatomic, readonly ) CGRect frameApp;
 
 
 - (void)ShowMainView;

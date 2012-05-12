@@ -23,6 +23,7 @@ GuideAssistAppDelegate *g_pAppDelegate = nil;
 @synthesize dataAccess = pDataAccess_;
 @synthesize window = _window;
 @synthesize loginViewContrller = ploginViewContrller_;
+@synthesize frameApp = frameApp_;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
