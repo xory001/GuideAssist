@@ -21,7 +21,7 @@
     {
         self.title = @"今日行程";
         self.view.backgroundColor = g_pAppDelegate.bgImgColor;
-        scrollView_.frame = g_pAppDelegate.frameApp;
+       // scrollView_.frame = g_pAppDelegate.frameApp;
         scrollView_.backgroundColor = [ UIColor clearColor ];
         [ self.view addSubview: scrollView_ ];
     }
