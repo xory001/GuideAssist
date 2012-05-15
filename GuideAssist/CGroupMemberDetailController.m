@@ -90,27 +90,28 @@
 
 - (void)initViewState
 {
-    if ( ( nil == pArrGroupMember_ ) || ( 0 == [ pArrGroupMember_ count ] ) ) 
-    {
-        btnPrePage_.enabled = NO;
-        btnPrePage_.enabled = NO;
-    }
-    else if ( 0 == nCurMemberIndex_ )
-    {
-        btnPrePage_.enabled = NO;
-        btnNextPage_.enabled = YES;
-    }
-    else if ( nCurMemberIndex_ == ( [ pArrGroupMember_ count ] - 1 ) )
-    {
-        btnPrePage_.enabled = YES;
-        btnNextPage_.enabled = NO;
-    }
+//    if ( ( nil == pArrGroupMember_ ) || ( 0 == [ pArrGroupMember_ count ] ) ) 
+//    {
+//        btnPrePage_.enabled = NO;
+//        btnPrePage_.enabled = NO;
+//    }
+//    else if ( 0 == nCurMemberIndex_ )
+//    {
+//        btnPrePage_.enabled = NO;
+//        btnNextPage_.enabled = YES;
+//    }
+//    else if ( nCurMemberIndex_ == ( [ pArrGroupMember_ count ] - 1 ) )
+//    {
+//        btnPrePage_.enabled = YES;
+//        btnNextPage_.enabled = NO;
+//    }
     [ self updateMemberInfo ];
 }
 
 - (void)updateMemberInfo
 {
-    if ( ( nil != pArrGroupMember_ ) && ( nCurMemberIndex_ < [ pArrGroupMember_ count ] ) )
+    if ( ( nil != pArrGroupMember_ ) && ( nCurMemberIndex_ < [ pArrGroupMember_ count ] ) 
+                                     && ( nCurMemberIndex_ >= 0 ) )
     {
         CGroupMember *pGroupMember = [ pArrGroupMember_ objectAtIndex:nCurMemberIndex_ ];
         labelAge_.text = pGroupMember.age;
@@ -131,27 +132,37 @@
 
 - (void)btnPrePageClick:(id)sender forEvent:(UIEvent *)event
 {
-    nCurMemberIndex_--;
-    if ( nCurMemberIndex_ <= 0 )
+//    nCurMemberIndex_--;
+//    if ( nCurMemberIndex_ <= 0 )
+//    {
+//        btnPrePage_.enabled = NO;
+//        btnNextPage_.enabled = YES;
+//        nCurMemberIndex_ = 0;
+//    }
+    if ( nCurMemberIndex_ > 0 )
     {
-        btnPrePage_.enabled = NO;
-        btnNextPage_.enabled = YES;
-        nCurMemberIndex_ = 0;
+        nCurMemberIndex_--;
+        [ self updateMemberInfo ];
     }
-    [ self updateMemberInfo ];
+    
     
 }
 
 - (void)btnNextPageClick:(id)sender forEvent:(UIEvent *)event
 {
-    nCurMemberIndex_++;
-    if ( nCurMemberIndex_ == ( [ pArrGroupMember_ count ] - 1 ) )
+//    nCurMemberIndex_++;
+//    if ( nCurMemberIndex_ == ( [ pArrGroupMember_ count ] - 1 ) )
+//    {
+////        nCurMemberIndex_ = [ pArrGroupMember_ count ] - 1;
+//        btnPrePage_.enabled = YES;
+//        btnNextPage_.enabled = NO;
+//    }
+    if ( ( nil != pArrGroupMember_ ) && ( nCurMemberIndex_ + 1 < [ pArrGroupMember_ count ] ) )
     {
-//        nCurMemberIndex_ = [ pArrGroupMember_ count ] - 1;
-        btnPrePage_.enabled = YES;
-        btnNextPage_.enabled = NO;
+        nCurMemberIndex_++;
+        [ self updateMemberInfo ];
     }
-    [ self updateMemberInfo ];
+    
     
 }
 

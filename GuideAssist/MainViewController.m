@@ -46,7 +46,7 @@
         {
             CTodayItineraryController *pTodayC = 
                 [[ CTodayItineraryController alloc ] initWithNibName:nil bundle:nil ];
-            [ pTodayC userInit:nil ];
+            [ pTodayC userInit:nil groupName:nil ];
             [ self.navigationController pushViewController:pTodayC animated:YES ];
             [ pTodayC release ];
         }

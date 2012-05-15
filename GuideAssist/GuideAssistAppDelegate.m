@@ -64,9 +64,9 @@ GuideAssistAppDelegate *g_pAppDelegate = nil;
     
     if ( nil == pnavc_ )
     {
-        pnavc_ = [[ UINavigationController alloc ] init ];
+        pnavc_ = [[ UINavigationController alloc ] initWithRootViewController: pmainViewContrller ];
     }
-    [ pnavc_ pushViewController: pmainViewContrller animated:NO ];
+   // [ pnavc_ pushViewController: pmainViewContrller animated:NO ];
     [ pmainViewContrller release ];
     
 //  [UIView beginAnimations:nil context:nil];
