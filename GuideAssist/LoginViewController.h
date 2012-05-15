@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LoginViewController : UIViewController {
+@interface LoginViewController : UIViewController < UITextFieldDelegate >
+{
   UITextField *loginName_;
   UITextField *loginPassword_;
   UISegmentedControl *loginType_;
@@ -26,6 +27,7 @@
  
 }
 
+
 @property (nonatomic,retain) IBOutlet UISegmentedControl *loginType;
 @property (nonatomic,retain ) IBOutlet UITextField *loginName;
 @property ( nonatomic,retain ) IBOutlet UITextField *loginPassword;
@@ -33,6 +35,7 @@
 
 - (IBAction)LoginButtonPressed:(id)sender;
 - (IBAction)quitBtnPressed:(id)sender;
+- (IBAction)textFeildDone:(id)sender forEvent:(UIEvent *)event;
 
 - (void)ThreadLogin:(NSString*)strWebServiceURL;
 - (void)ThreadQuitCalledMethod:(id)loginResult;

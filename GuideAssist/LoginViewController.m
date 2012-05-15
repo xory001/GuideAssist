@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "GuideAssistAppDelegate.h"
 #import "DebugMacroDefine.h"
-
+#import "CWaitModelViewController.h"
 
 @implementation LoginViewController
 
@@ -30,8 +30,13 @@
 //  [opetationQueue_ addOperation:invoctionOperation_];
  // [self release];
   //Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
-    GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate ShowMainView];
+  //  GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  //  [appDelegate ShowMainView];
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    CWaitModelViewController *wailModeCtrller = [[ CWaitModelViewController alloc ] 
+                                                 initWithNibName:nil
+                                                 bundle:nil ]; 
+    [ self presentModalViewController:wailModeCtrller animated:YES ];
   
 }
 
@@ -40,6 +45,46 @@
    // [ self performSelector:@selector(notExistCall) ];
    //abort();
     exit( 0 );
+}
+
+- (IBAction)textFeildDone:(id)sender forEvent:(UIEvent *)event 
+{
+ //   UITextField *textFeild = id;
+    if ( sender == loginName_ )
+    {
+        [ loginPassword_ becomeFirstResponder ];
+    }
+    else
+    {
+        [ sender resignFirstResponder ];
+
+    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [ loginName_ resignFirstResponder ];
+    [ loginPassword_ resignFirstResponder ];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if ( textField == loginPassword_ )
+    {
+        CGRect viewFrame = self.view.frame;
+        viewFrame.origin.y -= 216;;
+        self.view.frame = viewFrame;
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ( textField == loginPassword_ )
+    {
+        CGRect viewFrame = self.view.frame;
+        viewFrame.origin.y += 216;;
+        self.view.frame = viewFrame;
+    } 
 }
 
 -(void)ThreadLogin:(NSString *)strWebServiceURL

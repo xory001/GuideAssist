@@ -30,6 +30,8 @@ GuideAssistAppDelegate *g_pAppDelegate = nil;
 {
     g_pAppDelegate = self;
     
+    keyboardObserver_ = [[ CKeyBroardObserber alloc ] init ];
+    
     frameApp_ = [[ UIScreen mainScreen ] applicationFrame ];
     pDataAccess_ = [[ CDBAccess alloc ] init ];
     NSString *pstrImg = [ [NSBundle mainBundle ] pathForResource:@"bg" 
@@ -138,6 +140,7 @@ GuideAssistAppDelegate *g_pAppDelegate = nil;
 
 - (void)dealloc
 {
+    [ keyboardObserver_ release ];
     [ pnavc_ release ];
     self.loginViewContrller = nil;
     [_window release];

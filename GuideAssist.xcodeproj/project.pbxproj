@@ -12,6 +12,9 @@
 		9E5445D7155E03D500CC71BB /* CGroupMemberDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5445D5155E03D500CC71BB /* CGroupMemberDetailController.xib */; };
 		9E6F4108155EC64C0081136F /* CTodayItineraryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4106155EC64B0081136F /* CTodayItineraryController.m */; };
 		9E6F4109155EC64C0081136F /* CTodayItineraryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6F4107155EC64B0081136F /* CTodayItineraryController.xib */; };
+		9E6F410E15626CA90081136F /* CWaitModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F410C15626C930081136F /* CWaitModelViewController.m */; };
+		9E6F410F15626CA90081136F /* CWaitModelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6F410D15626C9E0081136F /* CWaitModelViewController.xib */; };
+		9E6F41121562AF530081136F /* CKeyBroardObserber.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F41111562AF530081136F /* CKeyBroardObserber.m */; };
 		9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73C445155AC69800116576 /* CGroupMemberListController.m */; };
 		9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E73C446155AC69800116576 /* CGroupMemberListController.xib */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
@@ -74,6 +77,11 @@
 		9E6F4105155EC64B0081136F /* CTodayItineraryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTodayItineraryController.h; sourceTree = "<group>"; };
 		9E6F4106155EC64B0081136F /* CTodayItineraryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTodayItineraryController.m; sourceTree = "<group>"; };
 		9E6F4107155EC64B0081136F /* CTodayItineraryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CTodayItineraryController.xib; sourceTree = "<group>"; };
+		9E6F410B15626C8E0081136F /* CWaitModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWaitModelViewController.h; sourceTree = "<group>"; };
+		9E6F410C15626C930081136F /* CWaitModelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWaitModelViewController.m; sourceTree = "<group>"; };
+		9E6F410D15626C9E0081136F /* CWaitModelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CWaitModelViewController.xib; sourceTree = "<group>"; };
+		9E6F41101562AF530081136F /* CKeyBroardObserber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKeyBroardObserber.h; sourceTree = "<group>"; };
+		9E6F41111562AF530081136F /* CKeyBroardObserber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKeyBroardObserber.m; sourceTree = "<group>"; };
 		9E73C444155AC69800116576 /* CGroupMemberListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberListController.h; sourceTree = "<group>"; };
 		9E73C445155AC69800116576 /* CGroupMemberListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberListController.m; sourceTree = "<group>"; };
 		9E73C446155AC69800116576 /* CGroupMemberListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberListController.xib; sourceTree = "<group>"; };
@@ -265,6 +273,9 @@
 				9E6F4105155EC64B0081136F /* CTodayItineraryController.h */,
 				9E6F4106155EC64B0081136F /* CTodayItineraryController.m */,
 				9E6F4107155EC64B0081136F /* CTodayItineraryController.xib */,
+				9E6F410B15626C8E0081136F /* CWaitModelViewController.h */,
+				9E6F410C15626C930081136F /* CWaitModelViewController.m */,
+				9E6F410D15626C9E0081136F /* CWaitModelViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -294,6 +305,8 @@
 			isa = PBXGroup;
 			children = (
 				9EACC4DA140A804900C580C1 /* DebugMacroDefine.h */,
+				9E6F41101562AF530081136F /* CKeyBroardObserber.h */,
+				9E6F41111562AF530081136F /* CKeyBroardObserber.m */,
 			);
 			name = BaseFunction;
 			path = ..;
@@ -395,6 +408,7 @@
 				9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */,
 				9E5445D7155E03D500CC71BB /* CGroupMemberDetailController.xib in Resources */,
 				9E6F4109155EC64C0081136F /* CTodayItineraryController.xib in Resources */,
+				9E6F410F15626CA90081136F /* CWaitModelViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +464,8 @@
 				9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */,
 				9E5445D6155E03D500CC71BB /* CGroupMemberDetailController.m in Sources */,
 				9E6F4108155EC64C0081136F /* CTodayItineraryController.m in Sources */,
+				9E6F410E15626CA90081136F /* CWaitModelViewController.m in Sources */,
+				9E6F41121562AF530081136F /* CKeyBroardObserber.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
