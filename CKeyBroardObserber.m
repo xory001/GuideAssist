@@ -50,9 +50,20 @@
     [ super dealloc ];
 }
 
+- (UIView *)getFirsrResponder:(UIViewController *)ctrller
+{
+    return nil;
+}
+
 - (void)getOSVersion
 {
     fOSVersion_ = [[[ UIDevice currentDevice ] systemVersion ] floatValue ];
+}
+
+- (void)setKeyboardWillShowDidMethod:(id)delegate forSelector:(SEL)selector
+{
+    threadDelegate_ = delegate;
+    selector_ = selector;    
 }
 
 - (void)keyboardWillChangeFrame:(NSNotification *)notifacation
@@ -61,7 +72,15 @@
     {
         NSValue *value = [[ notifacation  userInfo ] objectForKey: UIKeyboardFrameEndUserInfoKey ];
         [ value getValue:&keyboardBound_ ];
-        NSLog( @"keyboard width:%.2f, height:%.2f", keyboardBound_.size.width, keyboardBound_.size.height );
+//        NSLog( @"keyboard width:%.2f, height:%.2f", keyboardBound_.size.width, keyboardBound_.size.height );
+        
+        if ( threadDelegate_ && selector_ )
+        {
+            if ( [ threadDelegate_ respondsToSelector:selector_ ] )
+            {
+                [ threadDelegate_ performSelector:selector_ ];
+            }
+        }
     }
 }
 

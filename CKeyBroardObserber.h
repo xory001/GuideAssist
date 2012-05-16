@@ -13,6 +13,8 @@
 {
     CGRect keyboardBound_;
     float fOSVersion_;
+    id    threadDelegate_;
+    SEL   selector_;
     
 }
 
@@ -21,5 +23,10 @@
 - (void)getOSVersion;
 
 - (void)keyboardWillChangeFrame:(NSNotification*)notifacation;
+
+- (void)setKeyboardWillShowDidMethod:(id)delegate forSelector:(SEL)selector;
+
+- (UIView*)getFirsrResponder:(UIViewController*)ctrller;
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CKeyBroardObserber.h"
 
 
 @interface LoginViewController : UIViewController < UITextFieldDelegate >
@@ -20,6 +21,7 @@
   
   NSString *strWebServiceURL_; //end not has "/"
   BOOL bQuitThread_;
+    CKeyBroardObserber *keyboardObserver_;
     
   //  UILabel *pLableTest_;
     
@@ -39,5 +41,6 @@
 
 - (void)ThreadLogin:(NSString*)strWebServiceURL;
 - (void)ThreadQuitCalledMethod:(id)loginResult;
+- (void)keyboardWliiShow; //when keyboard will show,call this method
 
 @end

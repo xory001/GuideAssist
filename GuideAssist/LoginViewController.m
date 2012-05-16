@@ -30,13 +30,13 @@
 //  [opetationQueue_ addOperation:invoctionOperation_];
  // [self release];
   //Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
-  //  GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  //  [appDelegate ShowMainView];
-    self.modalPresentationStyle = UIModalPresentationCurrentContext;
-    CWaitModelViewController *wailModeCtrller = [[ CWaitModelViewController alloc ] 
-                                                 initWithNibName:nil
-                                                 bundle:nil ]; 
-    [ self presentModalViewController:wailModeCtrller animated:YES ];
+    GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate ShowMainView];
+//    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    CWaitModelViewController *wailModeCtrller = [[ CWaitModelViewController alloc ] 
+//                                                 initWithNibName:nil
+//                                                 bundle:nil ]; 
+//    [ self presentModalViewController:wailModeCtrller animated:YES ];
   
 }
 
@@ -45,6 +45,30 @@
    // [ self performSelector:@selector(notExistCall) ];
    //abort();
     exit( 0 );
+}
+
+- (void)keyboardWliiShow
+{
+    NSLog(@"keyboardWliiShow");
+    if ( [ loginName_ isFirstResponder ] )
+    {
+        CGRect viewFrame = self.view.frame;
+        viewFrame.origin.y -= 216;//g_pAppDelegate.boundKeyboard.size.height;
+        self.view.frame = viewFrame;
+        [ UIView animateWithDuration:0.4 
+                          animations:^
+                        {
+                           [ UIView setAnimationTransition:UIViewAnimationTransitionCurlUp 
+                                                   forView:self.view cache:NO ];  
+                        }
+                          completion:^(BOOL bComplete)
+                        {
+                            if ( bComplete )
+                            {
+                                NSLog( @"complete");
+                            }
+                        } ];
+    }
 }
 
 - (IBAction)textFeildDone:(id)sender forEvent:(UIEvent *)event 
@@ -67,13 +91,28 @@
     [ loginPassword_ resignFirstResponder ];
 }
 
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if ( textField == loginPassword_ )
     {
-        CGRect viewFrame = self.view.frame;
-        viewFrame.origin.y -= 216;;
-        self.view.frame = viewFrame;
+//        CGRect viewFrame = self.view.frame;
+//        viewFrame.origin.y -= g_pAppDelegate.boundKeyboard.size.height;
+//        self.view.frame = viewFrame;
+        
+//        [ UIView animateWithDuration:0.4 
+//                          animations:^
+//                        {
+//                           [ UIView setAnimationTransition:UIViewAnimationTransitionCurlUp 
+//                                                   forView:self.view cache:NO ];  
+//                        }
+//                          completion:^(BOOL bComplete)
+//                        {
+//                            if ( bComplete )
+//                            {
+//                                NSLog( @"complete");
+//                            }
+//                        } ];
     }
 }
 
@@ -82,9 +121,37 @@
     if ( textField == loginPassword_ )
     {
         CGRect viewFrame = self.view.frame;
-        viewFrame.origin.y += 216;;
+        viewFrame.origin.y += 216;//g_pAppDelegate.boundKeyboard.size.height;
         self.view.frame = viewFrame;
+        [ UIView animateWithDuration:0.4 
+                          animations:^
+                        {
+                           [ UIView setAnimationTransition:UIViewAnimationTransitionCurlUp 
+                                                   forView:self.view cache:NO ];  
+                        }
+                          completion:^(BOOL bComplete)
+                        {
+                            if ( bComplete )
+                            {
+                                NSLog( @"complete");
+                            }
+                        } ];
     } 
+         
+         //  [UIView beginAnimations:nil context:nil];
+         //  [UIView setAnimationDuration:1];
+         //    [ UIView setAnimationCurve:UIViewAnimationCurveEaseIn ];
+         ////  [self.window addSubview:self.mainViewContrller.view];
+         //    
+         //    [ self.window addSubview:self.groupMemberListController.view ];
+         //
+         //  [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft 
+         //                         forView:self.window cache:NO];
+         //  
+         // // [self.window addSubview:mainViewContrller_.view];
+         ////  [mainViewContrller_.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0]; 
+         //    
+         //  [UIView commitAnimations];
 }
 
 -(void)ThreadLogin:(NSString *)strWebServiceURL
@@ -136,7 +203,9 @@
         strWebServiceURL_ = [[NSString alloc] init];
 
         self.view.backgroundColor = g_pAppDelegate.bgImgColor;
-//                 ((GuideAssistAppDelegate*)( [[UIApplication sharedApplication] delegate] )).bgImgColor;
+        keyboardObserver_ = [[ CKeyBroardObserber alloc ] init ];
+        [ keyboardObserver_ setKeyboardWillShowDidMethod:self
+                                             forSelector:@selector(keyboardWliiShow) ];
     }
     return self;
 }
@@ -146,6 +215,7 @@
     self.loginName = nil;
     self.loginPassword = nil;
     self.loginType = nil;
+    [ keyboardObserver_ release ];
   [strWebServiceURL_ release];
   [opetationQueue_ release];
   [invoctionOperation_ release];

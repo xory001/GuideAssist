@@ -25,6 +25,13 @@ GuideAssistAppDelegate *g_pAppDelegate = nil;
 @synthesize loginViewContrller = ploginViewContrller_;
 @synthesize frameApp = frameApp_;
 
+@dynamic boundKeyboard;
+
+- (CGRect)boundKeyboard
+{
+    return keyboardObserver_.keyboardBound;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
