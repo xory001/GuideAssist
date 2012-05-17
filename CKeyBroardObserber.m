@@ -7,17 +7,21 @@
 //
 
 #import "CKeyBroardObserber.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation CKeyBroardObserber
 
+@synthesize rootView = rootView_;
 @synthesize keyboardBound = keyboardBound_;
+@synthesize autoAdjustRootView = bAutoAdjustRootView_;
 
 - (id)init
 {
     self = [ super init ];
     if ( self )
     {
+        bAutoAdjustRootView_ = NO;
         [ self getOSVersion ];
         
         if ( fOSVersion_ < 5.0 )
@@ -25,6 +29,11 @@
             [[ NSNotificationCenter defaultCenter ] addObserver:self
                                                        selector:@selector(keyboardWillChangeFrame:) 
                                                            name:UIKeyboardWillShowNotification 
+                                                         object:nil ];        
+            
+            [[ NSNotificationCenter defaultCenter ] addObserver:self
+                                                       selector:@selector(keyboardWillChangeFrame:) 
+                                                           name:UIKeyboardWillHideNotification 
                                                          object:nil ];
             
         }
@@ -37,6 +46,8 @@
 //                                                         object:nil ];
  
         }
+        
+        arrInputViews_ = [[ NSMutableArray alloc ] init ];
     }
     
     return self;
@@ -47,7 +58,21 @@
     [[ NSNotificationCenter defaultCenter ] removeObserver:self
                                                       name:UIKeyboardWillShowNotification
                                                     object:nil ];
+    [[ NSNotificationCenter defaultCenter ] removeObserver:self
+                                                      name:UIKeyboardWillHideNotification
+                                                    object:nil ];
+    [ arrInputViews_ removeAllObjects ];
+    [ arrInputViews_ release ];
+    self.rootView = nil;
     [ super dealloc ];
+}
+
+- (void)hideKeyboard
+{
+    for ( UIView *view in arrInputViews_ )
+    {
+        [ view resignFirstResponder ];
+    }
 }
 
 - (UIView *)getFirsrResponder:(UIViewController *)ctrller
@@ -55,30 +80,129 @@
     return nil;
 }
 
-- (void)getOSVersion
+- (float)getOSVersion
 {
-    fOSVersion_ = [[[ UIDevice currentDevice ] systemVersion ] floatValue ];
+    if ( fOSVersion_ < 0.1 )
+    {
+        fOSVersion_ = [[[ UIDevice currentDevice ] systemVersion ] floatValue ];  
+    }
+    return fOSVersion_;
 }
 
 - (void)setKeyboardWillShowDidMethod:(id)delegate forSelector:(SEL)selector
 {
-    threadDelegate_ = delegate;
-    selector_ = selector;    
+    delegateWillShow_ = delegate;
+    selectorWillShow_ = selector;    
+}
+
+- (void)setKeyboardWillHideDidMethod:(id)delegate forSelector:(SEL)selector
+{
+    deletateWillHide_ = delegate;
+    selectorWillHide_ = selector;
+}
+
+- (void)addViewOfNeedKeyboard:(UIView *)view
+{
+    if ( [ view isKindOfClass:[ UIView class ]] )
+    {
+        [ arrInputViews_ addObject:view ];
+    }
+}
+
+- (void)deleteViewOfNeedKeyboard:(UIView *)view
+{
+    [ arrInputViews_ removeObject:view ];
+}
+
+- (void)clearAllView
+{
+    [ arrInputViews_ removeAllObjects ];
+}
+
+- (UIView *)getFirsrResponderView
+{
+    for ( UIView *view in arrInputViews_ )
+    {
+        if ( [ view isFirstResponder ] )
+        {
+            return view;
+        }
+    }
+    
+    return nil;
 }
 
 - (void)keyboardWillChangeFrame:(NSNotification *)notifacation
 {
     if ( fOSVersion_ < 5.0 )
     {
-        NSValue *value = [[ notifacation  userInfo ] objectForKey: UIKeyboardFrameEndUserInfoKey ];
-        [ value getValue:&keyboardBound_ ];
-//        NSLog( @"keyboard width:%.2f, height:%.2f", keyboardBound_.size.width, keyboardBound_.size.height );
-        
-        if ( threadDelegate_ && selector_ )
+        if ( [[ notifacation name ] isEqualToString: UIKeyboardWillShowNotification ] ) 
         {
-            if ( [ threadDelegate_ respondsToSelector:selector_ ] )
+            NSValue *value = [[ notifacation  userInfo ] objectForKey: UIKeyboardFrameEndUserInfoKey ];
+            [ value getValue:&keyboardBound_ ];
+            //        NSLog( @"keyboard width:%.2f, height:%.2f", keyboardBound_.size.width, keyboardBound_.size.height );
+            
+            if ( delegateWillShow_ && selectorWillShow_ )
             {
-                [ threadDelegate_ performSelector:selector_ ];
+                if ( [ delegateWillShow_ respondsToSelector:selectorWillShow_ ] )
+                {
+                    [ delegateWillShow_ performSelector:selectorWillShow_ ];
+                }
+            }
+            if ( bAutoAdjustRootView_ )
+            {
+                firstResponderView_ = [ self getFirsrResponderView ];
+                if ( nil != firstResponderView_ )
+                {
+                    CGRect frameScreen = [[ UIScreen mainScreen ] bounds ];
+                    CGRect frameView = [ firstResponderView_ convertRect:firstResponderView_.frame 
+                                                                  toView:firstResponderView_.window ];
+                    if ( frameView.origin.y > ( frameScreen.size.height - keyboardBound_.size.height ) )
+                    {
+                        nMovedHeight_ = frameView.origin.y + frameView.size.height - 
+                                       frameScreen.size.height + keyboardBound_.size.height;
+                        CGRect frameSrc = rootView_.frame;
+                        frameSrc.origin.y -= nMovedHeight_;
+                        rootView_.frame = frameSrc;
+                        
+                        CATransition *pAnimotion = [ CATransition animation ];
+                        //    [ pAnimotion setType:@"pageCurl" ]; //@"suckEffect"  @"cube" rippleEffect
+                        [ pAnimotion setType: kCATransitionPush ];
+                        [ pAnimotion setSubtype:kCATransitionFromBottom ];
+                        [ pAnimotion setDuration:0.4 ];
+                        [ rootView_.layer addAnimation:pAnimotion forKey:nil ];
+                    }
+                    else
+                    {
+                        nMovedHeight_ = 0;
+                    }
+                }
+            }
+
+            
+        }
+        else if ( [[ notifacation name ] isEqualToString: UIKeyboardWillHideNotification ] )
+        {
+            if ( deletateWillHide_ && selectorWillHide_ )
+            {
+                if ( [ deletateWillHide_ respondsToSelector:selectorWillHide_ ] )
+                {
+                    [ deletateWillHide_ performSelector:selectorWillHide_ ];
+                }
+                 
+            }
+            if ( bAutoAdjustRootView_ && nMovedHeight_ )
+            {
+                CGRect frameSrc = rootView_.frame;
+                frameSrc.origin.y += nMovedHeight_;
+                rootView_.frame = frameSrc;
+                
+                CATransition *pAnimotion = [ CATransition animation ];
+                //    [ pAnimotion setType:@"pageCurl" ]; //@"suckEffect"  @"cube" rippleEffect
+                [ pAnimotion setType: kCATransitionPush ];
+                [ pAnimotion setSubtype:kCATransitionFromTop ];
+                [ pAnimotion setDuration:0.4 ];
+                [ rootView_.layer addAnimation:pAnimotion forKey:nil ];
             }
         }
     }

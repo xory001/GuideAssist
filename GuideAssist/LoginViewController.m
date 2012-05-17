@@ -30,8 +30,8 @@
 //  [opetationQueue_ addOperation:invoctionOperation_];
  // [self release];
   //Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
-    GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate ShowMainView];
+ //   GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+ //   [appDelegate ShowMainView];
 //    self.modalPresentationStyle = UIModalPresentationCurrentContext;
 //    CWaitModelViewController *wailModeCtrller = [[ CWaitModelViewController alloc ] 
 //                                                 initWithNibName:nil
@@ -49,6 +49,7 @@
 
 - (void)keyboardWliiShow
 {
+    return;
     NSLog(@"keyboardWliiShow");
     if ( [ loginName_ isFirstResponder ] )
     {
@@ -87,6 +88,8 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [ keyboardObserver_ hideKeyboard ];
+    return;
     [ loginName_ resignFirstResponder ];
     [ loginPassword_ resignFirstResponder ];
 }
@@ -118,6 +121,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    return;
     if ( textField == loginPassword_ )
     {
         CGRect viewFrame = self.view.frame;
@@ -204,8 +208,12 @@
 
         self.view.backgroundColor = g_pAppDelegate.bgImgColor;
         keyboardObserver_ = [[ CKeyBroardObserber alloc ] init ];
-        [ keyboardObserver_ setKeyboardWillShowDidMethod:self
-                                             forSelector:@selector(keyboardWliiShow) ];
+//        [ keyboardObserver_ setKeyboardWillShowDidMethod:self
+//                                             forSelector:@selector(keyboardWliiShow) ];
+        keyboardObserver_.autoAdjustRootView = YES;
+        keyboardObserver_.rootView = self.view;
+        [ keyboardObserver_ addViewOfNeedKeyboard:loginName_ ];
+        [ keyboardObserver_ addViewOfNeedKeyboard:loginPassword_ ];
     }
     return self;
 }

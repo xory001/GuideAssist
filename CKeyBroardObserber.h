@@ -13,20 +13,34 @@
 {
     CGRect keyboardBound_;
     float fOSVersion_;
-    id    threadDelegate_;
-    SEL   selector_;
-    
+    id    delegateWillShow_;
+    id    deletateWillHide_;
+    SEL   selectorWillShow_;
+    SEL   selectorWillHide_; 
+    UIView *rootView_;
+    UIView *firstResponderView_;
+    NSMutableArray *arrInputViews_;
+    BOOL bAutoAdjustRootView_;
+    int nMovedHeight_;
 }
 
 @property ( nonatomic, readonly ) CGRect keyboardBound;
+@property ( nonatomic, retain ) UIView *rootView;
+@property ( nonatomic, assign ) BOOL autoAdjustRootView;
 
-- (void)getOSVersion;
+- (float)getOSVersion;
 
 - (void)keyboardWillChangeFrame:(NSNotification*)notifacation;
 
 - (void)setKeyboardWillShowDidMethod:(id)delegate forSelector:(SEL)selector;
+- (void)setKeyboardWillHideDidMethod:(id)delegate forSelector:(SEL)selector;
 
-- (UIView*)getFirsrResponder:(UIViewController*)ctrller;
+- (void)addViewOfNeedKeyboard:(UIView*)view;
+- (void)deleteViewOfNeedKeyboard:(UIView*)view;
+- (void)clearAllView;
+- (void)hideKeyboard;
+
+- (UIView*)getFirsrResponderView;
 
 
 @end
