@@ -32,49 +32,42 @@
   //Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
  //   GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
  //   [appDelegate ShowMainView];
-//    self.modalPresentationStyle = UIModalPresentationCurrentContext;
-//    CWaitModelViewController *wailModeCtrller = [[ CWaitModelViewController alloc ] 
-//                                                 initWithNibName:nil
-//                                                 bundle:nil ]; 
-//    [ self presentModalViewController:wailModeCtrller animated:YES ];
+
   
 }
 
 - (IBAction)quitBtnPressed:(id)sender
 {
-   // [ self performSelector:@selector(notExistCall) ];
-   //abort();
     exit( 0 );
 }
 
 - (void)keyboardWliiShow
 {
     return;
-    NSLog(@"keyboardWliiShow");
-    if ( [ loginName_ isFirstResponder ] )
-    {
-        CGRect viewFrame = self.view.frame;
-        viewFrame.origin.y -= 216;//g_pAppDelegate.boundKeyboard.size.height;
-        self.view.frame = viewFrame;
-        [ UIView animateWithDuration:0.4 
-                          animations:^
-                        {
-                           [ UIView setAnimationTransition:UIViewAnimationTransitionCurlUp 
-                                                   forView:self.view cache:NO ];  
-                        }
-                          completion:^(BOOL bComplete)
-                        {
-                            if ( bComplete )
-                            {
-                                NSLog( @"complete");
-                            }
-                        } ];
-    }
+  
+//    if ( [ loginName_ isFirstResponder ] )
+//    {
+//        CGRect viewFrame = self.view.frame;
+//        viewFrame.origin.y -= 216;//g_pAppDelegate.boundKeyboard.size.height;
+//        self.view.frame = viewFrame;
+//        [ UIView animateWithDuration:0.4 
+//                          animations:^
+//                        {
+//                           [ UIView setAnimationTransition:UIViewAnimationTransitionCurlUp 
+//                                                   forView:self.view cache:NO ];  
+//                        }
+//                          completion:^(BOOL bComplete)
+//                        {
+//                            if ( bComplete )
+//                            {
+//                                NSLog( @"complete");
+//                            }
+//                        } ];
+//    }
 }
 
 - (IBAction)textFeildDone:(id)sender forEvent:(UIEvent *)event 
 {
- //   UITextField *textFeild = id;
     if ( sender == loginName_ )
     {
         [ loginPassword_ becomeFirstResponder ];
@@ -89,9 +82,6 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [ keyboardObserver_ hideKeyboard ];
-    return;
-    [ loginName_ resignFirstResponder ];
-    [ loginPassword_ resignFirstResponder ];
 }
 
 
@@ -99,63 +89,13 @@
 {
     if ( textField == loginPassword_ )
     {
-//        CGRect viewFrame = self.view.frame;
-//        viewFrame.origin.y -= g_pAppDelegate.boundKeyboard.size.height;
-//        self.view.frame = viewFrame;
-        
-//        [ UIView animateWithDuration:0.4 
-//                          animations:^
-//                        {
-//                           [ UIView setAnimationTransition:UIViewAnimationTransitionCurlUp 
-//                                                   forView:self.view cache:NO ];  
-//                        }
-//                          completion:^(BOOL bComplete)
-//                        {
-//                            if ( bComplete )
-//                            {
-//                                NSLog( @"complete");
-//                            }
-//                        } ];
+
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    return;
-    if ( textField == loginPassword_ )
-    {
-        CGRect viewFrame = self.view.frame;
-        viewFrame.origin.y += 216;//g_pAppDelegate.boundKeyboard.size.height;
-        self.view.frame = viewFrame;
-        [ UIView animateWithDuration:0.4 
-                          animations:^
-                        {
-                           [ UIView setAnimationTransition:UIViewAnimationTransitionCurlUp 
-                                                   forView:self.view cache:NO ];  
-                        }
-                          completion:^(BOOL bComplete)
-                        {
-                            if ( bComplete )
-                            {
-                                NSLog( @"complete");
-                            }
-                        } ];
-    } 
-         
-         //  [UIView beginAnimations:nil context:nil];
-         //  [UIView setAnimationDuration:1];
-         //    [ UIView setAnimationCurve:UIViewAnimationCurveEaseIn ];
-         ////  [self.window addSubview:self.mainViewContrller.view];
-         //    
-         //    [ self.window addSubview:self.groupMemberListController.view ];
-         //
-         //  [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft 
-         //                         forView:self.window cache:NO];
-         //  
-         // // [self.window addSubview:mainViewContrller_.view];
-         ////  [mainViewContrller_.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0]; 
-         //    
-         //  [UIView commitAnimations];
+
 }
 
 -(void)ThreadLogin:(NSString *)strWebServiceURL
@@ -227,7 +167,6 @@
   [strWebServiceURL_ release];
   [opetationQueue_ release];
   [invoctionOperation_ release];
-  Log(@"LoginViewController dealloc");
    [super dealloc];
 }
 

@@ -155,22 +155,32 @@
                 if ( nil != firstResponderView_ )
                 {
                     CGRect frameScreen = [[ UIScreen mainScreen ] bounds ];
+                    CGRect frameWin = firstResponderView_.window.frame;
+                    UIWindow *win = [[ UIApplication sharedApplication ] keyWindow ];
+                    UIWindow *viewWin = firstResponderView_.window;
                     CGRect frameView = [ firstResponderView_ convertRect:firstResponderView_.frame 
                                                                   toView:firstResponderView_.window ];
                     if ( frameView.origin.y > ( frameScreen.size.height - keyboardBound_.size.height ) )
                     {
                         nMovedHeight_ = frameView.origin.y + frameView.size.height - 
                                        frameScreen.size.height + keyboardBound_.size.height;
-                        CGRect frameSrc = rootView_.frame;
-                        frameSrc.origin.y -= nMovedHeight_;
-                        rootView_.frame = frameSrc;
+                        nMovedHeight_ = frameView.origin.y - frameScreen.size.height 
+                                            + keyboardBound_.size.height;
+                        nMovedHeight_ = 216;
+                      
                         
-                        CATransition *pAnimotion = [ CATransition animation ];
-                        //    [ pAnimotion setType:@"pageCurl" ]; //@"suckEffect"  @"cube" rippleEffect
-                        [ pAnimotion setType: kCATransitionPush ];
-                        [ pAnimotion setSubtype:kCATransitionFromBottom ];
-                        [ pAnimotion setDuration:0.4 ];
-                        [ rootView_.layer addAnimation:pAnimotion forKey:nil ];
+                        [ UIView animateWithDuration:0.3 
+                                          animations:^
+                         {
+                             CGRect frameSrc = rootView_.frame;
+                             frameSrc.origin.y -= nMovedHeight_;
+                             rootView_.frame = frameSrc;
+                             
+                             // [ UIView setAnimationDuration:kAnimationDuration ];
+                             [ UIView setAnimationCurve:UIViewAnimationCurveEaseInOut ];
+                             [ UIView setAnimationTransition:UIViewAnimationTransitionNone 
+                                                     forView:rootView_ cache:NO ];  
+                         } ];
                     }
                     else
                     {
@@ -193,16 +203,18 @@
             }
             if ( bAutoAdjustRootView_ && nMovedHeight_ )
             {
-                CGRect frameSrc = rootView_.frame;
-                frameSrc.origin.y += nMovedHeight_;
-                rootView_.frame = frameSrc;
-                
-                CATransition *pAnimotion = [ CATransition animation ];
-                //    [ pAnimotion setType:@"pageCurl" ]; //@"suckEffect"  @"cube" rippleEffect
-                [ pAnimotion setType: kCATransitionPush ];
-                [ pAnimotion setSubtype:kCATransitionFromTop ];
-                [ pAnimotion setDuration:0.4 ];
-                [ rootView_.layer addAnimation:pAnimotion forKey:nil ];
+                [ UIView animateWithDuration:0.3
+                                  animations:^
+                 {
+                     CGRect frameSrc = rootView_.frame;
+                     frameSrc.origin.y += nMovedHeight_;
+                     rootView_.frame = frameSrc;
+                     
+                     // [ UIView setAnimationDuration:kAnimationDuration ];
+                     [ UIView setAnimationCurve:UIViewAnimationCurveEaseInOut ];
+                     [ UIView setAnimationTransition:UIViewAnimationTransitionNone 
+                                             forView:rootView_ cache:NO ];  
+                 } ];
             }
         }
     }
