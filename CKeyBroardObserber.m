@@ -22,6 +22,8 @@
     if ( self )
     {
         bAutoAdjustRootView_ = NO;
+        nMovedHeight_ = 0;
+        
         [ self getOSVersion ];
         
         if ( fOSVersion_ < 5.0 )
@@ -155,21 +157,13 @@
                 if ( nil != firstResponderView_ )
                 {
                     CGRect frameScreen = [[ UIScreen mainScreen ] bounds ];
-                    CGRect frameWin = firstResponderView_.window.frame;
-                    UIWindow *win = [[ UIApplication sharedApplication ] keyWindow ];
-                    UIWindow *viewWin = firstResponderView_.window;
-                    CGRect frameView = [ firstResponderView_ convertRect:firstResponderView_.frame 
-                                                                  toView:firstResponderView_.window ];
-                    if ( frameView.origin.y > ( frameScreen.size.height - keyboardBound_.size.height ) )
+                    CGRect frameView = [ firstResponderView_ convertRect:firstResponderView_.bounds 
+                                                                  toView:nil ];
+                    if ( ( frameView.origin.y + frameView.size.height ) > ( frameScreen.size.height -keyboardBound_.size.height ) )
                     {
-                        nMovedHeight_ = frameView.origin.y + frameView.size.height - 
-                                       frameScreen.size.height + keyboardBound_.size.height;
                         nMovedHeight_ = frameView.origin.y - frameScreen.size.height 
-                                            + keyboardBound_.size.height;
-                        nMovedHeight_ = 216;
-                      
-                        
-                        [ UIView animateWithDuration:0.3 
+                                            + keyboardBound_.size.height + frameView.size.height;
+                         [ UIView animateWithDuration:0.3 
                                           animations:^
                          {
                              CGRect frameSrc = rootView_.frame;
