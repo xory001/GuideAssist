@@ -30,8 +30,8 @@
 //  [opetationQueue_ addOperation:invoctionOperation_];
  // [self release];
   //Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
- //   GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
- //   [appDelegate ShowMainView];
+   GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+   [appDelegate ShowMainView];
 
   
 }

@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "CGroupMemberListController.h"
 #import "CTodayItineraryController.h"
+#import "CItineraryMgr.h"
 
 
 
@@ -59,6 +60,15 @@
             [ pGroupC loadData:nil ];
             [ self.navigationController pushViewController:pGroupC animated:YES ];
             [ pGroupC release ];
+        }
+            break;
+            
+        case 4:
+        {
+            CItineraryMgr *itineraryMgr = [[ CItineraryMgr alloc ] initWithNibName:nil
+                                                                            bundle:nil ];
+            [ self.navigationController pushViewController:itineraryMgr animated:YES ];
+            [ itineraryMgr release ];
         }
             break;
             
