@@ -17,6 +17,7 @@
 		9E6F41121562AF530081136F /* CKeyBroardObserber.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F41111562AF530081136F /* CKeyBroardObserber.m */; };
 		9E6F4116156512180081136F /* CItineraryMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4114156511D40081136F /* CItineraryMgr.m */; };
 		9E6F4117156512180081136F /* CItineraryMgr.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6F4115156511E10081136F /* CItineraryMgr.xib */; };
+		9E6F411A156B44320081136F /* CCalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4119156B44310081136F /* CCalendarCalc.m */; };
 		9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73C445155AC69800116576 /* CGroupMemberListController.m */; };
 		9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E73C446155AC69800116576 /* CGroupMemberListController.xib */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
@@ -87,6 +88,8 @@
 		9E6F4113156511C30081136F /* CItineraryMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CItineraryMgr.h; sourceTree = "<group>"; };
 		9E6F4114156511D40081136F /* CItineraryMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CItineraryMgr.m; sourceTree = "<group>"; };
 		9E6F4115156511E10081136F /* CItineraryMgr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CItineraryMgr.xib; sourceTree = "<group>"; };
+		9E6F4118156B442F0081136F /* CCalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCalendarCalc.h; sourceTree = "<group>"; };
+		9E6F4119156B44310081136F /* CCalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCalendarCalc.m; sourceTree = "<group>"; };
 		9E73C444155AC69800116576 /* CGroupMemberListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberListController.h; sourceTree = "<group>"; };
 		9E73C445155AC69800116576 /* CGroupMemberListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberListController.m; sourceTree = "<group>"; };
 		9E73C446155AC69800116576 /* CGroupMemberListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberListController.xib; sourceTree = "<group>"; };
@@ -315,6 +318,8 @@
 				9EACC4DA140A804900C580C1 /* DebugMacroDefine.h */,
 				9E6F41101562AF530081136F /* CKeyBroardObserber.h */,
 				9E6F41111562AF530081136F /* CKeyBroardObserber.m */,
+				9E6F4118156B442F0081136F /* CCalendarCalc.h */,
+				9E6F4119156B44310081136F /* CCalendarCalc.m */,
 			);
 			name = BaseFunction;
 			path = ..;
@@ -476,6 +481,7 @@
 				9E6F410E15626CA90081136F /* CWaitModelViewController.m in Sources */,
 				9E6F41121562AF530081136F /* CKeyBroardObserber.m in Sources */,
 				9E6F4116156512180081136F /* CItineraryMgr.m in Sources */,
+				9E6F411A156B44320081136F /* CCalendarCalc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

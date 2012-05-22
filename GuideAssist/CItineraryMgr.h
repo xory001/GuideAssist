@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCalendarCalc.h"
 
 
-@interface CItineraryMgr : UIViewController {
-    
+@interface CItineraryMgr : UIViewController 
+{
+    NSMutableDictionary *dictLabel_;
+    NSMutableArray *arrLabel_;
+    int nCurYear_;
+    int nCurMonth_;
 }
+
+- (void)labelClick:(id)sender forEvent:(UIEvent*)event;
+
+- (void)showCalendar;
 
 @end

@@ -10,6 +10,7 @@
 #import "GuideAssistAppDelegate.h"
 #import "DebugMacroDefine.h"
 #import "CWaitModelViewController.h"
+#import "CCalendarCalc.h"
 
 @implementation LoginViewController
 
@@ -154,6 +155,11 @@
         keyboardObserver_.rootView = self.view;
         [ keyboardObserver_ addViewOfNeedKeyboard:loginName_ ];
         [ keyboardObserver_ addViewOfNeedKeyboard:loginPassword_ ];
+        
+        //test
+//        [ CCalendarCalc getCurMonthFisrtDayWeek ];
+//        [ CCalendarCalc getDaysOfPreMonth ];
+        
     }
     return self;
 }
