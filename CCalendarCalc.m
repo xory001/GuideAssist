@@ -32,6 +32,54 @@
 
 @implementation CCalendarCalc
 
++ (BOOL)getCurYear:(NSInteger *)pnYear andMonth:(NSInteger *)pnMonth
+{
+    NSDate *nowDate = [ NSDate date ];
+    NSCalendar *calendar = [ NSCalendar currentCalendar ];
+    NSDateComponents *comp = [ calendar components:NSYearCalendarUnit|NSMonthCalendarUnit
+                                          fromDate:nowDate ];
+    if ( NULL != pnYear )
+    {
+        *pnYear = [ comp year ];
+    }
+    
+    if ( NULL != pnMonth )
+    {
+        *pnMonth = [ comp month ];
+    }
+    
+    return YES;
+}
+
++ (NSInteger)getFisrtDayWeekAndDaysOfMonth:(NSInteger *)pDaysOfMonth 
+                                    byYear:(NSInteger)nYear andMonth:(NSInteger)nMonth
+{
+  //  NSString *strDate = [[ NSString alloc ] initWithFormat:@"%d-%02d-01", nYear, nMonth ];
+ //   NSDate *nowDate = [ NSDate date ];
+    NSCalendar *calendar = [ NSCalendar currentCalendar ];
+    NSDateComponents *comp = [[ NSDateComponents alloc ] init ];
+    [ comp setMonth: nMonth ];
+    [ comp setYear: nYear ];
+    [ comp setDay:1 ];
+    [ comp setHour: 12 ];
+    [ comp setMinute:30 ];
+    [ comp setSecond:30 ];
+   // [ comp setTimeZone:
+    
+    NSDate *dateAppoint = [ calendar dateFromComponents:comp ];
+    if ( NULL != pDaysOfMonth )
+    {
+        *pDaysOfMonth = [ calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit
+                                       forDate:dateAppoint ].length;
+    }
+    int nWeekDay = [[ calendar components:NSWeekdayCalendarUnit|NSWeekdayOrdinalCalendarUnit
+                                          fromDate:dateAppoint ] weekday ];
+    
+    return nWeekDay;
+
+}
+
+
 + (NSInteger)getCurMonthFisrtDayWeek:(NSInteger*)pDaysOfMonth
 {
   //  NSTimeZone *timeZone = [ NSTimeZone localTimeZone ];
@@ -48,10 +96,7 @@
     return [ comp weekday ];
 }
 
-+ (NSInteger)getTheMonthFisrtDayWeek:(NSString *)strYear month:(NSString *)strMonth
-{
-    return 0;
-}
+
 
 + (NSInteger)getDaysOfPreMonth
 {

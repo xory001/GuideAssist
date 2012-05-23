@@ -21,7 +21,9 @@
         self.view.backgroundColor = g_pAppDelegate.bgImgColor;
      //   dictLabel_ = [[ NSMutableDictionary alloc ] init ];
         arrLabel_ = [[ NSMutableArray alloc ] init ];
+        [ CCalendarCalc getCurYear:&nCurYear_ andMonth:&nCurMonth_ ];
         
+       
         int nLabelWid = g_pAppDelegate.frameApp.size.width / 7;
         int nStartPos = (NSInteger)g_pAppDelegate.frameApp.size.width % 7 / 2;
 
@@ -37,21 +39,19 @@
         [ viewBG release ];
         
         
-               
+        UIColor *clearColor = [ UIColor clearColor ];     
+        CGColorRef cgcolorBlack = [[ UIColor blackColor ] CGColor ];
         NSMutableArray *arrWeekLabel = [[ NSMutableArray alloc ] init ];
         CGRect frameLabel = CGRectMake( nStartPos, 10, nLabelWid, nLabelWid / 2 );
         for ( int j = 0; j < 7; j++ )
         {
 
             UILabel *labelWeek = [[ UILabel alloc ] initWithFrame:frameLabel ];
-           // label.text = @"8";
-           // label.tag = ( i << 16 ) & j;
             [ self.view addSubview:labelWeek ];
-            labelWeek.backgroundColor = [ UIColor clearColor ];
+            labelWeek.backgroundColor = clearColor;
             labelWeek.textAlignment = UITextAlignmentCenter;
          //   labelWeek.layer.borderWidth = 0.5;
          //   labelWeek.layer.borderColor = [ UIColor blackColor ].CGColor;
-            labelWeek.backgroundColor = [ UIColor clearColor ];
             [ arrWeekLabel addObject:labelWeek ];
        
             [ labelWeek release ];
@@ -90,13 +90,12 @@
                     frameLabel.size.width = nLabelWid;
                 }
                 UILabel *label = [[ UILabel alloc ] initWithFrame:frameLabel ];
-                label.backgroundColor = [ UIColor clearColor ];
+                label.backgroundColor = clearColor;
                 label.tag = i * j + j;
                 label.textAlignment = UITextAlignmentCenter;
-                label.layer.borderWidth = 0.5;
-                label.layer.borderColor = [ UIColor blackColor ].CGColor;
-                //[ label ];
-                
+                label.layer.borderWidth = 1;
+                label.layer.borderColor = cgcolorBlack;
+                  
                 [ self.view addSubview:label ];
                 [ arrLabel_ addObject:label ];
                 [ label release ];
@@ -107,18 +106,7 @@
             frameLabel.origin.x = 0;
         }
         
-        //calc weekday
-        //NSString *strEmpty = [ NSString 
-        NSMutableString *strTemp = [[ NSMutableString alloc ] init ];
-        int nDaysOfMonth = 0;
-        int nFirstWeekDay = [ CCalendarCalc getCurMonthFisrtDayWeek: &nDaysOfMonth ];
-        for ( int i = 1; i <= nDaysOfMonth; i++ )
-        {
-            [ strTemp setString:@"" ];
-            [ strTemp appendFormat:@"%d", i ];
-            ( (UILabel*)[ arrLabel_ objectAtIndex:i + nFirstWeekDay - 2 ] ).text = strTemp;
-        }
-        
+        [ self showCalendar ];        
         
 
     }
@@ -128,6 +116,72 @@
 - (void)labelClick:(id)sender forEvent:(UIEvent *)event
 {
     NSLog(@"lable: %d", ((UILabel*)sender).tag );
+}
+
+- (void)showCalendar
+{
+    //calc weekday
+    //NSString *strEmpty = [ NSString 
+    NSMutableString *strTemp = [[ NSMutableString alloc ] init ];
+    int nDaysOfMonth = 0;
+    int nFirstWeekDay = [ CCalendarCalc getFisrtDayWeekAndDaysOfMonth:&nDaysOfMonth
+                                                               byYear:nCurYear_ andMonth:nCurMonth_ ];
+
+    
+    UILabel *label = nil;
+    UIColor *colorBlack =  [ UIColor blackColor ];
+    UIColor *colorGray = [ UIColor grayColor ];
+    for ( int i = 1; i <= nDaysOfMonth; i++ )
+    {
+        [ strTemp setString:@"" ];
+        [ strTemp appendFormat:@"%d", i ];
+        label = [ arrLabel_ objectAtIndex: i + nFirstWeekDay - 2 ];
+        label.text = strTemp;
+        label.textColor = colorBlack;
+    }
+    
+    //last month
+    int nDayOfLastMonth = 0;
+    int nLastMonth = 0, nYear = 0;
+    if ( 1 == nCurMonth_ ) 
+    {
+        nLastMonth = 12;
+        nYear = nCurYear_ - 1;
+    }
+    else
+    {
+        nLastMonth = nCurMonth_ - 1;
+        nYear = nCurYear_;
+    }
+    [ CCalendarCalc getFisrtDayWeekAndDaysOfMonth:&nDayOfLastMonth byYear:nYear andMonth:nLastMonth ];
+    int nLastMonthPos = nFirstWeekDay - 2;
+    while ( nLastMonthPos >= 0 )
+    {
+        [ strTemp setString:@"" ];
+        [ strTemp appendFormat:@"%d", nDayOfLastMonth ];
+        label = [ arrLabel_ objectAtIndex:nLastMonthPos ];
+        label.text = strTemp;
+        label.textColor = colorGray;
+        
+        nLastMonthPos--;
+        nDayOfLastMonth--;
+    }
+
+    //next month
+    int nNextMonthPos = nDaysOfMonth + nFirstWeekDay - 2 + 1;
+    int nDay = 1;
+    while ( nNextMonthPos < [ arrLabel_ count ] )
+    {
+        [ strTemp setString:@"" ];
+        [ strTemp appendFormat:@"%d", nDay ];
+        label = [ arrLabel_ objectAtIndex: nNextMonthPos ];
+        label.text = strTemp;
+        label.textColor = colorGray;
+        
+        nDay++;
+        nNextMonthPos++;
+    }
+
 }
 
 - (void)dealloc

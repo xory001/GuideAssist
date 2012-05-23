@@ -14,10 +14,12 @@
     
 }
 
++ (BOOL)getCurYear:(NSInteger*)pnYear andMonth:(NSInteger*)pnMonth;
++ (NSInteger)getFisrtDayWeekAndDaysOfMonth:(NSInteger*)pDaysOfMonth 
+                                    byYear:(NSInteger)nYear andMonth:(NSInteger)nMonth;
+
 
 + (NSInteger)getCurMonthFisrtDayWeek:(NSInteger*)pDaysOfMonth;
-+ (NSInteger)getTheMonthFisrtDayWeek:(NSString*)strYear month:(NSString*)strMonth;
-
 + (NSInteger)getDaysOfPreMonth;
 
 @end
