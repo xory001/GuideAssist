@@ -18,6 +18,9 @@
 		9E6F4116156512180081136F /* CItineraryMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4114156511D40081136F /* CItineraryMgr.m */; };
 		9E6F4117156512180081136F /* CItineraryMgr.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6F4115156511E10081136F /* CItineraryMgr.xib */; };
 		9E6F411A156B44320081136F /* CCalendarCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4119156B44310081136F /* CCalendarCalc.m */; };
+		9E6F4125156CCC0B0081136F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4120156CCC0B0081136F /* FMDatabase.m */; };
+		9E6F4126156CCC0B0081136F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4122156CCC0B0081136F /* FMDatabaseAdditions.m */; };
+		9E6F4127156CCC0B0081136F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F4124156CCC0B0081136F /* FMResultSet.m */; };
 		9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73C445155AC69800116576 /* CGroupMemberListController.m */; };
 		9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E73C446155AC69800116576 /* CGroupMemberListController.xib */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
@@ -90,6 +93,12 @@
 		9E6F4115156511E10081136F /* CItineraryMgr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CItineraryMgr.xib; sourceTree = "<group>"; };
 		9E6F4118156B442F0081136F /* CCalendarCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCalendarCalc.h; sourceTree = "<group>"; };
 		9E6F4119156B44310081136F /* CCalendarCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCalendarCalc.m; sourceTree = "<group>"; };
+		9E6F411F156CCC0B0081136F /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		9E6F4120156CCC0B0081136F /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		9E6F4121156CCC0B0081136F /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		9E6F4122156CCC0B0081136F /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		9E6F4123156CCC0B0081136F /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		9E6F4124156CCC0B0081136F /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		9E73C444155AC69800116576 /* CGroupMemberListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGroupMemberListController.h; sourceTree = "<group>"; };
 		9E73C445155AC69800116576 /* CGroupMemberListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGroupMemberListController.m; sourceTree = "<group>"; };
 		9E73C446155AC69800116576 /* CGroupMemberListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberListController.xib; sourceTree = "<group>"; };
@@ -175,6 +184,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E6F411E156CCBB40081136F /* FMDB_sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				9E6F411F156CCC0B0081136F /* FMDatabase.h */,
+				9E6F4120156CCC0B0081136F /* FMDatabase.m */,
+				9E6F4121156CCC0B0081136F /* FMDatabaseAdditions.h */,
+				9E6F4122156CCC0B0081136F /* FMDatabaseAdditions.m */,
+				9E6F4123156CCC0B0081136F /* FMResultSet.h */,
+				9E6F4124156CCC0B0081136F /* FMResultSet.m */,
+			);
+			name = FMDB_sqlite;
+			sourceTree = "<group>";
+		};
 		9E9A13B0140124900047853A = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +232,7 @@
 		9E9A13C5140124910047853A /* GuideAssist */ = {
 			isa = PBXGroup;
 			children = (
+				9E6F411E156CCBB40081136F /* FMDB_sqlite */,
 				9E9E665F15494D7C009B05F7 /* config */,
 				9E9E665A1548E64B009B05F7 /* resource */,
 				9E9E663E153FA8BF009B05F7 /* baseModule */,
@@ -482,6 +505,9 @@
 				9E6F41121562AF530081136F /* CKeyBroardObserber.m in Sources */,
 				9E6F4116156512180081136F /* CItineraryMgr.m in Sources */,
 				9E6F411A156B44320081136F /* CCalendarCalc.m in Sources */,
+				9E6F4125156CCC0B0081136F /* FMDatabase.m in Sources */,
+				9E6F4126156CCC0B0081136F /* FMDatabaseAdditions.m in Sources */,
+				9E6F4127156CCC0B0081136F /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

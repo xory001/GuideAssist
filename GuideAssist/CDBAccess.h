@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "/usr/include/sqlite3.h"
+#import "FMDatabase.h"
+//#import "/usr/include/sqlite3.h"
 #import "CDataTypeDef.h"
 
 @interface CDBAccess : NSObject 
 {
+    FMDatabase *dbSQlite_;
     sqlite3 *pSQLite3_;
     NSString *pstrDatabaseFile_;
   //  CDBAccess *sharedInstance_;
@@ -19,9 +21,8 @@
 
 + (CDBAccess*)sharedInstance;
 
-- (BOOL)executeSQLA:(const char*)pszSQL;
-- (BOOL)executeSQLW:(wchar_t *)pwszSQL;
 - (BOOL)initDatabase;
+- (void)initDateTable;
 
 //main itinerary
 - (BOOL)insertMainItinerary:(CMainItinerary*)pMainIniterary;
@@ -32,12 +33,14 @@
 
 //detail itinerary
 - (BOOL)insertDetailItinerary:(CDetailItinerary*)pDetailItinerary;
-- (BOOL)getAllDetailItinerary:(NSMutableArray*)parrDetail ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
+- (BOOL)getAllDetailItinerary:(NSMutableArray*)parrDetail 
+           ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
 
 
 //group member
 - (BOOL)insertGroupMember:(CGroupMember*)pGroupMember;
-- (BOOL)getAllGroupMember:(NSMutableArray*)parrGroupMember ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
+- (BOOL)getAllGroupMember:(NSMutableArray*)parrGroupMember 
+       ByMainSerialNumber:( NSString *)pstrMainSerialNumber;
 
 
 

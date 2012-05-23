@@ -36,23 +36,32 @@ static CDBAccess *g_sharedInstance = nil;
         NSString *pstrDocPath = [ NSSearchPathForDirectoriesInDomains
                              ( NSDocumentDirectory, NSUserDomainMask, YES ) lastObject ];
         pstrDatabaseFile_ = [[ NSString alloc ] initWithFormat: @"%@/GuideAssist.db", pstrDocPath ];
-        Log( @"%@", pstrDatabaseFile_ );
-        if ( ![[ NSFileManager defaultManager ] fileExistsAtPath: pstrDatabaseFile_ ] )
+        
+        NSFileManager *fm = [ NSFileManager defaultManager ];
+#ifdef DEBUG
+        [ fm removeItemAtPath:pstrDatabaseFile_ error:nil ];
+#endif
+    //    Log( @"%@", pstrDatabaseFile_ );
+        dbSQlite_ = [[ FMDatabase alloc ] initWithPath:pstrDatabaseFile_ ];
+        BOOL bOpen = NO;
+        if ( ![ fm fileExistsAtPath: pstrDatabaseFile_ ] )
         {
-            if( SQLITE_OK != sqlite3_open( [ pstrDatabaseFile_ UTF8String ], &pSQLite3_ ) )
+            bOpen = [ dbSQlite_ open ];
+            if ( bOpen )
             {
-                pSQLite3_ = NULL;
-                return nil;
+                [ self initDateTable ];
             }
-            [ self initDatabase ];
         }
         else
         {
-            if( SQLITE_OK != sqlite3_open( [ pstrDatabaseFile_ UTF8String ], &pSQLite3_ ) )
-            {
-                pSQLite3_ = NULL;
-                return nil;
-            }
+            bOpen = [ dbSQlite_ open ];
+        }
+        if ( !bOpen )
+        {
+            [ dbSQlite_ release ];
+            dbSQlite_  = nil;
+            [ self release ];
+            return nil;
         }
     }
     
@@ -61,11 +70,6 @@ static CDBAccess *g_sharedInstance = nil;
 
 - (void)dealloc
 {
-    if ( pSQLite3_ )
-    {
-        sqlite3_close( pSQLite3_ );
-    }
-    
     [ pstrDatabaseFile_ release ];
     
     [ super dealloc ];
@@ -86,7 +90,7 @@ static CDBAccess *g_sharedInstance = nil;
      pMainIniterary.trafficCost, pMainIniterary.personalTotalCost, 
      pMainIniterary.groupTotalCost, pMainIniterary.ticketCost ];
     
-    BOOL bRet = [ self executeSQLA: [ pstrSQL UTF8String ] ];
+    BOOL bRet = [ dbSQlite_ executeUpdate:pstrSQL ];
     [ pstrSQL release ];
     return bRet;
     
@@ -136,13 +140,13 @@ static CDBAccess *g_sharedInstance = nil;
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
                          @"delete from tb_MainItinerary where SerialNumber = '%@'",
                          pstrSerialNumber ];
-    [ self executeSQLA: [ pstrSQL UTF8String ]];
+    [ dbSQlite_ executeUpdate:pstrSQL ];
     [ pstrSQL release ];
     
     pstrSQL = [[ NSString alloc ] initWithFormat:
                          @"delete from tb_DetailItinerary where SerialNumber = '%@'",
                          pstrSerialNumber ];
-    [ self executeSQLA: [ pstrSQL UTF8String ]];
+    [ dbSQlite_ executeUpdate:pstrSQL ];
     [ pstrSQL release ];
     
 
@@ -166,7 +170,7 @@ static CDBAccess *g_sharedInstance = nil;
                          pDetailItinerary.localTravelAgencyName, pDetailItinerary.localGuide,
                          pDetailItinerary.localGuidePhone ];
         
-    BOOL bRet = [ self executeSQLA: [ pstrSQL UTF8String ] ];
+    BOOL bRet = [ dbSQlite_ executeUpdate:pstrSQL ];
     [ pstrSQL release ];
     return bRet;
 
@@ -279,7 +283,7 @@ static CDBAccess *g_sharedInstance = nil;
                          pGroupMember.sex, pGroupMember.age, pGroupMember.remark,
                          pGroupMember.phone, pGroupMember.idCardType, pGroupMember.idCardNumber ];
     
-    BOOL bRet = [ self executeSQLA: [ pstrSQL UTF8String ] ];
+    BOOL bRet = [ dbSQlite_ executeUpdate:pstrSQL ];
     [ pstrSQL release ];
     return bRet;
 
@@ -290,7 +294,7 @@ static CDBAccess *g_sharedInstance = nil;
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
                @"delete from tb_GroupMember where SerialNumber = '%@'",
                pstrSerialNumber ];
-    [ self executeSQLA: [ pstrSQL UTF8String ]];
+    [ dbSQlite_ executeUpdate:pstrSQL ];
     [ pstrSQL release ];
     return YES;
 }
@@ -387,6 +391,7 @@ static CDBAccess *g_sharedInstance = nil;
     groupTotalCost TEXT, \
     ticketCost TEXT )";
     [ self executeSQLA:pstrCreateMainItineraryTable ];
+  //  [ dbSQlite_ executeUpdate: pstrCreateMainItineraryTable ];
     
     char *pstrCreateDetailItineraryTable =
     "create table tb_DetailItinerary \
@@ -426,25 +431,61 @@ static CDBAccess *g_sharedInstance = nil;
                         
 }
 
-- (BOOL)executeSQLA:(const char*)pszSQL
+- (void)initDateTable
 {
-    char *pszErrString = NULL;
-    if ( SQLITE_OK != sqlite3_exec( pSQLite3_, pszSQL, NULL, NULL, &pszErrString ) )
-    {
-        NSLog( @"sqlite execute err: %s", pszSQL );
-    }
-    if ( pszErrString )
-    {
-        NSLog( @"%s", pszErrString );
-        sqlite3_free( pszErrString );
-        return NO;
-    }
-    return YES;
+    NSString *strTableMain = [[ NSString alloc ] initWithFormat:@"create table tb_MainItinerary \
+    ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
+    SerialNumber TEXT, \
+    timeStamp TEXT, \
+    tourGroupName TEXT, \
+    travelAgencyName TEXT, \
+    memberCount INTEGER, \
+    statDay TEXT, \
+    endDay TEXT, \
+    standardCost TEXT, \
+    roomCost TEXT, \
+    mealCost TEXT, \
+    trafficCost TEXT, \
+    personalTotalCost TEXT, \
+    groupTotalCost TEXT, \
+    ticketCost TEXT )" ];
+    [ dbSQlite_ executeUpdate: strTableMain ];
+    [ strTableMain release ];
+    
+    NSString *strTableDetail = [[ NSString alloc ] initWithFormat:@"create table tb_DetailItinerary \
+    ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
+    nindex INTEGER, \
+    serialNumber TEXT, \
+    day TEXT, \
+    traffic TEXT, \
+    trafficNo TEXT, \
+    driverName INTEGER, \
+    driverPhone TEXT, \
+    city TEXT, \
+    meal TEXT, \
+    room TEXT, \
+    detailDesc TEXT, \
+    localTravelAgencyName TEXT, \
+    localGuide TEXT, \
+    localGuidePhone TEXT )"];
+    [ dbSQlite_ executeUpdate: strTableDetail ];
+    [ strTableDetail release ];
+    
+    
+    NSString *strTableGroup = [[ NSString alloc ] initWithFormat:@"create table tb_GroupMember \
+    ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
+    paid INTEGER, \
+    serialNumber TEXT, \
+    name TEXT, \
+    sex TEXT, \
+    age TEXT, \
+    remark INTEGER, \
+    phone TEXT, \
+    idCardType TEXT, \
+    idCardNumber TEXT )"];
+    [ dbSQlite_ executeUpdate: strTableGroup ];
+    [ strTableGroup release ];
 }
 
-- (BOOL)executeSQLW:(wchar_t *)pwszSQL
-{
-    return NO;
-}
 
 @end

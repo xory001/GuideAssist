@@ -72,13 +72,7 @@
    // NSLog( @"%d", indexPath.row );
 }
 
-- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView
-         accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
 
-{
-    //NSLog( @"%d", indexPath.row );
-    return UITableViewCellAccessoryDisclosureIndicator;
-}
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -126,11 +120,16 @@
      
         pCell.detailTextLabel.text = pMember.phone;
         pCell.textLabel.text = pMember.name;
-        pCell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        pCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+       // pCell.accessoryView.
+        //UITableViewCellAccessoryDetailDisclosureButton;
+      //  pCell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else
     {
         pCell.textLabel.text = [ NSString stringWithFormat:@"empty item" ];
+        pCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
     }
 
     return pCell;
@@ -138,7 +137,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [ tableView deselectRowAtIndexPath:indexPath animated:YES ];
     CGroupMemberDetailController *pGroupDetailCtrller = 
                 [[ CGroupMemberDetailController alloc ] initWithNibName:nil bundle:nil ];
     pGroupDetailCtrller.arrGroupMember = pArrGroupMember_;
@@ -146,6 +144,7 @@
     [ pGroupDetailCtrller initViewState ];
     [ self.navigationController pushViewController:pGroupDetailCtrller animated:YES ];
     [ pGroupDetailCtrller release ];
+    [ tableView deselectRowAtIndexPath:indexPath animated:YES ];
     
 }
 
