@@ -14,14 +14,12 @@
 @interface CDBAccess : NSObject 
 {
     FMDatabase *dbSQlite_;
-    sqlite3 *pSQLite3_;
     NSString *pstrDatabaseFile_;
   //  CDBAccess *sharedInstance_;
 }
 
 + (CDBAccess*)sharedInstance;
 
-- (BOOL)initDatabase;
 - (void)initDateTable;
 
 //main itinerary

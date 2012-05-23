@@ -11,6 +11,7 @@
 
 @synthesize serialNumner = pstrSerialNumner_;
 @synthesize date = pstrDate_;
+@synthesize groupName = strGroupName_;
 
 - (id)init
 {
@@ -19,6 +20,7 @@
     {
         pstrSerialNumner_ = [[ NSString alloc ] init ];
         pstrDate_ = [[ NSString alloc ] init ];
+        strGroupName_ = [[ NSString alloc ] init ];
     }
     return self;
 }
@@ -27,6 +29,7 @@
 {
     self.serialNumner = nil;
     self.date = nil;
+    self.groupName = nil;
     [ super dealloc ];
 }
 

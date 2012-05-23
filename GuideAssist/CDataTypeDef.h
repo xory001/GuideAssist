@@ -23,10 +23,12 @@ enum ITINERARY_STATE
 @private
     NSString *pstrSerialNumner_;
     NSString *pstrDate_;
+    NSString *strGroupName_;
 }
 
 @property ( nonatomic, copy ) NSString *serialNumner;
 @property ( nonatomic, copy ) NSString *date;
+@property ( nonatomic, copy ) NSString *groupName;
 
 
 @end
