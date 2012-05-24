@@ -27,6 +27,9 @@
 - (BOOL)getAllMainItinerarySerialNumber:(NSMutableArray*)parrMainSerialNumber;
 - (BOOL)deleteItineraryBySerialNumber:(NSString*)pstrSerialNumber;
 - (BOOL)deleteGroupMemberInfoByBySerialNumber:(NSString*)pstrSerialNumber;
+- (BOOL)getMainItineraryNumber:(NSMutableArray*)arrNumber 
+                    byStartDay:(NSString*)strStartDay 
+                     andEndDay:(NSString*)strEndDay;
 
 
 //detail itinerary

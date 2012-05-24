@@ -150,6 +150,28 @@ static CDBAccess *g_sharedInstance = nil;
      
 }
 
+- (BOOL)getMainItineraryNumber:(NSMutableArray *)arrNumber 
+                    byStartDay:(NSString *)strStartDay 
+                     andEndDay:(NSString *)strEndDay
+{
+    NSString *strSQL = [[ NSString alloc ] 
+                        initWithFormat:@"select SerialNumber, startDay, tourGroupName from tb_MainItinerary \
+                        where startDay >= '%@' and startDay <= '%@' ", strStartDay, strEndDay ];
+    FMResultSet *record = [ dbSQlite_ executeQuery:strSQL ];
+    while ( [ record next ])
+    {
+        CMainItinerarySerialNumner *pMainItinerarySerialNumner = [[ CMainItinerarySerialNumner alloc ] init ];
+        pMainItinerarySerialNumner.date = [ record stringForColumn:@"startDay" ];
+        pMainItinerarySerialNumner.serialNumner = [ record stringForColumn:@"serialNumber" ];
+        pMainItinerarySerialNumner.groupName = [ record stringForColumn:@"tourGroupName" ];
+        [ arrNumber addObject: pMainItinerarySerialNumner ];
+        [ pMainItinerarySerialNumner release ];
+    }
+    
+    [ strSQL release ];
+    return [ arrNumber count ];
+}
+
 //*********detail itinerary
 - (BOOL)insertDetailItinerary:(CDetailItinerary *)pDetailItinerary
 {
@@ -313,7 +335,7 @@ static CDBAccess *g_sharedInstance = nil;
 - (void)initDateTable
 {
     NSString *strTableMain = [[ NSString alloc ] initWithFormat:@"create table tb_MainItinerary \
-    ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
+    ( id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
     SerialNumber TEXT, \
     timeStamp TEXT, \
     tourGroupName TEXT, \

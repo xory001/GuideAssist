@@ -40,7 +40,7 @@
         
         
         UIColor *clearColor = [ UIColor clearColor ];     
-        CGColorRef cgcolorBlack = [[ UIColor blackColor ] CGColor ];
+       // CGColorRef cgcolorBlack = [[ UIColor blackColor ] CGColor ];
         NSMutableArray *arrWeekLabel = [[ NSMutableArray alloc ] init ];
         CGRect frameLabel = CGRectMake( nStartPos, 10, nLabelWid, nLabelWid / 2 );
         for ( int j = 0; j < 7; j++ )
@@ -89,12 +89,14 @@
                 {
                     frameLabel.size.width = nLabelWid;
                 }
-                UILabel *label = [[ UILabel alloc ] initWithFrame:frameLabel ];
-                label.backgroundColor = clearColor;
-                label.tag = i * j + j;
-                label.textAlignment = UITextAlignmentCenter;
-                label.layer.borderWidth = 1;
-                label.layer.borderColor = cgcolorBlack;
+                UIButton *label = [[ UIButton alloc ] initWithFrame:frameLabel ];
+             //   label.backgroundColor = clearColor;
+                label.tag = 0;
+                [ label addTarget:self action:@selector(labelClick:forEvent:) forControlEvents:UIControlEventTouchUpInside ];
+             //   label.titleLabel.textAlignment = UITextAlignmentCenter;
+             //   label.layer.borderWidth = 1;
+             //   label.layer.borderColor = cgcolorBlack;
+             //   label.userInteractionEnabled = YES;
                   
                 [ self.view addSubview:label ];
                 [ arrLabel_ addObject:label ];
@@ -115,73 +117,105 @@
 
 - (void)labelClick:(id)sender forEvent:(UIEvent *)event
 {
-    NSLog(@"lable: %d", ((UILabel*)sender).tag );
+    UIButton *btn = sender;
+  //  NSLog(@"lable: %@", ((UIButton*)sender).currentTitle );
+    NSInteger nDay = btn.tag;
+    NSString *strDay = [ NSString stringWithFormat:@"%d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
+                             ( nDay >> 8 ) & 0xff, nDay & 0xff ];
+    NSLog(@"%@", strDay );
 }
 
 - (void)showCalendar
 {
     //calc weekday
-    //NSString *strEmpty = [ NSString 
-    NSMutableString *strTemp = [[ NSMutableString alloc ] init ];
+    NSInteger nTag = 0;
     int nDaysOfMonth = 0;
     int nFirstWeekDay = [ CCalendarCalc getFisrtDayWeekAndDaysOfMonth:&nDaysOfMonth
                                                                byYear:nCurYear_ andMonth:nCurMonth_ ];
 
-    
-    UILabel *label = nil;
+    UIButton *label = nil;
     UIColor *colorBlack =  [ UIColor blackColor ];
     UIColor *colorGray = [ UIColor grayColor ];
     for ( int i = 1; i <= nDaysOfMonth; i++ )
     {
-        [ strTemp setString:@"" ];
-        [ strTemp appendFormat:@"%d", i ];
-        label = [ arrLabel_ objectAtIndex: i + nFirstWeekDay - 2 ];
-        label.text = strTemp;
-        label.textColor = colorBlack;
+         NSString *strCurMonth = [[ NSString alloc ] initWithFormat:@"%d", i ];
+         label = [ arrLabel_ objectAtIndex: i + nFirstWeekDay - 2 ];
+       
+        [ label setTitle:strCurMonth forState:UIControlStateNormal ];
+   //     [ label setTitle:strTemp forState:UIControlStateHighlighted ];
+        [ label setTitleColor:colorBlack forState:UIControlStateNormal ];
+        nTag =  ( nCurYear_ << 16 ) | ( nCurMonth_ << 8 ) | i;
+        [ label setTag: nTag ]; 
+  //      [ label setTitleColor:colorBlack forState:UIControlStateHighlighted ];
+   //     [ label setBackgroundColor:colorGray ];
+        [ strCurMonth release ];
     }
     
+   
     //last month
     int nDayOfLastMonth = 0;
-    int nLastMonth = 0, nYear = 0;
+    int nLastMonth = 0, nLastYear = 0;
     if ( 1 == nCurMonth_ ) 
     {
         nLastMonth = 12;
-        nYear = nCurYear_ - 1;
+        nLastYear = nCurYear_ - 1;
     }
     else
     {
         nLastMonth = nCurMonth_ - 1;
-        nYear = nCurYear_;
+        nLastYear = nCurYear_;
     }
-    [ CCalendarCalc getFisrtDayWeekAndDaysOfMonth:&nDayOfLastMonth byYear:nYear andMonth:nLastMonth ];
+    [ CCalendarCalc getFisrtDayWeekAndDaysOfMonth:&nDayOfLastMonth byYear:nLastYear andMonth:nLastMonth ];
     int nLastMonthPos = nFirstWeekDay - 2;
     while ( nLastMonthPos >= 0 )
     {
-        [ strTemp setString:@"" ];
-        [ strTemp appendFormat:@"%d", nDayOfLastMonth ];
+        NSString *strLastMonth = [[ NSString alloc ] initWithFormat:@"%d", nDayOfLastMonth ];
         label = [ arrLabel_ objectAtIndex:nLastMonthPos ];
-        label.text = strTemp;
-        label.textColor = colorGray;
-        
+        [ label setTitle:strLastMonth forState:UIControlStateNormal ];
+        [ label setTitleColor:colorGray forState:UIControlStateNormal ];
+        [ label setTag:( nLastYear << 16 ) | ( nLastMonth << 8 ) | nDayOfLastMonth ]; 
+        [ strLastMonth release ];
+       
         nLastMonthPos--;
         nDayOfLastMonth--;
     }
+    
+//    NSString *strStartDay = [ NSString stringWithFormat:@"%d-%02d-%02@",  ];
 
     //next month
+    int nNextYear = 0, nNextMobth = 0;
+    if ( 12 == nCurMonth_ )
+    {
+        nNextYear = nCurYear_ + 1;
+        nNextMobth = 1;
+    }
+    else
+    {
+        nNextYear = nCurYear_;
+        nNextMobth = nCurMonth_ + 1;
+    }
     int nNextMonthPos = nDaysOfMonth + nFirstWeekDay - 2 + 1;
-    int nDay = 1;
+    int nNextMonthDay = 1;
     while ( nNextMonthPos < [ arrLabel_ count ] )
     {
-        [ strTemp setString:@"" ];
-        [ strTemp appendFormat:@"%d", nDay ];
+        NSString *strNextMonth = [[ NSString alloc ] initWithFormat:@"%d", nNextMonthDay ];
         label = [ arrLabel_ objectAtIndex: nNextMonthPos ];
-        label.text = strTemp;
-        label.textColor = colorGray;
+        [ label setTitle:strNextMonth forState:UIControlStateNormal ];
+        [ label setTitleColor:colorGray forState:UIControlStateNormal ];
+      //  [ label setBackgroundColor:colorBlack ];
+        [ label setTag: ( nNextYear << 16 ) | ( nNextMobth << 8 ) | nNextMonthDay ];
+        [ strNextMonth release ];
         
-        nDay++;
+        nNextMonthDay++;
         nNextMonthPos++;
     }
-
+    
+    int nDay = ((UIButton*)[ arrLabel_ objectAtIndex:0 ]).tag;
+    NSString *strStartDay = [ NSString stringWithFormat:@"%d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
+                         ( nDay >> 8 ) & 0xff, nDay & 0xff ];
+    nDay = ((UIButton*)[ arrLabel_ lastObject ]).tag;
+    NSString *strEndDay = [ NSString stringWithFormat:@"%d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
+                           ( nDay >> 8 ) & 0xff, nDay & 0xff ];
 }
 
 - (void)dealloc

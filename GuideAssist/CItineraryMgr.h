@@ -12,7 +12,7 @@
 
 @interface CItineraryMgr : UIViewController 
 {
-    NSMutableDictionary *dictLabel_;
+    NSMutableArray *arrItineraryNumber_;
     NSMutableArray *arrLabel_;
     int nCurYear_;
     int nCurMonth_;
