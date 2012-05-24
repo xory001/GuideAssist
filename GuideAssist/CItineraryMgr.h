@@ -14,6 +14,10 @@
 {
     NSMutableArray *arrItineraryNumber_;
     NSMutableArray *arrLabel_;
+    UIImageView *imgViewLastMonth_;
+    UIImageView *imgViewCurMonth_;
+    UIImageView *imgViewNexMonth_;
+    CGRect frameImg_;
     int nCurYear_;
     int nCurMonth_;
 }

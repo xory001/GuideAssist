@@ -22,6 +22,27 @@
      //   dictLabel_ = [[ NSMutableDictionary alloc ] init ];
         arrLabel_ = [[ NSMutableArray alloc ] init ];
         [ CCalendarCalc getCurYear:&nCurYear_ andMonth:&nCurMonth_ ];
+        arrItineraryNumber_ = [[ NSMutableArray alloc ] init ];
+        
+        NSString *strImgMonth = [ [NSBundle mainBundle ] pathForResource:@"past" 
+                                                              ofType:@"png" 
+                                                         inDirectory:@"resource" ];
+        UIImage *img = [ UIImage imageWithContentsOfFile:strImgMonth ];
+        imgViewLastMonth_ = [[ UIImageView alloc ] initWithImage:img ];
+        
+        strImgMonth = [ [NSBundle mainBundle ] pathForResource:@"current" 
+                                                         ofType:@"png" 
+                                                    inDirectory:@"resource" ];
+        img = [ UIImage imageWithContentsOfFile:strImgMonth ];
+        imgViewCurMonth_ = [[ UIImageView alloc ] initWithImage:img ];
+
+        strImgMonth = [ [NSBundle mainBundle ] pathForResource:@"future" 
+                                                         ofType:@"png" 
+                                                    inDirectory:@"resource" ];
+        img = [ UIImage imageWithContentsOfFile:strImgMonth ];
+        imgViewNexMonth_ = [[ UIImageView alloc ] initWithImage:img ];
+
+        
         
        
         int nLabelWid = g_pAppDelegate.frameApp.size.width / 7;
@@ -118,9 +139,10 @@
 - (void)labelClick:(id)sender forEvent:(UIEvent *)event
 {
     UIButton *btn = sender;
+  //  [ btn addSubview:imgViewLastMonth_ ];
   //  NSLog(@"lable: %@", ((UIButton*)sender).currentTitle );
     NSInteger nDay = btn.tag;
-    NSString *strDay = [ NSString stringWithFormat:@"%d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
+    NSString *strDay = [ NSString stringWithFormat:@"%04d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
                              ( nDay >> 8 ) & 0xff, nDay & 0xff ];
     NSLog(@"%@", strDay );
 }
@@ -211,11 +233,34 @@
     }
     
     int nDay = ((UIButton*)[ arrLabel_ objectAtIndex:0 ]).tag;
-    NSString *strStartDay = [ NSString stringWithFormat:@"%d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
+    NSString *strStartDay = [ NSString stringWithFormat:@"%04d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
                          ( nDay >> 8 ) & 0xff, nDay & 0xff ];
     nDay = ((UIButton*)[ arrLabel_ lastObject ]).tag;
-    NSString *strEndDay = [ NSString stringWithFormat:@"%d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
+    NSString *strEndDay = [ NSString stringWithFormat:@"%04d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
                            ( nDay >> 8 ) & 0xff, nDay & 0xff ];
+    [ arrItineraryNumber_ removeAllObjects ];
+    if ( [ g_pAppDelegate.dataAccess getMainItineraryNumber:arrItineraryNumber_
+                                                 byStartDay:@"2012-04-21" 
+                                                  andEndDay:strEndDay ] )
+    {
+        NSMutableString *strDate = [[ NSMutableString alloc ] init ];
+        for ( CMainItinerarySerialNumner *itinerayNumber in arrItineraryNumber_ )
+        {
+            for ( UIButton *btn in arrLabel_ )
+            {
+                [ strDate setString:@"" ];
+                NSInteger nDay = btn.tag;
+                [ strDate appendFormat:@"%04d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
+                                    ( nDay >> 8 ) & 0xff, nDay & 0xff ];
+                if ( [ strDate isEqualToString:itinerayNumber.date ] )
+                {
+                    NSLog(@"%@", strDate );
+                }
+            
+            }
+        }
+        [ strDate release ];
+    }
 }
 
 - (void)dealloc
@@ -224,6 +269,11 @@
   //  [ dictLabel_ release ];
     [ arrLabel_ removeAllObjects ];
     [ arrLabel_ release ];
+    [ arrItineraryNumber_ removeAllObjects ];
+    [ arrItineraryNumber_ release ];
+    [ imgViewCurMonth_ release ];
+    [ imgViewLastMonth_ release ];
+    [ imgViewNexMonth_ release ];
     [super dealloc];
 }
 
