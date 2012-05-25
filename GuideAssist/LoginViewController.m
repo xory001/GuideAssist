@@ -27,7 +27,13 @@
 - (IBAction)LoginButtonPressed:(id)sender
 {
     CWaitModelViewController *waitView = [[ CWaitModelViewController alloc ] initWithNibName:nil bundle:nil ];
-    [ self presentModalViewController:waitView animated:YES ];
+    waitView.message = @"logining...";
+    [ waitView start ];
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    [ self presentModalViewController:waitView animated:NO ];
+    [ waitView start ];
+    
+    return;
     
     // webservice test
     CWebServiceAccess *pWebService = [[[ CWebServiceAccess alloc ] init ] autorelease ];
@@ -35,11 +41,11 @@
     pWebService.url = @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper";
     pWebService.icCardNumber = self.loginName.text; // @"712936";
     pWebService.guidePhone = self.loginPassword.text; // @"15305712936";
-    NSString *pstrErr = nil;
-    if ( ![ pWebService userLogin: &pstrErr ] )
+    NSString *strErr = nil;
+    if ( ![ pWebService userLogin: &strErr ] )
     {
         [ self dismissModalViewControllerAnimated:NO ];
-        msgBox(@"", pstrErr, @"确定", nil );
+        msgBox(@"", strErr, @"确定", nil );
         return;
     }
     [ pWebService syncItineraryInfo:nil ];
@@ -105,7 +111,7 @@
 {
     if ( textField == loginPassword_ )
     {
-
+        [ keyboardObserver_ autoScrollRootView ];
     }
 }
 

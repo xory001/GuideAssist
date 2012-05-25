@@ -134,6 +134,42 @@
     return nil;
 }
 
+- (void)autoScrollRootView
+{
+    if ( bAutoAdjustRootView_ )
+    {
+        firstResponderView_ = [ self getFirsrResponderView ];
+        if ( nil != firstResponderView_ )
+        {
+            CGRect frameScreen = [[ UIScreen mainScreen ] bounds ];
+            CGRect frameView = [ firstResponderView_ convertRect:firstResponderView_.bounds 
+                                                          toView:nil ];
+            if ( ( frameView.origin.y + frameView.size.height ) > ( frameScreen.size.height -keyboardBound_.size.height ) )
+            {
+                nMovedHeight_ = frameView.origin.y - frameScreen.size.height 
+                + keyboardBound_.size.height + frameView.size.height;
+                [ UIView animateWithDuration:0.3 
+                                  animations:^
+                 {
+                     CGRect frameSrc = rootView_.frame;
+                     frameSrc.origin.y -= nMovedHeight_;
+                     rootView_.frame = frameSrc;
+                     
+                     // [ UIView setAnimationDuration:kAnimationDuration ];
+                     [ UIView setAnimationCurve:UIViewAnimationCurveEaseInOut ];
+                     [ UIView setAnimationTransition:UIViewAnimationTransitionNone 
+                                             forView:rootView_ cache:NO ];  
+                 } ];
+            }
+            else
+            {
+                nMovedHeight_ = 0;
+            }
+        }
+    }
+
+}
+
 - (void)keyboardWillChangeFrame:(NSNotification *)notifacation
 {
     if ( fOSVersion_ < 5.0 )
@@ -151,38 +187,7 @@
                     [ delegateWillShow_ performSelector:selectorWillShow_ ];
                 }
             }
-            if ( bAutoAdjustRootView_ )
-            {
-                firstResponderView_ = [ self getFirsrResponderView ];
-                if ( nil != firstResponderView_ )
-                {
-                    CGRect frameScreen = [[ UIScreen mainScreen ] bounds ];
-                    CGRect frameView = [ firstResponderView_ convertRect:firstResponderView_.bounds 
-                                                                  toView:nil ];
-                    if ( ( frameView.origin.y + frameView.size.height ) > ( frameScreen.size.height -keyboardBound_.size.height ) )
-                    {
-                        nMovedHeight_ = frameView.origin.y - frameScreen.size.height 
-                                            + keyboardBound_.size.height + frameView.size.height;
-                         [ UIView animateWithDuration:0.3 
-                                          animations:^
-                         {
-                             CGRect frameSrc = rootView_.frame;
-                             frameSrc.origin.y -= nMovedHeight_;
-                             rootView_.frame = frameSrc;
-                             
-                             // [ UIView setAnimationDuration:kAnimationDuration ];
-                             [ UIView setAnimationCurve:UIViewAnimationCurveEaseInOut ];
-                             [ UIView setAnimationTransition:UIViewAnimationTransitionNone 
-                                                     forView:rootView_ cache:NO ];  
-                         } ];
-                    }
-                    else
-                    {
-                        nMovedHeight_ = 0;
-                    }
-                }
-            }
-
+            [ self autoScrollRootView ];
             
         }
         else if ( [[ notifacation name ] isEqualToString: UIKeyboardWillHideNotification ] )

@@ -11,6 +11,14 @@
 
 @interface CWaitModelViewController : UIViewController {
     
+    UIActivityIndicatorView *activityIndicatorView_;
+    NSString *strMessage_;
+    UILabel *labelMessage_;
 }
+@property (nonatomic, retain) IBOutlet UILabel *labelMessage_;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property ( nonatomic, copy ) NSString *message;
+
+- (void)start;
 
 @end

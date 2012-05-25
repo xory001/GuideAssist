@@ -39,6 +39,7 @@
 - (void)deleteViewOfNeedKeyboard:(UIView*)view;
 - (void)clearAllView;
 - (void)hideKeyboard;
+- (void)autoScrollRootView;
 
 - (UIView*)getFirsrResponderView;
 

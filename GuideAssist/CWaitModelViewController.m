@@ -10,24 +10,40 @@
 
 
 @implementation CWaitModelViewController
+@synthesize labelMessage_;
+@synthesize activityIndicatorView = activityIndicatorView_;
+@synthesize message = strMessage_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
+      //  [ activityIndicatorView_ startAnimating ];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    
+    [activityIndicatorView_ release];
+    self.message = nil;
+    [labelMessage_ release];
     [super dealloc];
+}
+
+- (void)start
+{
+    labelMessage_.text = strMessage_;
+  //  [ activityIndicatorView_ startAnimating ];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-   // [ self.parentViewController dismissModalViewControllerAnimated:YES ];
+#ifdef DEBUG
+   [ self.parentViewController dismissModalViewControllerAnimated:NO ];
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +64,8 @@
 
 - (void)viewDidUnload
 {
+    [self setActivityIndicatorView:nil];
+    [self setLabelMessage_:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
