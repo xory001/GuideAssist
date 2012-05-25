@@ -15,6 +15,7 @@
     NSString *strGroupName_;
     NSMutableArray *arrDetailItinerary_;
     int nDetailIndex_;
+    NSString *strCurDate_;
     
     UIScrollView *scrollView_;
     UIButton *btnPreDay_;

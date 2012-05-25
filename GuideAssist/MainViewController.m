@@ -11,6 +11,7 @@
 #import "CGroupMemberListController.h"
 #import "CTodayItineraryController.h"
 #import "CItineraryMgr.h"
+#import "DialogUIAlertView.h"
 
 
 
@@ -33,6 +34,9 @@
 
 - (void)dealloc
 {
+    self.dicMainIcon = nil;
+    self.mainView = nil;
+    [ strCurDayItinerary_ release ];
     [super dealloc];
 }
 
@@ -45,9 +49,19 @@
     {
         case  1:
         {
+            NSString *strCurDay = [ CCalendarCalc getCurDay ];
+            NSArray *retArray = [ g_pAppDelegate.dataAccess getFirstMainItineraryByDate:strCurDay ];
+            if ( nil == retArray )
+            {
+                msgBox(@"", @"今日无行程", @"确定", nil );
+                return;
+            }
+            
+            strCurDayItinerary_ = [[ retArray objectAtIndex:0 ] copy ];
+            
             CTodayItineraryController *pTodayC = 
                 [[ CTodayItineraryController alloc ] initWithNibName:nil bundle:nil ];
-            [ pTodayC userInit:nil groupName:nil ];
+            [ pTodayC userInit:strCurDayItinerary_ groupName:[ retArray lastObject ] ];
             [ self.navigationController pushViewController:pTodayC animated:YES ];
             [ pTodayC release ];
         }
@@ -55,9 +69,23 @@
             
         case 2: //group menber manage
         {
+            if ( nil == strCurDayItinerary_ )
+            {
+                NSString *strCurDay = [ CCalendarCalc getCurDay ];
+                NSArray *retArray = [ g_pAppDelegate.dataAccess getFirstMainItineraryByDate:strCurDay ];
+                if ( nil == retArray )
+                {
+                    msgBox(@"", @"今日无行程,没有团员信息", @"确定", nil );
+                    return;
+                }
+                strCurDayItinerary_ = [[ retArray objectAtIndex:0 ] copy ];
+            }
+                        
+           
+            
             CGroupMemberListController *pGroupC = 
                         [[ CGroupMemberListController alloc ] initWithNibName:nil bundle:nil ];
-            [ pGroupC loadData:nil ];
+            [ pGroupC loadData:strCurDayItinerary_ ];
             [ self.navigationController pushViewController:pGroupC animated:YES ];
             [ pGroupC release ];
         }

@@ -27,7 +27,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [ self.parentViewController dismissModalViewControllerAnimated:YES ];
+   // [ self.parentViewController dismissModalViewControllerAnimated:YES ];
 }
 
 - (void)didReceiveMemoryWarning

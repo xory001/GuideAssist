@@ -14,6 +14,7 @@
 @private
     NSDictionary *pDictMainIcon_;
     NSArray *pMainView_;
+    NSString *strCurDayItinerary_;
     
 }
 

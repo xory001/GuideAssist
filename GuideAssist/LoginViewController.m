@@ -11,6 +11,8 @@
 #import "DebugMacroDefine.h"
 #import "CWaitModelViewController.h"
 #import "CCalendarCalc.h"
+#import "CWebServiceAccess.h"
+#import "DialogUIAlertView.h"
 
 @implementation LoginViewController
 
@@ -24,13 +26,26 @@
 
 - (IBAction)LoginButtonPressed:(id)sender
 {
-//  Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]);
-//  opetationQueue_ = [[NSOperationQueue alloc] init];
-//  [opetationQueue_ setMaxConcurrentOperationCount:1];
-//  invoctionOperation_ = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(ThreadLogin:) object:strWebServiceURL_];
-//  [opetationQueue_ addOperation:invoctionOperation_];
- // [self release];
-  //Log( @"LoginViewController LoginButtonPressed self retanCount:%d", [self retainCount]); 
+    CWaitModelViewController *waitView = [[ CWaitModelViewController alloc ] initWithNibName:nil bundle:nil ];
+    [ self presentModalViewController:waitView animated:YES ];
+    
+    // webservice test
+    CWebServiceAccess *pWebService = [[[ CWebServiceAccess alloc ] init ] autorelease ];
+    pWebService.dbAccess = g_pAppDelegate.dataAccess;
+    pWebService.url = @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper";
+    pWebService.icCardNumber = self.loginName.text; // @"712936";
+    pWebService.guidePhone = self.loginPassword.text; // @"15305712936";
+    NSString *pstrErr = nil;
+    if ( ![ pWebService userLogin: &pstrErr ] )
+    {
+        [ self dismissModalViewControllerAnimated:NO ];
+        msgBox(@"", pstrErr, @"确定", nil );
+        return;
+    }
+    [ pWebService syncItineraryInfo:nil ];
+    
+    [ self dismissModalViewControllerAnimated:NO ];
+    
    GuideAssistAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
    [appDelegate ShowMainView];
 
@@ -39,7 +54,7 @@
 
 - (IBAction)quitBtnPressed:(id)sender
 {
-    exit( 0 );
+   // exit( 0 );
 }
 
 - (void)keyboardWliiShow

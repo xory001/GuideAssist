@@ -30,6 +30,8 @@
 - (BOOL)getMainItineraryNumber:(NSMutableArray*)arrNumber 
                     byStartDay:(NSString*)strStartDay 
                      andEndDay:(NSString*)strEndDay;
+-(NSArray*)getFirstMainItineraryByDate:(NSString*)strDate; //get itineraray that strDate is between startDay and endDay,
+                                                            // return NSArray, 0 object is sn, last object is tourgroupname
 
 
 //detail itinerary

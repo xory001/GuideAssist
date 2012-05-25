@@ -79,6 +79,17 @@
 
 }
 
++ (NSString *)getCurDay
+{
+    //  NSTimeZone *timeZone = [ NSTimeZone localTimeZone ];
+    NSDate *nowDate = [ NSDate date ];
+    NSCalendar *calendar = [ NSCalendar currentCalendar ];
+    NSDateComponents *comp = [ calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
+                                          fromDate:nowDate ];
+    NSString *strCurDay = [ NSString stringWithFormat:@"%04d-%02d-%02d", [ comp year ], [ comp month ], [ comp day ]];
+    return strCurDay;
+
+}
 
 + (NSInteger)getCurMonthFisrtDayWeek:(NSInteger*)pDaysOfMonth
 {

@@ -240,7 +240,7 @@
                            ( nDay >> 8 ) & 0xff, nDay & 0xff ];
     [ arrItineraryNumber_ removeAllObjects ];
     if ( [ g_pAppDelegate.dataAccess getMainItineraryNumber:arrItineraryNumber_
-                                                 byStartDay:@"2012-04-21" 
+                                                 byStartDay:strStartDay 
                                                   andEndDay:strEndDay ] )
     {
         NSMutableString *strDate = [[ NSMutableString alloc ] init ];

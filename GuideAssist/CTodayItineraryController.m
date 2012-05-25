@@ -7,6 +7,7 @@
 //
 #import "GuideAssistAppDelegate.h"
 #import "CTodayItineraryController.h"
+#import "CCalendarCalc.h"
 
 
 @implementation CTodayItineraryController
@@ -45,9 +46,12 @@
 
 - (void)dealloc
 {
+    [ arrDetailItinerary_ removeAllObjects ];
     [ arrDetailItinerary_ release ];
     [ strGroupName_ release ];
     [ strItineraryNumber_ release ];
+    [ strCurDate_ release ];
+    
     [ scrollView_ release ];
     [btnPreDay_ release];
     [btnNextDay_ release];
@@ -87,6 +91,8 @@
 {
     strGroupName_ = [ strGroupName copy ];
     strItineraryNumber_ = [ pstrItinearyNumber copy ];
+
+       
     
    
     
@@ -98,7 +104,7 @@
     nDetailIndex_ = -1;
     for ( CDetailItinerary *pDetail in arrDetailItinerary_ )
     {
-        if ( pDetail.day )
+        if ( [ pDetail.day isEqualToString: strCurDate_ ])
         {
             nDetailIndex_ = [ arrDetailItinerary_ indexOfObject: pDetail ];
             break;

@@ -172,6 +172,24 @@ static CDBAccess *g_sharedInstance = nil;
     return [ arrNumber count ];
 }
 
+- (NSArray*)getFirstMainItineraryByDate:(NSString *)strDate
+{
+    NSString *strSQL = [[ NSString alloc ] 
+                        initWithFormat:@"select SerialNumber, tourGroupName from tb_MainItinerary \
+                        where startDay >= '%@' and endDay <= '%@' ", strDate, strDate ];
+    NSArray *retArray = nil;
+    
+    FMResultSet *record = [ dbSQlite_ executeQuery:strSQL ];
+    if ( [ record next ])
+    {
+        retArray = [ NSArray arrayWithObjects:[ record stringForColumn:@"serialNumber" ],
+                             [ record stringForColumn:@"tourGroupName" ], nil ];
+    }
+    
+    [ strSQL release ];
+    return retArray;
+}
+
 //*********detail itinerary
 - (BOOL)insertDetailItinerary:(CDetailItinerary *)pDetailItinerary
 {
@@ -289,10 +307,10 @@ static CDBAccess *g_sharedInstance = nil;
         return bRet;
     }
     [ parrGroupMember removeAllObjects ];
-  //  NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
-  //                       @"select * from tb_DetailItinerary where serialNumber = '%@'", pstrMainSerialNumber ];
-    NSString *pstrSQL = [[ NSString alloc ] initWithString:
-                         @"select * from tb_GroupMember" ];
+    NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
+                        @"select * from tb_DetailItinerary where serialNumber = '%@'", pstrMainSerialNumber ];
+//   NSString *pstrSQL = [[ NSString alloc ] initWithString:
+//                         @"select * from tb_GroupMember" ];
 
 //    ( id INTEGER PRIMARY KEY AUTOINCREMENT, \
 //     paid INTEGER, \

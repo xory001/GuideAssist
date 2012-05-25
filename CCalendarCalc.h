@@ -17,6 +17,7 @@
 + (BOOL)getCurYear:(NSInteger*)pnYear andMonth:(NSInteger*)pnMonth;
 + (NSInteger)getFisrtDayWeekAndDaysOfMonth:(NSInteger*)pDaysOfMonth 
                                     byYear:(NSInteger)nYear andMonth:(NSInteger)nMonth;
++ (NSString*)getCurDay;
 
 
 + (NSInteger)getCurMonthFisrtDayWeek:(NSInteger*)pDaysOfMonth;
