@@ -33,8 +33,12 @@
     [ self presentModalViewController:waitView animated:NO ];
     [ waitView start ];
     
-    return;
-    
+  
+    if ( ( [ self.loginName.text length ] == 0 ) || ( [ self.loginPassword.text length ] == 0 ) )
+    {
+        msgBox(@"", @"帐号和密码不能为空", @"确定", nil );
+        return;
+    }
     // webservice test
     CWebServiceAccess *pWebService = [[[ CWebServiceAccess alloc ] init ] autorelease ];
     pWebService.dbAccess = g_pAppDelegate.dataAccess;
