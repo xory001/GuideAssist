@@ -26,30 +26,35 @@
 
 - (IBAction)LoginButtonPressed:(id)sender
 {
-    CWaitModelViewController *waitView = [[ CWaitModelViewController alloc ] initWithNibName:nil bundle:nil ];
-    waitView.message = @"logining...";
-    [ waitView start ];
-    self.modalPresentationStyle = UIModalPresentationCurrentContext;
-    [ self presentModalViewController:waitView animated:NO ];
-    [ waitView start ];
-    
-  
+   
     if ( ( [ self.loginName.text length ] == 0 ) || ( [ self.loginPassword.text length ] == 0 ) )
     {
         msgBox(@"", @"帐号和密码不能为空", @"确定", nil );
         return;
     }
+    
+    CWaitModelViewController *waitView = [[ CWaitModelViewController alloc ] initWithNibName:nil bundle:nil ];
+    waitView.message = @"logining...";
+    [ waitView start ];
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    [ self presentModalViewController:waitView animated:NO ];
+
     // webservice test
     CWebServiceAccess *pWebService = [[[ CWebServiceAccess alloc ] init ] autorelease ];
     pWebService.dbAccess = g_pAppDelegate.dataAccess;
-    pWebService.url = @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper";
+    pWebService.url = @"http://dy.cneroom.com:81/TourHelperService/tourHelper"; //@"http://192.168.7.60:8080/tourhelper/TourHelperService/tourHelper";
+    // @"http://dy.cneroom.com:81/TourHelperService/tourHelper"; 
+    // @"http://60.191.115.39:8080/tvlsys/TourHelperService/tourHelper";
     pWebService.icCardNumber = self.loginName.text; // @"712936";
     pWebService.guidePhone = self.loginPassword.text; // @"15305712936";
     NSString *strErr = nil;
     if ( ![ pWebService userLogin: &strErr ] )
     {
-        [ self dismissModalViewControllerAnimated:NO ];
-        msgBox(@"", strErr, @"确定", nil );
+        if ( nil != strErr )
+        {
+            [ self dismissModalViewControllerAnimated:NO ];
+            msgBox(@"", strErr, @"确定", nil ); 
+        }
         return;
     }
     [ pWebService syncItineraryInfo:nil ];
@@ -124,32 +129,6 @@
 
 }
 
--(void)ThreadLogin:(NSString *)strWebServiceURL
-{
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  NSLog( @"LoginViewController ThreadLogin start");
-
-  BOOL bRet = FALSE;
-  //do logining
-  bRet = TRUE;
-  
-  NSNumber *numRet = [[NSNumber alloc] initWithBool:bRet];
-  Log( @"LoginViewController ThreadLogin numRet 1 retanCount:%u", [numRet retainCount]);
-  
-  
-  [self performSelectorOnMainThread:@selector(ThreadQuitCalledMethod:) 
-                         withObject:numRet 
-                      waitUntilDone:YES];
-  Log( @"LoginViewController ThreadLogin numRet 2 retanCount:%u", [numRet retainCount]);
-  Log( @"LoginViewController ThreadLogin 1 self retanCount:%u",[self retainCount]);
-
-  [numRet release];
-  NSLog( @"LoginViewController ThreadLogin end");
-  [pool drain];
-  Log( @"LoginViewController ThreadLogin 2 self retanCount:%u",[self retainCount]);
-
-  
-}
 
 -(void)ThreadQuitCalledMethod:(id)loginResult
 {
@@ -170,8 +149,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) 
     {
-        strWebServiceURL_ = [[NSString alloc] init];
-
         self.view.backgroundColor = g_pAppDelegate.bgImgColor;
         keyboardObserver_ = [[ CKeyBroardObserber alloc ] init ];
 //        [ keyboardObserver_ setKeyboardWillShowDidMethod:self
@@ -181,9 +158,11 @@
         [ keyboardObserver_ addViewOfNeedKeyboard:loginName_ ];
         [ keyboardObserver_ addViewOfNeedKeyboard:loginPassword_ ];
         
-        //test
-//        [ CCalendarCalc getCurMonthFisrtDayWeek ];
-//        [ CCalendarCalc getDaysOfPreMonth ];
+#ifdef DEBUG
+        loginName_.text = @"712936";
+        loginPassword_.text = @"15305712936";
+#endif
+        
         
     }
     return self;
@@ -195,9 +174,6 @@
     self.loginPassword = nil;
     self.loginType = nil;
     [ keyboardObserver_ release ];
-  [strWebServiceURL_ release];
-  [opetationQueue_ release];
-  [invoctionOperation_ release];
    [super dealloc];
 }
 

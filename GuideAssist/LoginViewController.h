@@ -16,11 +16,7 @@
   UITextField *loginPassword_;
   UISegmentedControl *loginType_;
   
-  NSOperationQueue *opetationQueue_;
-  NSInvocationOperation *invoctionOperation_;
-  
-  NSString *strWebServiceURL_; //end not has "/"
-  BOOL bQuitThread_;
+
     CKeyBroardObserber *keyboardObserver_;
     
   //  UILabel *pLableTest_;
@@ -39,8 +35,7 @@
 - (IBAction)quitBtnPressed:(id)sender;
 - (IBAction)textFeildDone:(id)sender forEvent:(UIEvent *)event;
 
-- (void)ThreadLogin:(NSString*)strWebServiceURL;
-- (void)ThreadQuitCalledMethod:(id)loginResult;
+
 - (void)keyboardWliiShow; //when keyboard will show,call this method
 
 @end

@@ -69,7 +69,7 @@
                              self.guidePhone, pstrItineraryNumber ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
-                                  @"<tyDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
+                                  @"<tyDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
                                   <arg0 xmlns=\"\">%@</arg0> \
                                   <arg1 xmlns=\"\">%@</arg1> \
                                   <arg2 xmlns=\"\">%@</arg2> \
@@ -102,9 +102,9 @@
 {
     NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@0", pstrItineraryNumber,
                              pstrTimeStamp ] autorelease ];
-    NSString *pstrMD5 = [ self getMD5: pstrSource ];
-    NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
-                                @"<tyDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
+    NSString *pstrMD5 = [ self getMD5: pstrSource ];  //http://service.travelsys.pubinfo.zj.cn
+    NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat: //http://service.tourhelper.pubinfo.zj.cn
+                                @"<tyDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
                                 <arg0 xmlns=\"\">%@</arg0> \
                                 <arg1 xmlns=\"\">0</arg1> \
                                 <arg2 xmlns=\"\">%@</arg2> \
@@ -162,7 +162,7 @@
                              self.guidePhone, pstrTimeStamp ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
-                                @"<xcdDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
+                                @"<xcdDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
                                 <arg0 xmlns=\"\">%@</arg0> \
                                 <arg1 xmlns=\"\">%@</arg1> \
                                 <arg2 xmlns=\"\">%@</arg2> \
@@ -256,36 +256,37 @@
 
 - (BOOL)syncItineraryInfo:(NSMutableDictionary *)pDictSyncItineraryInfo
 {
-    NSMutableString *pstrItineraryInfo = [[ NSMutableString alloc ] init ];
+    NSMutableString *pstrLocalItineraryInfo = [[[ NSMutableString alloc ] init ] autorelease ];
     NSEnumerator *pEnumerator = [ pDictSyncItineraryInfo keyEnumerator ];
     NSString *pstrKey = nil, *pstrValue = nil;
     pstrKey = [ pEnumerator nextObject ];
     while ( pstrKey )
     {
         pstrValue = [ pDictSyncItineraryInfo objectForKey:pstrKey ];
-        [ pstrItineraryInfo appendFormat:@"%@|%@", pstrKey, pstrValue ];
+        [ pstrLocalItineraryInfo appendFormat:@"%@|%@", pstrKey, pstrValue ];
         pstrKey = [ pEnumerator nextObject ];
         if ( pstrKey )
         {
-            [ pstrItineraryInfo appendString: @"," ];
+            [ pstrLocalItineraryInfo appendString: @"," ];
         }
     }
     NSString *pCurDay = [ self getYYYYMMddhh ];
-    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@%@%@", pstrItineraryInfo,
+    NSString *pstrSource = [[[ NSString alloc ] initWithFormat:@"%@%@%@%@", pstrLocalItineraryInfo,
                              pCurDay, self.icCardNumber,
                              self.guidePhone ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrLoginInfo = [[[ NSString alloc ] initWithFormat:
-                                @"<isDataSync xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
+                                @"<IsDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
                                 <arg0 xmlns=\"\">%@</arg0> \
                                 <arg1 xmlns=\"\">%@</arg1> \
                                 <arg2 xmlns=\"\">%@</arg2> \
                                 <arg3 xmlns=\"\">%@</arg3> \
                                 <arg4 xmlns=\"\">%@</arg4> \
                                 <arg5 xmlns=\"\">1</arg5> \
-                                </isDataSync>", pstrItineraryInfo,
+                                </IsDataSync>", pstrLocalItineraryInfo,
                                 pCurDay, self.icCardNumber,
                                 self.guidePhone, pstrMD5 ] autorelease ];
+    
     
     NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrLoginInfo ] autorelease ];
     
@@ -345,12 +346,12 @@
                                 self.guidePhone ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrLoginInfo = [[[ NSString alloc ] initWithFormat:
-                               @"<userLogin xmlns=\"http://service.travelsys.pubinfo.zj.cn/\"> \
+                               @"<UserLogin xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
                                <arg0 xmlns=\"\">%@</arg0> \
                                <arg1 xmlns=\"\">%@</arg1> \
                                <arg2 xmlns=\"\">0</arg2> \
                                <arg3 xmlns=\"\">%@</arg3> \
-                               </userLogin>", self.icCardNumber,
+                               </UserLogin>", self.icCardNumber,
                                self.guidePhone, pstrMD5 ] autorelease ];
     NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrLoginInfo ] autorelease ];
    
@@ -363,9 +364,12 @@
         {
             if ( NULL != ppstrRetErrInfo )
             {
-                *ppstrRetErrInfo = [[[ NSString alloc ] initWithString: 
-                                     [ pXMLRoot leafForKey:@"ErrInfo" ] ] autorelease ];
-                //     NSLog(@"%@", *ppstrRetErrInfo );
+                if ( [ pXMLRoot leafForKey:@"ErrInfo" ] ) 
+                {
+                    *ppstrRetErrInfo = [[[ NSString alloc ] initWithString: 
+                                         [ pXMLRoot leafForKey:@"ErrInfo" ] ] autorelease ];
+                }
+                                //     NSLog(@"%@", *ppstrRetErrInfo );
             }
             return NO;
         }
@@ -394,6 +398,10 @@
         NSString *pstrRet = [ [phttpRequest_ getResultString ] stringByReplacingOccurrencesOfString: @"&lt;" withString: @"<" ] ;
         NSUInteger uIndex = [ pstrRet findString: @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
                                withStartLocation: 1 ];
+        if ( NSNotFound == uIndex )
+        {
+            return nil;
+        }
         return [ pstrRet midString: uIndex ];
     }
     return nil;

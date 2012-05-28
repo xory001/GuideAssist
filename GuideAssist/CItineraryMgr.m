@@ -141,6 +141,15 @@
     UIButton *btn = sender;
   //  [ btn addSubview:imgViewLastMonth_ ];
   //  NSLog(@"lable: %@", ((UIButton*)sender).currentTitle );
+    if ( btn.currentImage )
+    {
+        [ btn setImage:nil forState:UIControlStateNormal ];
+    }
+    else
+    {
+        [ btn setImage:imgViewLastMonth_.image forState:UIControlStateNormal ];
+ 
+    }
     NSInteger nDay = btn.tag;
     NSString *strDay = [ NSString stringWithFormat:@"%04d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
                              ( nDay >> 8 ) & 0xff, nDay & 0xff ];
