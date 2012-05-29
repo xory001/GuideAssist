@@ -176,7 +176,7 @@ static CDBAccess *g_sharedInstance = nil;
 {
     NSString *strSQL = [[ NSString alloc ] 
                         initWithFormat:@"select SerialNumber, tourGroupName from tb_MainItinerary \
-                        where startDay >= '%@' and endDay <= '%@' ", strDate, strDate ];
+                        where startDay <= '%@' and endDay >= '%@' ", strDate, strDate ];
     NSArray *retArray = nil;
     
     FMResultSet *record = [ dbSQlite_ executeQuery:strSQL ];
@@ -308,7 +308,7 @@ static CDBAccess *g_sharedInstance = nil;
     }
     [ parrGroupMember removeAllObjects ];
     NSString *pstrSQL = [[ NSString alloc ] initWithFormat:
-                        @"select * from tb_DetailItinerary where serialNumber = '%@'", pstrMainSerialNumber ];
+                        @"select * from tb_GroupMember where serialNumber = '%@'", pstrMainSerialNumber ];
 //   NSString *pstrSQL = [[ NSString alloc ] initWithString:
 //                         @"select * from tb_GroupMember" ];
 

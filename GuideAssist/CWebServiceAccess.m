@@ -69,13 +69,14 @@
                              self.guidePhone, pstrItineraryNumber ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
-                                  @"<tyDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
+                                  @"<XcdClose xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
                                   <arg0 xmlns=\"\">%@</arg0> \
                                   <arg1 xmlns=\"\">%@</arg1> \
                                   <arg2 xmlns=\"\">%@</arg2> \
-                                  <arg3 xmlms=\"\">%@</agr3> \
-                                  </tyDataSync>", self.icCardNumber,
-                                  self.guidePhone, pstrItineraryNumber , pstrMD5 ] autorelease ];
+                                  <arg3 xmlns=\"\">%@</agr3> \
+                                  <arg4 xmlns=\"\">%@</arg4> \
+                                  </XcdClose>", self.icCardNumber,
+                                  self.guidePhone, pstrItineraryNumber,pstrRemark, pstrMD5 ] autorelease ];
     
     NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrRequestInfo ] autorelease ];
     
@@ -104,11 +105,11 @@
                              pstrTimeStamp ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];  //http://service.travelsys.pubinfo.zj.cn
     NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat: //http://service.tourhelper.pubinfo.zj.cn
-                                @"<tyDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
+                                @"<TyDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
                                 <arg0 xmlns=\"\">%@</arg0> \
                                 <arg1 xmlns=\"\">0</arg1> \
                                 <arg2 xmlns=\"\">%@</arg2> \
-                                </tyDataSync>", pstrItineraryNumber,
+                                </TyDataSync>", pstrItineraryNumber,
                                 /*pstrTimeStamp ,*/ pstrMD5 ] autorelease ];
     
     NSString *pstrBody = [[[ NSString alloc ] initWithFormat: pstrContentFormat_ , pstrRequestInfo ] autorelease ];
@@ -162,14 +163,14 @@
                              self.guidePhone, pstrTimeStamp ] autorelease ];
     NSString *pstrMD5 = [ self getMD5: pstrSource ];
     NSString *pstrRequestInfo = [[[ NSString alloc ] initWithFormat:
-                                @"<xcdDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
+                                @"<XcdDataSync xmlns=\"http://service.tourhelper.pubinfo.zj.cn/\"> \
                                 <arg0 xmlns=\"\">%@</arg0> \
                                 <arg1 xmlns=\"\">%@</arg1> \
                                 <arg2 xmlns=\"\">%@</arg2> \
                                 <arg3 xmlns=\"\">%@</arg3> \
                                 <arg4 xmlns=\"\">%@</arg4> \
                                 <arg5 xmlns=\"\">%@</arg5> \
-                                </xcdDataSync>",self.icCardNumber,
+                                </XcdDataSync>",self.icCardNumber,
                                 self.guidePhone, pstrItineraryNumber, 
                                 pstrTimeStamp, pstrCurTime , pstrMD5 ] autorelease ];
     
@@ -189,9 +190,11 @@
         {
             TreeNode *pXcdNode = [[ pXMLRoot objectForKey:@"Xcd" ] objectForKey:@"ds" ];
             TreeNode *pMainItineraryNode = [ pXcdNode objectForKey:@"mn" ];
-            CMainItinerary *pMainItinerary = [[ CMainItinerary alloc ] init ];
+            CMainItinerary *pMainItinerary = nil;
             if ( pMainItineraryNode )
             {
+                pMainItinerary = [[ CMainItinerary alloc ] init ];
+                
                 pMainItinerary.tourGroupName = [ pMainItineraryNode leafForKey:@"a" ];
                 pMainItinerary.travelAgencyName = [ pMainItineraryNode leafForKey:@"b" ];
                 pMainItinerary.memberCount = [[ pMainItineraryNode leafForKey:@"c" ] intValue ];
@@ -201,7 +204,7 @@
                 pMainItinerary.serialNumber = pstrItineraryNumber;
             }
             pMainItineraryNode = [ pXcdNode objectForKey:@"fe" ];
-            if ( pMainItineraryNode )
+            if ( pMainItineraryNode && pMainItinerary )
             {
                 pMainItinerary.standardCost = [ pMainItineraryNode leafForKey:@"a" ];
                 pMainItinerary.roomCost = [ pMainItineraryNode leafForKey:@"b" ];
@@ -211,17 +214,23 @@
                 pMainItinerary.personalTotalCost = [ pMainItineraryNode leafForKey:@"f" ];
                 pMainItinerary.groupTotalCost = [ pMainItineraryNode leafForKey:@"g" ];
             }
-            [ pDBAccess_ deleteItineraryBySerialNumber: pstrItineraryNumber ];
-            [ pDBAccess_ insertMainItinerary: pMainItinerary ];
-            [ pMainItinerary release ];
-            
+            if ( pMainItinerary )
+            {
+                [ pDBAccess_ deleteItineraryBySerialNumber: pstrItineraryNumber ];
+                [ pDBAccess_ insertMainItinerary: pMainItinerary ];
+                [ pMainItinerary release ]; 
+            }
+
+                  
             CDetailItinerary *pDetailItinerary = nil;
             pMainItineraryNode = [ pXcdNode objectForKey:@"dts" ];
             NSArray *parrDetailNode = [ pXcdNode objectsForKey:@"dd" ];
             int nIndex = 1;
-            pDetailItinerary = [[ CDetailItinerary alloc ] init ];
+          
             for ( TreeNode *pTmpNode in parrDetailNode ) 
             {
+                pDetailItinerary = [[ CDetailItinerary alloc ] init ];
+                
                 pDetailItinerary.index = nIndex;
                 pDetailItinerary.day = [ pTmpNode leafForKey:@"a" ];
                 pDetailItinerary.traffic = [ pTmpNode leafForKey:@"c" ];
@@ -229,13 +238,15 @@
                 pDetailItinerary.driverName = [ pTmpNode leafForKey:@"e" ];
                 pDetailItinerary.driverPhone = [ pTmpNode leafForKey:@"f" ];
                 pDetailItinerary.city = [ pTmpNode leafForKey:@"i" ];
-                pDetailItinerary.meal = [ pTmpNode leafForKey:@"j" ];
+                pDetailItinerary.meal = [ pTmpNode leafForKey:@"j" ]; //it means traffic time, 2012.05.29
                 pDetailItinerary.room = [ pTmpNode leafForKey:@"k" ];
-                pDetailItinerary.detailDesc = [ pTmpNode leafForKey:@"h" ];
+                pDetailItinerary.detailDesc = [[ pTmpNode objectForKey:@"t" ] leafForKey:@"c" ];
                 pDetailItinerary.localTravelAgencyName = [ pTmpNode leafForKey:@"r" ];
-                pDetailItinerary.localGuide = [ pTmpNode leafForKey:@"s" ];
-                pDetailItinerary.localGuidePhone = [ pTmpNode leafForKey:@"t" ];
+                pDetailItinerary.localGuide = [ pTmpNode leafForKey:@"g" ];
+                pDetailItinerary.localGuidePhone = [ pTmpNode leafForKey:@"h" ];
                 pDetailItinerary.serialNumber = pstrItineraryNumber;
+                   //<j></j> traffic time
+                //<t><c>desc</c></t>
                 
                 [ pDBAccess_ insertDetailItinerary: pDetailItinerary ];
                 nIndex++;
@@ -313,8 +324,8 @@
                 {
                     case ITINERARY_STATE_ADD:
                     case ITINERARY_STATE_MODIFY:
-                        [ self getItineraryInfo:pItineraryNumber timeStamp:nil ];
-                        [ self getGroupMember:pItineraryNumber timeStamp:nil ];
+                        [ self getItineraryInfo:pItineraryNumber timeStamp:@"0" ];
+                        [ self getGroupMember:pItineraryNumber timeStamp:@"0" ];
                         break;
                         
 
