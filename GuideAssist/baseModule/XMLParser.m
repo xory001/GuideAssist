@@ -63,6 +63,13 @@ static XMLParser *sharedInstance = nil;
 	return [self parse:parser];
 }
 
+- (TreeNode *)parseXMLFromString:(NSString *)strXML
+{
+    NSString *strTmp = [ strXML stringByReplacingOccurrencesOfString: @"&lt;" withString: @"<" ] ;
+    NSString *strRet = [ strTmp stringByReplacingOccurrencesOfString: @"&gt;" withString: @">" ] ;
+
+   return  [ self parseXMLFromData: [ strRet dataUsingEncoding: NSUnicodeStringEncoding ]];
+}
 
 
 // Descend to a new element

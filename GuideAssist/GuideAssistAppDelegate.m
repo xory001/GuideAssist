@@ -25,19 +25,19 @@ GuideAssistAppDelegate *g_pAppDelegate = nil;
 @synthesize loginViewContrller = ploginViewContrller_;
 @synthesize frameApp = frameApp_;
 
-@dynamic boundKeyboard;
+//@dynamic boundKeyboard;
 
-- (CGRect)boundKeyboard
-{
-    return keyboardObserver_.keyboardBound;
-}
+//- (CGRect)boundKeyboard
+//{
+//    return keyboardObserver_.keyboardBound;
+//}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     g_pAppDelegate = self;
     
-    keyboardObserver_ = [[ CKeyBroardObserber alloc ] init ];
+   // keyboardObserver_ = [[ CKeyBroardObserber alloc ] init ];
     
     frameApp_ = [[ UIScreen mainScreen ] applicationFrame ];
     pDataAccess_ = [[ CDBAccess alloc ] init ];
@@ -147,7 +147,7 @@ GuideAssistAppDelegate *g_pAppDelegate = nil;
 
 - (void)dealloc
 {
-    [ keyboardObserver_ release ];
+ //   [ keyboardObserver_ release ];
     [ pnavc_ release ];
     self.loginViewContrller = nil;
     [_window release];

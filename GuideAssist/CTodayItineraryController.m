@@ -139,13 +139,15 @@
     NSString *strPage = nil;
     if ( [ arrDetailItinerary_ count ] )
     {
-        strPage = [[ NSString alloc ] initWithFormat:@"第%d/%d日" ];
+        strPage = [[ NSString alloc ] initWithFormat:@"第%d/%d日", nDetailIndex_ + 1, 
+                                                    [ arrDetailItinerary_ count ] ];
     }
     else
     {
         strPage = [[ NSString alloc ] initWithString:@"第0/0日" ];
     }
     labelPage_.text = strPage;
+    labelTravelGroupName_.text = strGroupName_;
     [ strPage release ];
 }
 

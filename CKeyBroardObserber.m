@@ -161,10 +161,10 @@
                                              forView:rootView_ cache:NO ];  
                  } ];
             }
-            else
-            {
-                nMovedHeight_ = 0;
-            }
+//            else
+//            {
+//                nMovedHeight_ = 0;
+//            }
         }
     }
 
@@ -187,7 +187,7 @@
                     [ delegateWillShow_ performSelector:selectorWillShow_ ];
                 }
             }
-            [ self autoScrollRootView ];
+       //     [ self autoScrollRootView ];
             
         }
         else if ( [[ notifacation name ] isEqualToString: UIKeyboardWillHideNotification ] )
@@ -213,6 +213,7 @@
                      [ UIView setAnimationCurve:UIViewAnimationCurveEaseInOut ];
                      [ UIView setAnimationTransition:UIViewAnimationTransitionNone 
                                              forView:rootView_ cache:NO ];  
+                     nMovedHeight_ = 0;
                  } ];
             }
         }

@@ -20,5 +20,6 @@
 + (XMLParser *) sharedInstance;
 - (TreeNode *) parseXMLFromURL: (NSURL *) url;
 - (TreeNode *) parseXMLFromData: (NSData*) data;
+- (TreeNode *) parseXMLFromString: (NSString*) strXML;
 @end
 

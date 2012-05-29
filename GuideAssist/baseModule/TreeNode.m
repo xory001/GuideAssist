@@ -166,7 +166,15 @@
 - (NSString *) leafForKey: (NSString *) aKey
 {
 	TreeNode *node = [self objectForKey:aKey];
-	return node.leafvalue;
+    if ( nil == node )
+    {
+        return @"";
+    }
+    if ( node.leafvalue )
+    {
+        return node.leafvalue;
+    }
+	return @"";
 }
 
 // Return all children that match the key, including recursive depth first search.

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "CDBAccess.h"
-#import "CKeyBroardObserber.h"
+//#import "CKeyBroardObserber.h"
 
 @class LoginViewController;
 
@@ -23,7 +23,7 @@
     UINavigationController *pnavc_;
     
     UIColor *pbgImgColor_;
-    CKeyBroardObserber *keyboardObserver_;
+  //  CKeyBroardObserber *keyboardObserver_;
 
 }
 
@@ -32,7 +32,7 @@
 @property ( nonatomic, readonly ) CDBAccess *dataAccess;
 @property ( nonatomic, readonly ) UIColor *bgImgColor;
 @property ( nonatomic, readonly ) CGRect frameApp;
-@property ( nonatomic, readonly ) CGRect boundKeyboard;
+//@property ( nonatomic, readonly ) CGRect boundKeyboard;
 
 
 - (void)ShowMainView;

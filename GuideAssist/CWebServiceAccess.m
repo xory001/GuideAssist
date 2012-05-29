@@ -241,6 +241,8 @@
                 pDetailItinerary.meal = [ pTmpNode leafForKey:@"j" ]; //it means traffic time, 2012.05.29
                 pDetailItinerary.room = [ pTmpNode leafForKey:@"k" ];
                 pDetailItinerary.detailDesc = [[ pTmpNode objectForKey:@"t" ] leafForKey:@"c" ];
+                
+        
                 pDetailItinerary.localTravelAgencyName = [ pTmpNode leafForKey:@"r" ];
                 pDetailItinerary.localGuide = [ pTmpNode leafForKey:@"g" ];
                 pDetailItinerary.localGuidePhone = [ pTmpNode leafForKey:@"h" ];
@@ -406,14 +408,16 @@
     [ phttpRequest_ setHttpBody: pstrRequestBody withEncoding: NSUTF8StringEncoding ];
     if ( [ phttpRequest_ startDownloadWithBlockTime: 10000 ] )
     {
-        NSString *pstrRet = [ [phttpRequest_ getResultString ] stringByReplacingOccurrencesOfString: @"&lt;" withString: @"<" ] ;
-        NSUInteger uIndex = [ pstrRet findString: @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
+        NSString *strTmp = [ [phttpRequest_ getResultString ] stringByReplacingOccurrencesOfString: @"&lt;" withString: @"<" ] ;
+        NSString *strRet = [ strTmp stringByReplacingOccurrencesOfString: @"&gt;" withString: @">" ] ;
+        
+        NSUInteger uIndex = [ strRet findString: @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
                                withStartLocation: 1 ];
         if ( NSNotFound == uIndex )
         {
             return nil;
         }
-        return [ pstrRet midString: uIndex ];
+        return [ strRet midString: uIndex ];
     }
     return nil;
 }
