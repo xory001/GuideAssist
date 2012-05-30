@@ -8,6 +8,7 @@
 
 #import "CItineraryMgr.h"
 #import "GuideAssistAppDelegate.h"
+#import "CTodayItineraryController.h"
 
 
 @implementation CItineraryMgr
@@ -19,31 +20,26 @@
     {
         self.title = @"行程管理";
         self.view.backgroundColor = g_pAppDelegate.bgImgColor;
-     //   dictLabel_ = [[ NSMutableDictionary alloc ] init ];
         arrLabel_ = [[ NSMutableArray alloc ] init ];
         [ CCalendarCalc getCurYear:&nCurYear_ andMonth:&nCurMonth_ ];
         arrItineraryNumber_ = [[ NSMutableArray alloc ] init ];
+        arrBtnHasFlag_  = [[ NSMutableArray alloc ] init ];
         
         NSString *strImgMonth = [ [NSBundle mainBundle ] pathForResource:@"past" 
                                                               ofType:@"png" 
                                                          inDirectory:@"resource" ];
-        UIImage *img = [ UIImage imageWithContentsOfFile:strImgMonth ];
-        imgViewLastMonth_ = [[ UIImageView alloc ] initWithImage:img ];
-        
-        strImgMonth = [ [NSBundle mainBundle ] pathForResource:@"current" 
+        imgLastMonth_ = [[UIImage alloc ] initWithContentsOfFile:strImgMonth ];
+              
+        strImgMonth = [[NSBundle mainBundle ] pathForResource:@"current" 
                                                          ofType:@"png" 
                                                     inDirectory:@"resource" ];
-        img = [ UIImage imageWithContentsOfFile:strImgMonth ];
-        imgViewCurMonth_ = [[ UIImageView alloc ] initWithImage:img ];
+        imgCurMonth_ = [[UIImage alloc ] initWithContentsOfFile:strImgMonth ];
 
-        strImgMonth = [ [NSBundle mainBundle ] pathForResource:@"future" 
+        strImgMonth = [[NSBundle mainBundle ] pathForResource:@"future" 
                                                          ofType:@"png" 
                                                     inDirectory:@"resource" ];
-        img = [ UIImage imageWithContentsOfFile:strImgMonth ];
-        imgViewNexMonth_ = [[ UIImageView alloc ] initWithImage:img ];
+        imgNexMonth_ = [[UIImage alloc ] initWithContentsOfFile:strImgMonth ];
 
-        
-        
        
         int nLabelWid = g_pAppDelegate.frameApp.size.width / 7;
         int nStartPos = (NSInteger)g_pAppDelegate.frameApp.size.width % 7 / 2;
@@ -71,6 +67,7 @@
             [ self.view addSubview:labelWeek ];
             labelWeek.backgroundColor = clearColor;
             labelWeek.textAlignment = UITextAlignmentCenter;
+            labelWeek.userInteractionEnabled = NO;
          //   labelWeek.layer.borderWidth = 0.5;
          //   labelWeek.layer.borderColor = [ UIColor blackColor ].CGColor;
             [ arrWeekLabel addObject:labelWeek ];
@@ -111,6 +108,7 @@
                     frameLabel.size.width = nLabelWid;
                 }
                 UIButton *label = [[ UIButton alloc ] initWithFrame:frameLabel ];
+                label.userInteractionEnabled = NO;
              //   label.backgroundColor = clearColor;
                 label.tag = 0;
                 [ label addTarget:self action:@selector(labelClick:forEvent:) forControlEvents:UIControlEventTouchUpInside ];
@@ -139,21 +137,25 @@
 - (void)labelClick:(id)sender forEvent:(UIEvent *)event
 {
     UIButton *btn = sender;
-  //  [ btn addSubview:imgViewLastMonth_ ];
-  //  NSLog(@"lable: %@", ((UIButton*)sender).currentTitle );
-    if ( btn.currentImage )
-    {
-        [ btn setImage:nil forState:UIControlStateNormal ];
-    }
-    else
-    {
-        [ btn setImage:imgViewLastMonth_.image forState:UIControlStateNormal ];
- 
-    }
     NSInteger nDay = btn.tag;
     NSString *strDay = [ NSString stringWithFormat:@"%04d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
                              ( nDay >> 8 ) & 0xff, nDay & 0xff ];
-    NSLog(@"%@", strDay );
+    for ( CMainItinerarySerialNumner *itinerayNumber in arrItineraryNumber_ )
+    {
+        for ( UIButton *btn in arrLabel_ )
+        {
+            if ( [ strDay isEqualToString:itinerayNumber.date ] )
+            {
+                CTodayItineraryController *pTodayC = 
+                [[ CTodayItineraryController alloc ] initWithNibName:nil bundle:nil ];
+                [ pTodayC userInit:itinerayNumber.serialNumner groupName: itinerayNumber.groupName ];
+                [ self.navigationController pushViewController:pTodayC animated:YES ];
+                [ pTodayC release ];
+                return;
+            }
+            
+        }
+    }
 }
 
 - (void)showCalendar
@@ -241,6 +243,8 @@
         nNextMonthPos++;
     }
     
+    [ self clearAllBtnFlag ];
+    
     int nDay = ((UIButton*)[ arrLabel_ objectAtIndex:0 ]).tag;
     NSString *strStartDay = [ NSString stringWithFormat:@"%04d-%02d-%02d", ( nDay >> 16 ) & 0xffff,
                          ( nDay >> 8 ) & 0xff, nDay & 0xff ];
@@ -263,12 +267,47 @@
                                     ( nDay >> 8 ) & 0xff, nDay & 0xff ];
                 if ( [ strDate isEqualToString:itinerayNumber.date ] )
                 {
-                    NSLog(@"%@", strDate );
+                   // NSLog(@"%@", strDate );
+                    [ self addBtnFlag:btn forImage:imgCurMonth_ ];
+                    btn.userInteractionEnabled = YES;
                 }
             
             }
         }
         [ strDate release ];
+    }
+    
+}
+
+- (void)addBtnFlag:(UIButton *)btn forImage:(UIImage *)imgFlag
+{
+    CGRect frameImg;
+    frameImg.size = imgFlag.size;
+    frameImg.origin.x = btn.frame.size.width - frameImg.size.width;
+    frameImg.origin.y = 3;
+    UIImageView *imgView = [[ UIImageView alloc ] initWithFrame:frameImg ];
+    imgView.image = imgFlag;
+    imgView.frame = frameImg;
+    imgView.tag = 1001;
+    
+    [ btn addSubview:imgView ];
+    [ arrBtnHasFlag_ addObject: btn ];
+    [ imgView release ];
+}
+
+- (void)clearAllBtnFlag
+{
+    for ( UIButton *btn in arrBtnHasFlag_ )
+    {
+        NSArray *arrSubViews = [ btn subviews ];
+        for ( UIView *view in arrSubViews ) 
+        {
+            if ( 1001 == view.tag )
+            {
+                [ view removeFromSuperview ];
+            }
+        }
+        btn.userInteractionEnabled = NO;
     }
 }
 
@@ -278,11 +317,13 @@
   //  [ dictLabel_ release ];
     [ arrLabel_ removeAllObjects ];
     [ arrLabel_ release ];
+    [ arrBtnHasFlag_ removeAllObjects ];
+    [ arrBtnHasFlag_ release ];
     [ arrItineraryNumber_ removeAllObjects ];
     [ arrItineraryNumber_ release ];
-    [ imgViewCurMonth_ release ];
-    [ imgViewLastMonth_ release ];
-    [ imgViewNexMonth_ release ];
+    [ imgCurMonth_ release ];
+    [ imgLastMonth_ release ];
+    [ imgNexMonth_ release ];
     [super dealloc];
 }
 

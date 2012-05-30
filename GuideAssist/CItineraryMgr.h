@@ -14,16 +14,19 @@
 {
     NSMutableArray *arrItineraryNumber_;
     NSMutableArray *arrLabel_;
-    UIImageView *imgViewLastMonth_;
-    UIImageView *imgViewCurMonth_;
-    UIImageView *imgViewNexMonth_;
-    CGRect frameImg_;
+    NSMutableArray *arrBtnHasFlag_;
+    UIImage *imgLastMonth_;
+    UIImage *imgCurMonth_;
+    UIImage *imgNexMonth_;
+
     int nCurYear_;
     int nCurMonth_;
 }
 
 - (void)labelClick:(id)sender forEvent:(UIEvent*)event;
 
+- (void)addBtnFlag:(UIButton*)btn forImage:(UIImage*)imgFlag;
 - (void)showCalendar;
+- (void)clearAllBtnFlag;
 
 @end

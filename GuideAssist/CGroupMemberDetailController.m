@@ -115,12 +115,59 @@
     {
         CGroupMember *pGroupMember = [ pArrGroupMember_ objectAtIndex:nCurMemberIndex_ ];
         labelAge_.text = pGroupMember.age;
-        labelIDCard_.text = pGroupMember.idCardType;
+        
+        int nCardType = [ pGroupMember.idCardType intValue ];
+        switch ( nCardType )
+        {
+            case 1:
+                labelIDCard_.text = @"身份证";
+                break;
+                
+            case 2:
+                labelIDCard_.text = @"士兵证";
+                break;
+                
+            case 3:
+                labelIDCard_.text = @"军官证";
+                break;
+                
+            case 4:
+                labelIDCard_.text = @"警官证";
+                break;
+                
+            case 5:
+                labelIDCard_.text = @"护照";
+                break;
+                     
+            default:
+                labelIDCard_.text = @"其他";
+                break;
+        }
+        //labelIDCard_.text = pGroupMember.idCardType;
         labelIDCardNo_.text = pGroupMember.idCardNumber;
-        //labelPaidState_.text = pGroupMember.paid;
+        
+        if ( pGroupMember.paid )
+        {
+            labelPaidState_.text = @"已付费";
+        }
+        else
+        {
+             labelPaidState_.text = @"未付费";
+        }
         labelPhone_.text = pGroupMember.phone;
         labelRemark_.text = pGroupMember.remark;
-        labelSex_.text = pGroupMember.sex;
+        
+        
+        int nAge = [ pGroupMember.sex intValue ];
+        if ( 1 == nAge )
+        {
+            labelSex_.text = @"男";
+        }
+        else
+        {
+            labelSex_.text = @"女";
+        }
+        //labelSex_.text = pGroupMember.sex;
         labelName_.text = pGroupMember.name;
         
         NSString *pstrPage = [[ NSString alloc ] initWithFormat:@"第%d/%d位", 

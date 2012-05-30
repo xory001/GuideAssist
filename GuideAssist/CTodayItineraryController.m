@@ -99,8 +99,7 @@
     [ g_pAppDelegate.dataAccess getAllDetailItinerary:arrDetailItinerary_ 
                                    ByMainSerialNumber:strItineraryNumber_ ];
     
-    scrollView_.contentSize = CGSizeMake( g_pAppDelegate.frameApp.size.width, 
-                                         labelItineraryDesc.frame.origin.y + labelItineraryDesc.frame.size.height + 20 );
+
     nDetailIndex_ = -1;
     for ( CDetailItinerary *pDetail in arrDetailItinerary_ )
     {
@@ -131,11 +130,45 @@
         labelCity_.text = detail.city;
         labelGuideName_.text = detail.localGuide;
         labelGuidePhone_.text = detail.localGuidePhone;
-        labelTrafficType_.text = detail.traffic;
+        
+        int nTraffic = [ detail.traffic intValue ];
+        switch ( nTraffic ) 
+        {
+            case 1:
+                labelTrafficType_.text = @"汽车";
+                break;
+                
+            case 2:
+                labelTrafficType_.text = @"火车";
+                break;
+                
+            case 3:
+                labelTrafficType_.text = @"飞机";
+                break;
+                
+            default:
+                labelTrafficType_.text = @"其他";
+                break;
+        }
+        //labelTrafficType_.text = detail.traffic;
         labelDriveName_.text = detail.driverName;
         labelDrivePhone_.text = detail.driverPhone;
         labelItineraryDesc.text = detail.detailDesc;
     }
+    
+    CGSize maximumSize = CGSizeMake( labelItineraryDesc.frame.size.width, 9999 );
+    CGSize dateStringSize = [ labelItineraryDesc.text sizeWithFont:labelItineraryDesc.font
+                                   constrainedToSize:maximumSize
+                                       lineBreakMode:labelItineraryDesc.lineBreakMode];
+    CGRect dateFrame = labelItineraryDesc.frame;
+    dateFrame.size.height = dateStringSize.height;
+    labelItineraryDesc.frame = dateFrame;
+    scrollView_.contentSize = CGSizeMake( g_pAppDelegate.frameApp.size.width, 
+                                         labelItineraryDesc.frame.origin.y + labelItineraryDesc.frame.size.height + 20 );
+    
+    
+
+    
     NSString *strPage = nil;
     if ( [ arrDetailItinerary_ count ] )
     {
