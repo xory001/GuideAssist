@@ -158,10 +158,10 @@
         [ keyboardObserver_ addViewOfNeedKeyboard:loginName_ ];
         [ keyboardObserver_ addViewOfNeedKeyboard:loginPassword_ ];
         
-#ifdef DEBUG
+//#ifdef DEBUG
         loginName_.text = @"712936";
         loginPassword_.text = @"15305712936";
-#endif
+//#endif
         
         
     }

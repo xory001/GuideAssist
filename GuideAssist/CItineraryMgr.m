@@ -12,6 +12,7 @@
 
 
 @implementation CItineraryMgr
+@synthesize labelCurMonth_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,6 +25,8 @@
         [ CCalendarCalc getCurYear:&nCurYear_ andMonth:&nCurMonth_ ];
         arrItineraryNumber_ = [[ NSMutableArray alloc ] init ];
         arrBtnHasFlag_  = [[ NSMutableArray alloc ] init ];
+        
+        labelCurMonth_.textColor = [ UIColor whiteColor ];
         
         NSString *strImgMonth = [ [NSBundle mainBundle ] pathForResource:@"past" 
                                                               ofType:@"png" 
@@ -47,7 +50,7 @@
         NSString *pstrImg = [ [NSBundle mainBundle ] pathForResource:@"date_bg" 
                                                               ofType:@"png" 
                                                          inDirectory:@"resource" ];
-        CGRect frameBG = CGRectMake( 0, 10, g_pAppDelegate.frameApp.size.width, nLabelWid / 2 );
+        CGRect frameBG = CGRectMake( 0, 40, g_pAppDelegate.frameApp.size.width, nLabelWid / 2 );
         UIView *viewBG = [[ UIView alloc ] initWithFrame: frameBG ];
         viewBG.backgroundColor = [[ UIColor alloc ] initWithPatternImage:
                                   [ UIImage imageWithContentsOfFile:pstrImg ] ];
@@ -59,7 +62,7 @@
         UIColor *clearColor = [ UIColor clearColor ];     
        // CGColorRef cgcolorBlack = [[ UIColor blackColor ] CGColor ];
         NSMutableArray *arrWeekLabel = [[ NSMutableArray alloc ] init ];
-        CGRect frameLabel = CGRectMake( nStartPos, 10, nLabelWid, nLabelWid / 2 );
+        CGRect frameLabel = CGRectMake( nStartPos, 40, nLabelWid, nLabelWid / 2 );
         for ( int j = 0; j < 7; j++ )
         {
 
@@ -134,6 +137,36 @@
     return self;
 }
 
+- (IBAction)btnPreMonthClick:(id)sender forEvent:(UIEvent *)event 
+{
+    //last month
+    if ( 1 == nCurMonth_ ) 
+    {
+        nCurMonth_ = 12;
+        nCurYear_ = nCurYear_ - 1;
+    }
+    else
+    {
+        nCurMonth_ = nCurMonth_ - 1;
+    }
+    [ self showCalendar ];
+
+}
+
+- (IBAction)btnNextMonthClick:(id)sender forEvent:(UIEvent *)event 
+{
+    if ( 12 == nCurMonth_ ) 
+    {
+        nCurMonth_ = 1;
+        nCurYear_ = nCurYear_ + 1;
+    }
+    else
+    {
+        nCurMonth_ = nCurMonth_ + 1;
+    }
+    [ self showCalendar ];
+}
+
 - (void)labelClick:(id)sender forEvent:(UIEvent *)event
 {
     UIButton *btn = sender;
@@ -165,10 +198,13 @@
     int nDaysOfMonth = 0;
     int nFirstWeekDay = [ CCalendarCalc getFisrtDayWeekAndDaysOfMonth:&nDaysOfMonth
                                                                byYear:nCurYear_ andMonth:nCurMonth_ ];
+    NSString *strCurMonth = [ NSString stringWithFormat:@"%d年%02d月", nCurYear_, nCurMonth_ ];
+    labelCurMonth_.text = strCurMonth;
 
     UIButton *label = nil;
-    UIColor *colorBlack =  [ UIColor blackColor ];
+ //   UIColor *colorBlack =  [ UIColor blackColor ];
     UIColor *colorGray = [ UIColor grayColor ];
+    UIColor *colorWhite = [ UIColor whiteColor ];
     for ( int i = 1; i <= nDaysOfMonth; i++ )
     {
          NSString *strCurMonth = [[ NSString alloc ] initWithFormat:@"%d", i ];
@@ -176,7 +212,7 @@
        
         [ label setTitle:strCurMonth forState:UIControlStateNormal ];
    //     [ label setTitle:strTemp forState:UIControlStateHighlighted ];
-        [ label setTitleColor:colorBlack forState:UIControlStateNormal ];
+        [ label setTitleColor:colorWhite forState:UIControlStateNormal ];
         nTag =  ( nCurYear_ << 16 ) | ( nCurMonth_ << 8 ) | i;
         [ label setTag: nTag ]; 
   //      [ label setTitleColor:colorBlack forState:UIControlStateHighlighted ];
@@ -257,6 +293,8 @@
                                                   andEndDay:strEndDay ] )
     {
         NSMutableString *strDate = [[ NSMutableString alloc ] init ];
+        NSString *strFisrtDay = [ NSString stringWithFormat:@"%04d-%02d-01", nCurYear_, nCurMonth_ ];
+        NSString *strLastDay = [ NSString stringWithFormat:@"%04d-%02d-%02d", nCurYear_, nCurMonth_, nDaysOfMonth ];
         for ( CMainItinerarySerialNumner *itinerayNumber in arrItineraryNumber_ )
         {
             for ( UIButton *btn in arrLabel_ )
@@ -267,8 +305,18 @@
                                     ( nDay >> 8 ) & 0xff, nDay & 0xff ];
                 if ( [ strDate isEqualToString:itinerayNumber.date ] )
                 {
-                   // NSLog(@"%@", strDate );
-                    [ self addBtnFlag:btn forImage:imgCurMonth_ ];
+                    if ( NSOrderedAscending == [ itinerayNumber.date compare: strFisrtDay] )
+                    {
+                        [ self addBtnFlag:btn forImage:imgLastMonth_ ];
+                    }
+                    else if ( NSOrderedDescending == [ itinerayNumber.date compare:strLastDay ] )
+                    {
+                        [ self addBtnFlag:btn forImage:imgNexMonth_ ];
+                    }
+                    else
+                    {
+                        [ self addBtnFlag:btn forImage:imgCurMonth_ ];
+                    }
                     btn.userInteractionEnabled = YES;
                 }
             
@@ -324,6 +372,7 @@
     [ imgCurMonth_ release ];
     [ imgLastMonth_ release ];
     [ imgNexMonth_ release ];
+    [labelCurMonth_ release];
     [super dealloc];
 }
 
@@ -345,6 +394,7 @@
 
 - (void)viewDidUnload
 {
+    [self setLabelCurMonth_:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

@@ -21,7 +21,11 @@
 
     int nCurYear_;
     int nCurMonth_;
+    UILabel *labelCurMonth_;
 }
+- (IBAction)btnPreMonthClick:(id)sender forEvent:(UIEvent *)event;
+- (IBAction)btnNextMonthClick:(id)sender forEvent:(UIEvent *)event;
+@property (nonatomic, retain) IBOutlet UILabel *labelCurMonth_;
 
 - (void)labelClick:(id)sender forEvent:(UIEvent*)event;
 

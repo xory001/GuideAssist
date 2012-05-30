@@ -24,6 +24,7 @@
 		9E73C447155AC69800116576 /* CGroupMemberListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73C445155AC69800116576 /* CGroupMemberListController.m */; };
 		9E73C448155AC69800116576 /* CGroupMemberListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E73C446155AC69800116576 /* CGroupMemberListController.xib */; };
 		9E928187153E639D00785495 /* CWebServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E928186153E639B00785495 /* CWebServiceAccess.m */; };
+		9E95F1C515761F4C009E3927 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E95F1C415761F4C009E3927 /* icon57.png */; };
 		9E9A13C0140124910047853A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13BF140124910047853A /* UIKit.framework */; };
 		9E9A13C2140124910047853A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C1140124910047853A /* Foundation.framework */; };
 		9E9A13C4140124910047853A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9A13C3140124910047853A /* CoreGraphics.framework */; };
@@ -104,6 +105,7 @@
 		9E73C446155AC69800116576 /* CGroupMemberListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CGroupMemberListController.xib; sourceTree = "<group>"; };
 		9E928185153E639A00785495 /* CWebServiceAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWebServiceAccess.h; sourceTree = "<group>"; };
 		9E928186153E639B00785495 /* CWebServiceAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWebServiceAccess.m; sourceTree = "<group>"; };
+		9E95F1C415761F4C009E3927 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
 		9E9A13BB140124900047853A /* GuideAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E9A13BF140124910047853A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E9A13C1140124910047853A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -200,6 +202,7 @@
 		9E9A13B0140124900047853A = {
 			isa = PBXGroup;
 			children = (
+				9E95F1C415761F4C009E3927 /* icon57.png */,
 				9E5445D0155D0A5200CC71BB /* QuartzCore.framework */,
 				9EACC4D71409607800C580C1 /* Settings.bundle */,
 				9E9A13C5140124910047853A /* GuideAssist */,
@@ -446,6 +449,7 @@
 				9E6F4109155EC64C0081136F /* CTodayItineraryController.xib in Resources */,
 				9E6F410F15626CA90081136F /* CWaitModelViewController.xib in Resources */,
 				9E6F4117156512180081136F /* CItineraryMgr.xib in Resources */,
+				9E95F1C515761F4C009E3927 /* icon57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
